@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'StockStream'`, () => {
+  it(`should have as title 'stockstream'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('StockStream');
+    expect(app.title).toEqual('stockstream');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('StockStream app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('stockstream app is running!');
   });
 });
