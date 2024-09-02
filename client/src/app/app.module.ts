@@ -5,18 +5,34 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { InvestmentPreferencesComponent } from './components/investment-preferences/investment-preferences.component';
+import { CarouselComponent } from './components/landing/carousel/carousel.component';
+import { FooterComponent } from './components/landing/footer/footer.component';
+import { HomepageComponent } from './components/landing/homepage/homepage.component';
+import { NavigationBarComponent } from './components/landing/navigation-bar/navigation-bar.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    InvestmentPreferencesComponent,
+    NavigationBarComponent,
+    FooterComponent,
+    HomepageComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
