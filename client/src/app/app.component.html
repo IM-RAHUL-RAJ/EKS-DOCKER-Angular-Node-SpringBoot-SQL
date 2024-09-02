@@ -1,5 +1,6 @@
 <section class="app-container">
-    <app-navigation-bar [isLoggedIn]="true"></app-navigation-bar>
-    <app-homepage></app-homepage>
+    {{isLoggedIn}}
+    <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
+    <router-outlet></router-outlet>
 </section>
 <app-footer></app-footer>

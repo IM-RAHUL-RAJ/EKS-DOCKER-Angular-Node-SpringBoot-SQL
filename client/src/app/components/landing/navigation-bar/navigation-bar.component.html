@@ -29,15 +29,17 @@
         <div>
             <a href="#">Robo Advisor</a>
         </div>
-        
+        <div>
+            <a (click)="logOut()">Logout</a>
+        </div>
     </div>
     <div class="dropdown-menu" *ngIf="isMenuOpen && !isLoggedIn">
         <div>
-            <a href="#">Login</a>
+            <a routerLink="/login">Login</a>
             <hr>
         </div>
         <div>
-            <a href="#">Register</a>
+            <a routerLink="/register">Register</a>
             <hr>
         </div>
       

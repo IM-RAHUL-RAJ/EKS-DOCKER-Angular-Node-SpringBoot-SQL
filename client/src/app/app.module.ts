@@ -10,6 +10,7 @@ import { CarouselComponent } from './components/landing/carousel/carousel.compon
 import { FooterComponent } from './components/landing/footer/footer.component';
 import { HomepageComponent } from './components/landing/homepage/homepage.component';
 import { NavigationBarComponent } from './components/landing/navigation-bar/navigation-bar.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NavigationBarComponent } from './components/landing/navigation-bar/navi
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

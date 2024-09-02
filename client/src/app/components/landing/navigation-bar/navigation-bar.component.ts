@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -11,9 +13,17 @@ export class NavigationBarComponent {
 
   isMenuOpen = false;
 
+  constructor(private clientService: ClientService, private router: Router) {}
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    console.log(this.isMenuOpen)
+  }
+
+  logOut() {
+    this.clientService.logout();
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 
 }

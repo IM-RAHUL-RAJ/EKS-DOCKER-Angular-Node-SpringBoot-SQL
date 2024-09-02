@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { InvestmentPreferences } from 'src/app/models/investment-preferences';
 import { InvestmentPurposeService } from 'src/app/services/investment-purpose.service';
 
@@ -23,7 +24,7 @@ export class InvestmentPreferencesComponent implements OnInit{
     isRoboAdviserTermsAccepted: new FormControl(''),
   })
 
-  constructor(private investmentPreferenceService: InvestmentPurposeService){}
+  constructor(private investmentPreferenceService: InvestmentPurposeService, private router: Router){}
 
   ngOnInit(): void {
     this.investmentPreferenceService.getInvestmentPreference().subscribe((data) =>{
@@ -39,6 +40,8 @@ export class InvestmentPreferencesComponent implements OnInit{
     if(this.investmentPreferencesForm.valid && this.isRoboAdviserTermsAccepted.value){
       console.log('hello',this.investmentPreferencesForm)
       this.isSubmitted = false
+      this.router.navigate(['/home'])
+
     }else{
       console.log('else',this.isRoboAdviserTermsAccepted)
       if(!this.isRoboAdviserTermsAccepted.value){
