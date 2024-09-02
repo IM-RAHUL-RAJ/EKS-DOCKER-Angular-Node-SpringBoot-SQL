@@ -1,0 +1,12 @@
+<div class="carousel">
+    <div class="carousel-wrapper" #carouselWrapper>
+      <div class="carousel-item" *ngFor="let card of cards">
+        <img [src]="card.image" alt="Card Image" class="carousel-image">
+        <h3 class="carousel-heading">{{ card.heading }}</h3>
+        <a [href]="card.link" class="carousel-button">Continue Reading</a>
+      </div>
+    </div>
+    <button class="carousel-button-prev" (click)="prevSlide()">&#10094;</button>
+    <button class="carousel-button-next" (click)="nextSlide()">&#10095;</button>
+</div>
+  
