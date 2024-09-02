@@ -1,4 +1,6 @@
-<div class="auth_container">
-    <app-registration></app-registration>
-    <app-login></app-login>
-</div>
+<section class="app-container">
+    {{isLoggedIn}}
+    <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
+    <router-outlet></router-outlet>
+</section>
+<app-footer></app-footer>
