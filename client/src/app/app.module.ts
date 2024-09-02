@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import { PDFService } from './services/pdf.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { WatchlistComponent } from './components/watchlist/watchlist.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [PDFService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
