@@ -1,0 +1,47 @@
+.reports-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .reports-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .reports-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .reports-container li {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .report-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .report-details h3 {
+    margin: 0 0 10px 0;
+  }
+  
+  .report-details p {
+    margin: 0;
+  }
+  
+  .download-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  
