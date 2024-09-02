@@ -1,74 +1,50 @@
-nav {
-    background-color: black;
+.logo-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    margin-right: auto;
 }
-.logoheading{
-    display: flex;
-    align-items: center;
-}
+
 .logo {
-    height: 5rem;
-    width: 5rem;
-    padding-right: 0.5rem;
+    height: 48px;
+    padding: 16px;
+    margin-right: 16px;
 }
 
-.iconBackground {
-    height: 3rem;
-    width: 3rem;
-    margin-right: 1rem;
-    cursor: pointer;
-}
-
-.heading {
-    color: white;
-}
-
-
-.menu-container {
-    position: relative;
-    display: inline-block;
-}
-
-.icon {
+.title {
     font-size: 24px;
-    cursor: pointer;
+    font-weight: 500;
+    padding: 8px 0;
+    margin-right: 24px;
 }
 
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #333;
-    border-radius: 4px;
-    z-index: 1000;
-    transform: translateX(-60%); 
-    margin-top: 0.5rem;
-    min-width: 200px;
+.basic-container {
+    padding: 50px;
+
+    a {
+        text-decoration: none;
+        color: yellow;
+    }
 }
 
-.dropdown-menu a {
-    color: white;
-    padding: 1rem 2rem 1rem 2rem;
-    text-decoration: none;
-    display: block;
-    white-space: nowrap; 
-    text-align: center;
-}
-
-.dropdown-menu a:hover {
-    background-color: #575757;
-}
-
-hr{
+mat-nav-list.list-horizontal {
     padding: 0;
-    margin: 0;
+    width: fit-content;
+    display: flex;
+    align-items: end;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
-/* Apply this style when the menu is open */
-/* .dropdown-menu.ng-tns-c0-0 {
-    display: block;
-} */
+mat-list-item {
+    flex: content;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+    height: unset !important;
+}
+
+.mat-list-item .mat-list-item-content {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
