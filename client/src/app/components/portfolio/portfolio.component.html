@@ -1,0 +1,79 @@
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="logo">
+            <a href="#">Img Placeholder</a>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#trade">Trade</a></li>
+            <li><a href="#account">Account</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="portfolio-container">
+    <h2>My Portfolio</h2>
+    
+    <!-- Sort Option -->
+    <div class="sort-options">
+        <label for="sort">Sort by:</label>
+        <select id="sort" (change)="sortPortfolio($event)">
+            <option value="name">Name</option>
+            <option value="investedCapital">Invested Capital</option>
+            <option value="profitLoss">Profit/Loss</option>
+        </select>
+    </div>
+
+    <div class="portfolio-summary">
+        <div class="summary-item">
+            <span>Total Invested Capital:35800</span>
+        </div>
+        <div class="summary-item">
+            <span>Total Current Value:54000</span>
+        </div>
+        <div class="summary-item">
+            <span>Total Profit/Loss:650</span>
+        </div>
+        <div class="summary-item">
+            <span>Total Day Change:90</span>
+        </div>
+    </div>
+
+    <div class="portfolio-card" *ngFor="let stock of portfolio">
+        <div class="stock-info">
+            <span class="stock-name">{{stock.instrument}}</span>
+            <span class="stock-id">{{stock.instrumentId}}</span>
+        </div>
+    
+        <div class="stock-details">
+            <div class="stock-metric">
+                <span>Quantity:</span> {{stock.quantity}}
+            </div>
+            <div class="stock-metric">
+                <span>Avg. Price:</span> {{stock.averagePrice | currency}}
+            </div>
+            <div class="stock-metric">
+                <span>Invested Capital:</span> {{stock.investedCapital | currency}}
+            </div>
+            <div class="stock-metric">
+                <span>LTP:</span> {{stock.ltp | currency}}
+            </div>
+            <div class="stock-metric">
+                <span>% Change:</span> {{stock.percentChange | number:'1.2-2'}}%
+            </div>
+            <div class="stock-metric">
+                Profit/Loss:  <span [ngClass]="profLossFunc(stock.profitLoss)">{{stock.profitLoss | currency}}</span>
+            </div>
+            <div class="stock-metric">
+                <span>Day Change %:</span> {{stock.dayChangePercent | number:'1.2-2'}}%
+            </div>
+        </div>
+    </div>
+     <!-- Watchlist Section -->
+  <app-watchlist></app-watchlist>
+</div>
+
+<footer>
+    <p>This is a footer</p>
+</footer>
