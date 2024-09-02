@@ -1,0 +1,20 @@
+table {
+    width: 100%;
+  }
+
+.header-grey{
+  background-color: #696969;
+}
+
+.medium-font{
+  font-weight: 700;
+}
+
+th{ background-color: plum; }
+
+.no-data-view{
+  padding: 6px;
+  text-align: center;
+  color: #696969;
+  font-size: 16px;
+}

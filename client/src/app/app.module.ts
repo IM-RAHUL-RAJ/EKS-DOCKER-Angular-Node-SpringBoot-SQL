@@ -5,19 +5,31 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TradingHistoryComponent } from './components/trading-history/trading-history.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    TradingHistoryComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })
