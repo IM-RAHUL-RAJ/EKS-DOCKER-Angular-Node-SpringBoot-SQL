@@ -11,6 +11,8 @@ import { FooterComponent } from './components/landing/footer/footer.component';
 import { HomepageComponent } from './components/landing/homepage/homepage.component';
 import { NavigationBarComponent } from './components/landing/navigation-bar/navigation-bar.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
