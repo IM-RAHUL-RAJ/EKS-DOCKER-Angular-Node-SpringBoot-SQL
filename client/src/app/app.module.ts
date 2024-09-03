@@ -5,16 +5,16 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { InvestmentPreferencesComponent } from './components/investment-preferences/investment-preferences.component';
+import { CarouselComponent } from './components/landing/carousel/carousel.component';
+import { FooterComponent } from './components/landing/footer/footer.component';
+import { HomepageComponent } from './components/landing/homepage/homepage.component';
+import { NavigationBarComponent } from './components/landing/navigation-bar/navigation-bar.component';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { TradingHistoryComponent } from './components/trading-history/trading-history.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {MatDividerModule} from '@angular/material/divider'
 
 @NgModule({
   declarations: [
@@ -22,22 +22,22 @@ import {MatDividerModule} from '@angular/material/divider'
     RegistrationComponent,
     LoginComponent,
     TradingHistoryComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    InvestmentPreferencesComponent,
+    NavigationBarComponent,
+    FooterComponent,
+    HomepageComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule, 
-    MatInputModule,
-    MatCardModule,
-    MatDividerModule
-],
+    MaterialModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,74 @@
+nav {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.logoheading{
+    display: flex;
+    align-items: center;
+}
+.logo {
+    height: 5rem;
+    width: 5rem;
+    padding-right: 0.5rem;
+}
+
+.iconBackground {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.heading {
+    color: white;
+}
+
+
+.menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    border-radius: 4px;
+    z-index: 1000;
+    transform: translateX(-60%); 
+    margin-top: 0.5rem;
+    min-width: 200px;
+}
+
+.dropdown-menu a {
+    color: white;
+    padding: 1rem 2rem 1rem 2rem;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap; 
+    text-align: center;
+}
+
+.dropdown-menu a:hover {
+    background-color: #575757;
+}
+
+hr{
+    padding: 0;
+    margin: 0;
+}
+
+/* Apply this style when the menu is open */
+/* .dropdown-menu.ng-tns-c0-0 {
+    display: block;
+} */

@@ -1,6 +1,6 @@
-<div class="auth_container">
-</div>
-
-<body>
-    <app-trading-history></app-trading-history>
-</body>
+<section class="app-container">
+    {{isLoggedIn}}
+    <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
+    <router-outlet></router-outlet>
+</section>
+<app-footer></app-footer>

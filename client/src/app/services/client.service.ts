@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Client } from '../models/client';
 import { ClientVerification } from '../models/client-verification';
 
@@ -10,6 +10,7 @@ import { ClientVerification } from '../models/client-verification';
 export class ClientService {
   private baseUrl = 'http://localhost:3001'; // Main server URL
   private clientVerificationUrl = 'http://localhost:3000'; // URL for Fmts
+  private storageSubject = new BehaviorSubject<string>(sessionStorage.getItem('currentUser') || '');
 
   constructor(private http: HttpClient) {}
 
@@ -41,8 +42,8 @@ export class ClientService {
   }
 
   // Check if user is logged in
-  isLoggedId(): boolean {
-    return !!sessionStorage.getItem('currentUser');
+  isLoggedId() {
+      return this.storageSubject.asObservable();
   }
 
   // Logout user

@@ -1,0 +1,48 @@
+<nav>
+<div class="logoheading">
+    <img src="assets\images\StockStreamLogo.png" class="logo" alt="Stock Stream">
+    <h2 class="heading">Stock Stream</h2>
+</div>
+<div class="menu-container" (click)="toggleMenu()">
+    <img src="assets\images\account.svg" class="iconBackground" alt="User">
+    <div class="dropdown-menu" *ngIf="isMenuOpen && isLoggedIn">
+        <div>
+            <a href="#">Portfolio</a>
+            <hr>
+        </div>
+        <div>
+            <a href="#">Trade History</a>
+            <hr>
+        </div>
+        <div>
+            <a href="#">Buy</a>
+            <hr>
+        </div>
+        <div>
+            <a href="#">Sell</a>
+            <hr>
+        </div>
+        <div>
+            <a href="#">Investment Preferences</a>
+            <hr>
+        </div>
+        <div>
+            <a href="#">Robo Advisor</a>
+        </div>
+        <div>
+            <a (click)="logOut()">Logout</a>
+        </div>
+    </div>
+    <div class="dropdown-menu" *ngIf="isMenuOpen && !isLoggedIn">
+        <div>
+            <a routerLink="/login">Login</a>
+            <hr>
+        </div>
+        <div>
+            <a routerLink="/register">Register</a>
+            <hr>
+        </div>
+      
+    </div>
+</div>
+</nav>

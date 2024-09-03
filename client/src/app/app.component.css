@@ -13,3 +13,7 @@ body{
     justify-content: space-around;
     margin: 20px;
 }
+
+.app-container {
+    flex: 1;
+}

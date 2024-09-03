@@ -2,6 +2,10 @@ table {
     width: 100%;
   }
 
+.margin-20{
+  margin: 20px;
+}
+
 .border-1{
   border: 1px solid black;
 }
