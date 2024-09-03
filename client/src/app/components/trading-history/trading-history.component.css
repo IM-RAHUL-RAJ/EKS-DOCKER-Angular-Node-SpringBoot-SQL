@@ -2,6 +2,14 @@ table {
     width: 100%;
   }
 
+.border-1{
+  border: 1px solid black;
+}
+
+.shadow{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .header-grey{
   background-color: #696969;
 }
@@ -17,4 +25,15 @@ th{ background-color: plum; }
   text-align: center;
   color: #696969;
   font-size: 16px;
+}
+
+.trade-history-section{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 5px;
+}
+
+.search-form{
+  width: 100%;
 }

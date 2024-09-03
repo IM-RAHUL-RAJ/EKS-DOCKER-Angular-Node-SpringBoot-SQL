@@ -15,6 +15,7 @@ describe('TradingHistoryComponent', () => {
     fixture = TestBed.createComponent(TradingHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
   });
 
   it('should create', () => {

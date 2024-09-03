@@ -7,6 +7,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 
 @Component({
@@ -17,9 +19,17 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 export class TradingHistoryComponent implements AfterViewInit {
 
   trades: Trade[] = [];
+  filteredTrades:Trade[] = []
 
   displayedColumns: string[] = ['instrumentId', 'order.orderDate', 'tradeDate', 'direction','quantity','executionPrice'];
   dataSource = new MatTableDataSource<Trade>();
+
+
+  emailFormControl = new FormControl('', []);
+  
+
+  matcher = new MyErrorStateMatcher();
+
 
   @ViewChild(MatSort) sort: MatSort | undefined;
 
@@ -112,43 +122,58 @@ export class TradingHistoryComponent implements AfterViewInit {
   currentSortKey: keyof Trade | null = null;
   sortAscending: boolean = true;
 
+
+
   constructor(private tradingService: TradeService,private _liveAnnouncer: LiveAnnouncer) {
     
   }
   ngOnInit(): void {
     this.loadTradeData();
-    console.log(!this.trades.length);
-    this.dataSource = new MatTableDataSource<Trade>(this.trades);
+    this.filteredTrades = this.trades
+    this.refreshTable()
+  }
+
+  refreshTable():void{
+    this.dataSource.data = this.filteredTrades;
+    
   }
 
   loadTradeData() {
     this.trades = this.tradingService.getTradeHistory();
   }
 
-  filterData(key: keyof Trade, order: 'asc' | 'desc' = 'asc'): void {
-    if (this.currentSortKey === key) {
-      // Reverse the sort order if the same column is clicked
-      this.sortAscending = !this.sortAscending;
-    } else {
-      // Sort in ascending order if a new column is clicked
-      this.currentSortKey = key;
-      this.sortAscending = true;
+  
+
+  filterData(searchText: any): void {
+    if (!this.trades) {
+      this.filteredTrades =  [];
+      this.refreshTable()
+      return
     }
+    if (!searchText || !searchText.length) {
+      this.filteredTrades = this.trades
+      this.refreshTable()
+      return
+    }
+    searchText = searchText.toLocaleLowerCase();
 
-    this.trades.sort((a, b) => {
-      const valueA = a[key];
-      const valueB = b[key];
 
-      if (valueA < valueB) return this.sortAscending ? -1 : 1;
-      if (valueA > valueB) return this.sortAscending ? 1 : -1;
-      return 0;
+    this.filteredTrades = this.trades.filter(it => {
+      return (it.direction.toLocaleLowerCase().includes(searchText)||it.instrumentId.toLocaleLowerCase().includes(searchText)||it.order.orderDate.toLocaleLowerCase().includes(searchText)||it.tradeDate.toLocaleLowerCase().includes(searchText));
     });
+    
+    this.refreshTable()
   }
 
-  check() {
-    console.log(formatDate('2002/02/11', 'dd/mm/yyyy', 'en-US'));
+
+
+}
+
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
-
-
-
 }
