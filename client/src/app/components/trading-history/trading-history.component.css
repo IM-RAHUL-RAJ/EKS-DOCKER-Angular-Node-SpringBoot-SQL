@@ -37,3 +37,10 @@ th{ background-color: plum; }
 .search-form{
   width: 100%;
 }
+
+.trading-history-body{
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
