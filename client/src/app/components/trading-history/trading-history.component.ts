@@ -25,11 +25,7 @@ export class TradingHistoryComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Trade>();
 
 
-  emailFormControl = new FormControl('', []);
-  
-
-  matcher = new MyErrorStateMatcher();
-
+  searchFormControl = new FormControl('', []);
 
   @ViewChild(MatSort) sort: MatSort | undefined;
 
@@ -43,8 +39,6 @@ export class TradingHistoryComponent implements AfterViewInit {
       this.dataSource.sort = this.sort;
     }
   }
-
-  searchTrade: string = '';
   roboSuggestionsMock: any = [
     {
       askPrice: 104.75,
@@ -119,9 +113,6 @@ export class TradingHistoryComponent implements AfterViewInit {
     },
   ];
 
-  currentSortKey: keyof Trade | null = null;
-  sortAscending: boolean = true;
-
 
 
   constructor(private tradingService: TradeService,private _liveAnnouncer: LiveAnnouncer) {
@@ -167,13 +158,4 @@ export class TradingHistoryComponent implements AfterViewInit {
 
 
 
-}
-
-
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
 }
