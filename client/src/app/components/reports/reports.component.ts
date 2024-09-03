@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Portfolio } from 'src/app/models/portfolio';
 import { PDFService } from 'src/app/services/pdf.service';
 import { ReportService } from 'src/app/services/report.service';
+import { formatNumber, formatDate } from '@angular/common'; // Import for formatting numbers and dates
+
 
 @Component({
   selector: 'app-reports',
@@ -27,18 +29,60 @@ export class ReportsComponent implements OnInit {
     })
   }
 
+  // generateReport() {
+  //   const body = this.reports.map(portfolio => [
+  //     portfolio.instrument,
+  //     portfolio.instrumentId,
+  //     portfolio.quantity,
+  //     portfolio.averagePrice,
+  //     portfolio.investedCapital,
+  //     portfolio.ltp,
+  //     portfolio.percentChange,
+  //     portfolio.profitLoss,
+  //     portfolio.dayChangePercent
+  //   ]);
+  //   this.pdfService.generatePdf(body, this.columns);
+  // }
   generateReport() {
+    // Define a header for the report
+    const header = ['Report Generated on: ' + formatDate(new Date(), 'dd/MM/yyyy', 'en-US')];
+  
+    // Create the body of the report
     const body = this.reports.map(portfolio => [
-      portfolio.instrument,
-      portfolio.instrumentId,
-      portfolio.quantity,
-      portfolio.averagePrice,
-      portfolio.investedCapital,
-      portfolio.ltp,
-      portfolio.percentChange,
-      portfolio.profitLoss,
-      portfolio.dayChangePercent
+      portfolio.instrument || 'N/A',
+      portfolio.instrumentId || 'N/A',
+      formatNumber(portfolio.quantity, 'en-US', '1.0-0') || 'N/A',
+      formatNumber(portfolio.averagePrice, 'en-US', '1.2-2') || 'N/A',
+      formatNumber(portfolio.investedCapital, 'en-US', '1.2-2') || 'N/A',
+      formatNumber(portfolio.ltp, 'en-US', '1.2-2') || 'N/A',
+      formatNumber(portfolio.percentChange, 'en-US', '1.2-2') + '%' || 'N/A',
+      formatNumber(portfolio.profitLoss, 'en-US', '1.2-2') || 'N/A',
+      formatNumber(portfolio.dayChangePercent, 'en-US', '1.2-2') + '%' || 'N/A'
     ]);
-    this.pdfService.generatePdf(body, this.columns);
-  }
+  
+    // Create a title and date for the report
+    const reportTitle = 'Portfolio Report';
+    const reportDate = formatDate(new Date(), 'dd/MM/yyyy', 'en-US');
+   // Generate the PDF with the title, header, body, and columns
+   this.pdfService.generatePdf(
+    body, // Combine header and body
+    this.columns
+  );
+}
+generatePerformanceReport() {
+  // Define columns and data for the report
+  const columns = ['Date', 'Total Value', 'Change (%)'];
+  const body = this.reports.map(report => [
+    formatDate('12/03/2024', 'dd/MM/yyyy', 'en-US'),
+    formatNumber(5692.03, 'en-US', '1.2-2'),
+    formatNumber(23, 'en-US', '1.2-2') + '%'
+  ]);
+
+  // Add a title and summary
+  const title = 'Portfolio Performance Report';
+  const summary = `Report generated on ${formatDate(new Date(), 'dd/MM/yyyy', 'en-US')}`;
+
+  // Generate PDF with title, summary, and body
+  this.pdfService.generatePdf([title, summary, ...body.flat()], columns);
+}
 }
