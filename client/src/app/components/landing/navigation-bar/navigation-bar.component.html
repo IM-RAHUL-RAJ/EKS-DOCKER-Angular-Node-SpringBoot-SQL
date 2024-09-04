@@ -29,11 +29,11 @@
             </button>
         </mat-list-item>
         <mat-menu #transactMenu="matMenu" [overlapTrigger]="false">
-            <button mat-menu-item>
+            <button mat-menu-item routerLink="/trade">
                 <mat-icon>add</mat-icon>
                 <span>Buy</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item routerLink="/trade">
                 <mat-icon>remove</mat-icon>
                 <span>Sell Holdings</span>
             </button>
@@ -69,6 +69,3 @@
 
     </mat-nav-list>
 </mat-toolbar>
-<div class="basic-container">
-
-</div>

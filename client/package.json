@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "authserver": "cd auth_server && npm start",
+    "fmtsserver": "cd fmts && npm start"
   },
   "private": true,
   "dependencies": {

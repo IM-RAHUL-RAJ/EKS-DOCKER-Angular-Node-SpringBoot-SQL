@@ -34,6 +34,10 @@ const routes: Routes = [
         component: InvestmentPreferencesComponent
     },
     {
+        path: 'trade',
+        component: TradeComponent
+    },
+    {
         path: "**",
         redirectTo: '/'
     }
