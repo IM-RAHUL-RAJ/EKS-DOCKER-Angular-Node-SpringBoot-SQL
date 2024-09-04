@@ -16,6 +16,10 @@ import { FooterComponent } from './components/landing/footer/footer.component';
 import { HomepageComponent } from './components/landing/homepage/homepage.component';
 import { CarouselComponent } from './components/landing/carousel/carousel.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import { PDFService } from './services/pdf.service';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
@@ -30,6 +34,9 @@ import { TradingHistoryComponent } from './components/trading-history/trading-hi
     SellFormComponent,
     RegistrationComponent,
     LoginComponent,
+    PortfolioComponent,
+    WatchlistComponent,
+    ReportsComponent,
     TradingHistoryComponent,
     SearchFilterPipe,
     InvestmentPreferencesComponent,
@@ -47,7 +54,7 @@ import { TradingHistoryComponent } from './components/trading-history/trading-hi
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [PDFService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
