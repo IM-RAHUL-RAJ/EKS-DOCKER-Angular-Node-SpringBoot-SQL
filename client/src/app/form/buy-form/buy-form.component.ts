@@ -20,14 +20,10 @@ export class BuyFormComponent {
     
     @Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder) {
     this.buyform = this.fb.group({
-      quantity: [null, [Validators.required, Validators.min(1)
-        // , Validators.max(1000)
+      quantity: [null, [Validators.required, Validators.min(data.minQuantity),Validators.max(data.maxQuantity)
       ]]
     });
-   } 
-
-
-  
+   }  
 
   getQuantity(): number {
     return this.buyform.get('quantity')?.value;
@@ -44,8 +40,6 @@ export class BuyFormComponent {
       this.dialogRef.close();
     }
   }
-  
-  
   ngOnInit() { 
     this.buy = new Buy('','', this.instrumentId); 
     };

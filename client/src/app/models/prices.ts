@@ -1,5 +1,4 @@
 import { Instruments } from "./instruments";
-
 export class Prices {
     constructor(
         // public instrumentId: string,

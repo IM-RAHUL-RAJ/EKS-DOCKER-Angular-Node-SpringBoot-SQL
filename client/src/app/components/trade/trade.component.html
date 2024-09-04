@@ -43,7 +43,7 @@
         {{ category }}
       </mat-option>
     </mat-select>
-  </mat-form-field>
+</mat-form-field>
   
   <div *ngIf="selectedCat">
     <h3>Instruments in {{ selectedCat }}:</h3>
@@ -66,8 +66,8 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let element">
-          <button  (click)="BuyForm(element.askPrice)">Buy</button>
-          <button  (click)="SellForm()">Sell</button>
+          <button  (click)="BuyForm(element.askPrice, element.minQuantity, element.maxQuanity)">Buy</button>
+          <button  (click)="SellForm(element.bidPrice)">Sell</button>
         </td>
       </ng-container>
   
