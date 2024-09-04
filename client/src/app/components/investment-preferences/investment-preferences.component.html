@@ -19,20 +19,9 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <!-- <div class="circular-image-container">
-        <div class="image-card">
-          <div class="image-wrapper">
-            <img mat-card-image src="assets/images/investPurpose.jpg" alt="Image description">
-          </div>
-          <div class="content">
-            <h2 class="heading">Investment Purpose</h2>
-          </div>
-        </div>
-        <mat-divider></mat-divider>
-      </div> -->
-      <mat-form-field appearance="fill" formControlName="investmentPurpose">
+      <mat-form-field appearance="fill" >
         <mat-label>Purpose of Investment</mat-label>
-        <input matInput placeholder="Placeholder">
+        <input matInput formControlName="investmentPurpose">
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>College Fund, Retirement, etc</mat-hint>
       </mat-form-field>
