@@ -12,7 +12,7 @@
 /auth_server/node_modules
 npm-debug.log
 yarn-error.log
-/fmts
+/fmts/node_modules
 
 # IDEs and editors
 .idea/
