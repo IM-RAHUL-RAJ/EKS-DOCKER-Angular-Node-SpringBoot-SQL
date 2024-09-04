@@ -86,7 +86,6 @@ export class RegistrationComponent {
         this.clientService.register(client).subscribe({
           next: (registrationResponse) => {
             console.log('Registration successful', registrationResponse);
-            alert('Registration successful');
             this.router.navigate(['/preferences']).then(() => {
               window.location.reload();
             })

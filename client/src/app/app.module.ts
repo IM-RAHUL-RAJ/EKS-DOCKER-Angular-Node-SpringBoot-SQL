@@ -14,7 +14,6 @@ import { InvestmentPreferencesComponent } from './components/investment-preferen
 import { NavigationBarComponent } from './components/landing/navigation-bar/navigation-bar.component';
 import { FooterComponent } from './components/landing/footer/footer.component';
 import { HomepageComponent } from './components/landing/homepage/homepage.component';
-import { CarouselComponent } from './components/landing/carousel/carousel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ReportsComponent } from './components/reports/reports.component';
@@ -43,7 +42,6 @@ import { TradingHistoryComponent } from './components/trading-history/trading-hi
     NavigationBarComponent,
     FooterComponent,
     HomepageComponent,
-    CarouselComponent
   ],
   imports: [
     BrowserModule,

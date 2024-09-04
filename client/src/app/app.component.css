@@ -5,3 +5,9 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.app-container {
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 48px;
+}
