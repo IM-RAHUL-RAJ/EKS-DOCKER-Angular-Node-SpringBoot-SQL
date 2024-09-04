@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Buy {{ data.instrumentName }} </h1><br>
+<h1 mat-dialog-title>Price: {{ data.price }} </h1>
+<h1 mat-dialog-title>Total Price: {{ calculateTotal() | currency }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="buyform" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Quantity</mat-label>
+      <input matInput formControlName="quantity" type="number" min=minQuantity max=maxQuantity>    
+      <mat-error *ngIf="buyform.controls['quantity'].hasError('min')">
+        Minimum quantity is {{data.minQuantity}}
+      </mat-error>
+      <mat-error *ngIf="buyform.controls['quantity'].hasError('max')">
+        Maximum quantity is {{data.maxQuantity}}
+      </mat-error>
+    </mat-form-field>
+    <button mat-button type="submit">Submit</button>
+  </form>
+</div>
+

@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { InvestmentPreferences } from './models/investment-preferences';
 import { InvestmentPreferencesComponent } from './components/investment-preferences/investment-preferences.component';
+import { TradeComponent } from './components/trade/trade.component';
 
 const routes: Routes = [
     {
@@ -25,8 +26,16 @@ const routes: Routes = [
         component: RegistrationComponent
     },
     {
+        path: 'trade',
+        component: TradeComponent
+    },
+    {
         path: 'preferences',
         component: InvestmentPreferencesComponent
+    },
+    {
+        path: 'trade',
+        component: TradeComponent
     },
     {
         path: "**",
