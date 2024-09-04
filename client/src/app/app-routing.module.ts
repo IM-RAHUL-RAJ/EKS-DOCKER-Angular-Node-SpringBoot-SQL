@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomepageComponent } from './components/landing/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { InvestmentPreferences } from './models/investment-preferences';
 import { InvestmentPreferencesComponent } from './components/investment-preferences/investment-preferences.component';
+import { TradingHistoryComponent } from './components/trading-history/trading-history.component';
 import { TradeComponent } from './components/trade/trade.component';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
 
 const routes: Routes = [
     {
@@ -34,8 +35,12 @@ const routes: Routes = [
         component: InvestmentPreferencesComponent
     },
     {
-        path: 'trade',
-        component: TradeComponent
+        path: 'history',
+        component: TradingHistoryComponent
+    },    
+    {
+        path: 'portfolio',
+        component: PortfolioComponent
     },
     {
         path: "**",
