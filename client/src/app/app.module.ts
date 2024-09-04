@@ -18,6 +18,8 @@ import { CarouselComponent } from './components/landing/carousel/carousel.compon
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { TradingHistoryComponent } from './components/trading-history/trading-history.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { MaterialModule } from './material.module';
     SellFormComponent,
     RegistrationComponent,
     LoginComponent,
+    TradingHistoryComponent,
+    SearchFilterPipe,
     InvestmentPreferencesComponent,
     NavigationBarComponent,
     FooterComponent,
