@@ -89,8 +89,8 @@ p{
   }
   
   .image-wrapper {
-    width: 100px; /* Adjust size as needed */
-    height: 100px; /* Adjust size as needed */
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
     border-radius: 50%;
     overflow: hidden;
     display: flex;

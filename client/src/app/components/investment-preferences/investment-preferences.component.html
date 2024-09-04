@@ -14,7 +14,7 @@
               <img mat-card-image src="assets/images/investPurpose.jpg" alt="Image description">
             </div>
             <div class="content">
-              <h2 class="heading">Investment Purpose</h2>
+              <h3 class="heading">Investment Purpose</h3>
             </div>
           </div>
         </mat-card-content>
@@ -67,6 +67,9 @@
       <div *ngIf="riskTolerance.invalid && (riskTolerance.dirty || riskTolerance.touched || isSubmitted)" class="alert">
         <div *ngIf="riskTolerance.errors?.['required']">This field is required.</div>
       </div>
+
+
+      
     </section>
 
     <section class="form-section">
