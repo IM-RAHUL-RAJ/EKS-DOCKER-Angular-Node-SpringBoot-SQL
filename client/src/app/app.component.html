@@ -1,6 +1,12 @@
-<section class="app-container">
-    {{isLoggedIn}}
-    <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
-    <router-outlet></router-outlet>
-</section>
-<app-footer></app-footer>
+<main>
+    <header>
+        <div style="padding: 16px; font-family: monospace; background-color: black; color: rgb(0, 255, 0);">User login status: {{isLoggedIn}}</div>
+        <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
+    </header>
+    <section class="app-container">
+        <router-outlet></router-outlet>
+    </section>
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</main>

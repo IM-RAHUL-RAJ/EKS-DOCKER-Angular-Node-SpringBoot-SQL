@@ -1,0 +1,78 @@
+<!-- <div>
+    <label for="category">Available Category </label>
+    <select #categorySelector (change)="onSelectCategory(categorySelector.value)"> 
+        <option value="">--Select a category--</option>
+        <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+        </option>
+    </select>
+</div>
+
+<div *ngIf="selectedCat">
+  <h3>Instruments in {{ selectedCat }}:</h3>
+  <table> 
+    <thead>
+        <tr>
+            <td>Category </td>
+            <td>Instrument Name </td>
+            <td>Price</td>
+            <td> B/S </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let instrument of selectedInst">
+            <td>{{selectedCat}}</td>
+            <td>{{instrument.instrument.instrumentDescription}}</td>
+            <td>{{instrument.askPrice}}</td>
+            <td>
+                <button (click)="BuyForm(instrument.askPrice)">Buy</button>
+            </td>
+            <td>
+                <button (click)="SellForm()">Sell</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div> -->
+
+<mat-form-field appearance="fill">
+    <mat-label>Available Category</mat-label>
+    <mat-select #categorySelector (selectionChange)="onSelectCategory($event.value)">
+      <mat-option value="">--Select a category--</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+  
+  <div *ngIf="selectedCat">
+    <h3>Instruments in {{ selectedCat }}:</h3>
+    <table mat-table [dataSource]="selectedInst" class="mat-elevation-z8">
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let element">{{ selectedCat }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="instrumentName">
+        <th mat-header-cell *matHeaderCellDef> Instrument Name </th>
+        <td mat-cell *matCellDef="let element">{{ element.instrument.instrumentDescription }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element">{{ element.askPrice }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button  (click)="BuyForm(element.askPrice, element.minQuantity, element.maxQuanity)">Buy</button>
+          <button  (click)="SellForm(element.bidPrice)">Sell</button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="['category', 'instrumentName', 'price', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['category', 'instrumentName', 'price', 'actions']"></tr>
+    </table>
+  </div>
+  

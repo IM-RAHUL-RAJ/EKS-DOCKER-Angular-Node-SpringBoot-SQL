@@ -1,0 +1,26 @@
+<!-- watchlist.component.html -->
+<div class="watchlist-card-container">
+  <div class="watchlist-card">
+    <h3>Watchlist</h3>
+    <button class="add-new" (click)="addNewStock()">Add New</button>
+    <div class="watchlist-content">
+      <div class="watchlist-card-item" *ngFor="let stock of watchlist">
+        <div class="stock-logo">
+          <img [src]="stock.logo" alt="{{stock.name}} logo">
+        </div>
+        <div class="stock-info">
+          <span class="stock-symbol">{{stock.symbol}}</span>
+          <span class="stock-name">{{stock.name}}</span>
+        </div>
+        <div class="stock-details">
+          <div class="stock-metric">
+            <span>{{stock.price | currency}}</span>
+          </div>
+          <div class="stock-metric">
+            <span [ngClass]="{'positive': stock.change > 0, 'negative': stock.change < 0}">{{stock.change | number:'1.2-2'}}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
