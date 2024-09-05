@@ -7,6 +7,7 @@ import { By } from '@angular/platform-browser';
 import { Component, Input } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from './material.module';
 
 @Component({
   selector: 'app-navigation-bar'
@@ -33,7 +34,8 @@ describe('AppComponent', () => {
       declarations: [AppComponent, MockNavigationBarComponent, MockFooterComponent],
       imports: [
         RouterTestingModule,
-        HttpClientModule
+        HttpClientModule,
+        MaterialModule
     ],
       providers: [
         { provide: ClientService },

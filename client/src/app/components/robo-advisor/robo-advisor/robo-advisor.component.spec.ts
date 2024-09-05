@@ -9,7 +9,7 @@ import { Prices } from 'src/app/models/prices';
 import { InvestmentPreferences } from 'src/app/models/investment-preferences';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-fdescribe('RoboAdvisorComponent', () => {
+describe('RoboAdvisorComponent', () => {
   let component: RoboAdvisorComponent;
   let fixture: ComponentFixture<RoboAdvisorComponent>;
   let roboAdvisorService: jasmine.SpyObj<RoboAdvisorService>;

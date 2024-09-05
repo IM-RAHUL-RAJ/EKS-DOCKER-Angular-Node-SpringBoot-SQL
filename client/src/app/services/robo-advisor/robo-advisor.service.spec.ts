@@ -25,7 +25,7 @@ const mockSuggestions: Prices[] = [
   },
 ];
 
-fdescribe('RoboAdvisorService', () => {
+describe('RoboAdvisorService', () => {
   let service: RoboAdvisorService;
   let investmentPurposeService: jasmine.SpyObj<InvestmentPurposeService>;
 
