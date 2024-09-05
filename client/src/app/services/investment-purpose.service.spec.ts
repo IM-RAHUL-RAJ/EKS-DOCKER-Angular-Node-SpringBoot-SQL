@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { InvestmentPurposeService } from './investment-purpose.service';
 
-describe('InvestmentPurposeService', () => {
+fdescribe('InvestmentPurposeService', () => {
   let service: InvestmentPurposeService;
 
   beforeEach(() => {

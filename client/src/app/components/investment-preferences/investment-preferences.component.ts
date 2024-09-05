@@ -21,7 +21,7 @@ export class InvestmentPreferencesComponent implements OnInit{
     riskTolerance:  new FormControl('',Validators.required),
     incomeCategory:  new FormControl('',Validators.required),
     investmentYears:  new FormControl('',Validators.required),
-    isRoboAdviserTermsAccepted: new FormControl(''),
+    isRoboAdviserTermsAccepted: new FormControl(),
   })
 
   constructor(private investmentPreferenceService: InvestmentPurposeService, private router: Router){}
