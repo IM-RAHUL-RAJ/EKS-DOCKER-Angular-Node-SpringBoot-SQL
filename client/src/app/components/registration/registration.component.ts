@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ClientService } from 'src/app/services/client.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class RegistrationComponent {
   private ppsPattern = /^d{7}[A-W]{1,2}$/;
   private panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
 
-  constructor(private clientService: ClientService, private formBuilder: FormBuilder) {
+  constructor(private clientService: ClientService, private formBuilder: FormBuilder, private router: Router) {
     this.registrationForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -86,6 +87,9 @@ export class RegistrationComponent {
           next: (registrationResponse) => {
             console.log('Registration successful', registrationResponse);
             alert('Registration successful');
+            this.router.navigate(['/preferences']).then(() => {
+              window.location.reload();
+            })
           },
           error: (registrationError) => {
             console.error('Registration failed', registrationError);

@@ -1,0 +1,75 @@
+<div class="margin-20">
+  <section class="trading-history-body">
+    <mat-card class="trade-history-section shadow">
+      <div class="search-form">
+        <mat-form-field class="search-form">
+          <mat-label>Search</mat-label>
+          <input type="search" matInput [formControl]="searchFormControl" 
+                 placeholder="search by keyword" (change)="filterData(searchFormControl.value)">
+    
+        
+        </mat-form-field>
+    </div>
+    <div class="">
+      <table mat-table [dataSource]="tradeDataSource" matSort  >
+    
+        <ng-container matColumnDef="instrumentId">
+          <th  mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="Sort by instrumentId"> Instrument </th>
+          <td mat-cell *matCellDef="let element" class="medium-font"> {{element.instrumentId}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="order.orderDate">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header > Order Date/Time </th>
+          <td mat-cell *matCellDef="let element"> {{element.order.orderDate}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="tradeDate" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > Transaction Date/Time </th>
+          <td mat-cell *matCellDef="let element"> {{element.tradeDate}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="direction" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by direction"> Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.direction}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="quantity" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by direction"> Quantity </th>
+          <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="executionPrice" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by direction"> Ex. Price </th>
+          <td mat-cell *matCellDef="let element"> {{element.executionPrice}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <tr>
+          
+        </tr>
+      </table>
+    
+      <mat-paginator *ngIf="trades.length" [pageSizeOptions]="[8,10]"
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+      <div class="no-data-view" *ngIf="!trades.length">
+        There is no data to display
+      </div>
+    </div>
+    
+    </mat-card>
+    <section>
+      <div class="watchlist">
+        
+      </div>
+    </section>
+  </section>
+  
+  
+  
+</div>
+
+

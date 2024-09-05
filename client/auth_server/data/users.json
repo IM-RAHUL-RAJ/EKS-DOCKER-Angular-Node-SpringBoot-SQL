@@ -43,6 +43,20 @@
         }
       ],
       "clientId": 132082253
+    },
+    "five@emaill.com": {
+      "email": "five@emaill.com",
+      "password": "123456",
+      "fullName": "Brad Pitt",
+      "dateOfBirth": "2024-09-10T18:30:00.000Z",
+      "country": "India",
+      "postalCode": "65650",
+      "identification": [
+        {
+          "value": "AIEPK3999E"
+        }
+      ],
+      "clientId": 214237455
     }
   }
 }

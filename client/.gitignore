@@ -12,6 +12,7 @@
 /auth_server/node_modules
 npm-debug.log
 yarn-error.log
+/fmts/node_modules
 
 # IDEs and editors
 .idea/
@@ -21,6 +22,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+package-lock.json
 
 # Visual Studio Code
 .vscode/*

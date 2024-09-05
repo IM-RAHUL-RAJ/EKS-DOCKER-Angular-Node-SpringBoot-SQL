@@ -1,29 +1,58 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+
+import { TradeComponent } from './components/trade/trade.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { BuyFormComponent } from './form/buy-form/buy-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SellFormComponent } from './form/sell-form/sell-form.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
+import { InvestmentPreferencesComponent } from './components/investment-preferences/investment-preferences.component';
+import { NavigationBarComponent } from './components/landing/navigation-bar/navigation-bar.component';
+import { FooterComponent } from './components/landing/footer/footer.component';
+import { HomepageComponent } from './components/landing/homepage/homepage.component';
+import { CarouselComponent } from './components/landing/carousel/carousel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { WatchlistComponent } from './components/watchlist/watchlist.component';
 import { PDFService } from './services/pdf.service';
+import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { TradingHistoryComponent } from './components/trading-history/trading-history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TradeComponent,
+    OrdersComponent,
+    BuyFormComponent,
+    SellFormComponent,
     RegistrationComponent,
     LoginComponent,
     PortfolioComponent,
     WatchlistComponent,
-    ReportsComponent
+    ReportsComponent,
+    TradingHistoryComponent,
+    SearchFilterPipe,
+    InvestmentPreferencesComponent,
+    NavigationBarComponent,
+    FooterComponent,
+    HomepageComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [PDFService],
   bootstrap: [AppComponent]

@@ -1,0 +1,71 @@
+<mat-toolbar color="secondary">
+    <div class="logo-container">
+        <img class="logo" src="assets\images\StockStreamLogo.png">
+        <span class="title">StockStream</span>
+    </div>
+    <mat-nav-list class="list-horizontal">
+
+        <mat-list-item>
+            <button mat-menu-item routerLink="/home">
+                Home
+            </button>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="isLoggedIn">
+            <button mat-menu-item routerLink="/portfolio">
+                Portfolio
+            </button>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="isLoggedIn">
+            <button mat-menu-item routerLink="/history">
+                History
+            </button>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="isLoggedIn">
+            <button mat-menu-item [matMenuTriggerFor]="transactMenu">
+                Transact
+            </button>
+        </mat-list-item>
+        <mat-menu #transactMenu="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item routerLink="/trade">
+                <mat-icon>add</mat-icon>
+                <span>Buy</span>
+            </button>
+            <button mat-menu-item routerLink="/trade">
+                <mat-icon>remove</mat-icon>
+                <span>Sell Holdings</span>
+            </button>
+        </mat-menu>
+
+        <mat-list-item>
+            <button mat-menu-item [matMenuTriggerFor]="accountMenu">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </mat-list-item>
+        <mat-menu #accountMenu="matMenu" [overlapTrigger]="false">
+            <button *ngIf="!isLoggedIn" mat-menu-item routerLink="/login">
+                <mat-icon>login</mat-icon>
+                <span>Login</span>
+            </button>
+            <button *ngIf="!isLoggedIn" mat-menu-item routerLink="/register">
+                <mat-icon>person_edit</mat-icon>
+                <span>Register</span>
+            </button>
+            <button *ngIf="isLoggedIn" mat-menu-item>
+                <mat-icon>manage_accounts</mat-icon>
+                <span>Account details</span>
+            </button>
+            <button *ngIf="isLoggedIn" mat-menu-item routerLink="/preferences">
+                <mat-icon>tune</mat-icon>
+                <span>Investment Preferences</span>
+            </button>
+            <button *ngIf="isLoggedIn" mat-menu-item (click)="logOut()">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+            </button>
+        </mat-menu>
+
+    </mat-nav-list>
+</mat-toolbar>
