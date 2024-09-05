@@ -13,7 +13,7 @@ import { WatchlistComponent } from '../watchlist/watchlist.component';
 class mockWatchlistComponent{}
 
 
-fdescribe('PortfolioComponent', () => {
+describe('PortfolioComponent', () => {
   let component: PortfolioComponent;
   let fixture: ComponentFixture<PortfolioComponent>;
   let mockStockData:Portfolio[] = [

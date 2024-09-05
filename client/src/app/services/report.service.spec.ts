@@ -3,7 +3,7 @@ import { ReportService } from './report.service';
 import { Portfolio } from '../models/portfolio';
 import { of } from 'rxjs';
 
-fdescribe('ReportService', () => {
+describe('ReportService', () => {
   let service: ReportService;
 
   beforeEach(() => {
