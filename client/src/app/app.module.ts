@@ -50,7 +50,8 @@ import { TradingHistoryComponent } from './components/trading-history/trading-hi
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [PDFService],
   bootstrap: [AppComponent]

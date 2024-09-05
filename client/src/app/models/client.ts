@@ -5,7 +5,7 @@ export interface Client {
     dateOfBirth: string;
     country: string;
     postalCode: string;
-    identification: { type: string; value: string }[];
+    identification: { type: string; value: string };
     clientId: string;
   }
   

@@ -73,7 +73,7 @@ export class RegistrationComponent {
       dateOfBirth: formValues.dateOfBirth,
       country: formValues.country,
       postalCode: formValues.postalCode,
-      identification: [{ type: formValues.identificationType, value: formValues.identificationValue }],
+      identification: { type: formValues.identificationType, value: formValues.identificationValue },
       clientId: ""
     };
 
@@ -86,7 +86,7 @@ export class RegistrationComponent {
         this.clientService.register(client).subscribe({
           next: (registrationResponse) => {
             console.log('Registration successful', registrationResponse);
-            this.router.navigate(['/preferences']).then(() => {
+            this.router.navigate(['/preferences'])?.then(() => {
               window.location.reload();
             })
           },
