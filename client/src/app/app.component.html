@@ -1,12 +1,23 @@
+<header>
+  <div
+    style="
+      padding: 16px;
+      font-family: monospace;
+      background-color: black;
+      color: rgb(0, 255, 0);
+    "
+  >
+    User login status: {{ isLoggedIn }}
+  </div>
+  <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
+</header>
 <main>
-    <header>
-        <div style="padding: 16px; font-family: monospace; background-color: black; color: rgb(0, 255, 0);">Debug flags:<br>User login status: {{isLoggedIn}}</div>
-        <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
-    </header>
-    <section class="app-container">
-        <router-outlet></router-outlet>
-    </section>
-    <footer>
-        <app-footer></app-footer>
-    </footer>
+  <section class="app-container">
+    <router-outlet></router-outlet>
+  </section>
+  <button mat-icon-button class="robo-advisor-btn" routerLink="/robo-advisor"><mat-icon fontIcon="support_agent" color="white"></mat-icon></button>
 </main>
+
+<footer>
+  <app-footer></app-footer>
+</footer>

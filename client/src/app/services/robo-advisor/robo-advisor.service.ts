@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
+import { InvestmentPreferences } from 'src/app/models/investment-preferences';
+import { InvestmentPurposeService } from '../investment-purpose.service';
+import { Prices } from 'src/app/models/prices';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoboAdvisorService {
 
-  mockSuggestions:any = [
+  mockInvestmentPreferences:InvestmentPreferences|undefined
+  
+
+  mockSuggestions:Prices[] = [
     {
       askPrice: 104.75,
       bidPrice: 104.25,
@@ -79,9 +85,19 @@ export class RoboAdvisorService {
     },
   ]
 
-  constructor() { }
+  constructor(investmentPreferenceService:InvestmentPurposeService) {
+    investmentPreferenceService.getInvestmentPreference().subscribe(
+      (data)=>{
+        this.mockInvestmentPreferences = data
+      }
+    )
+   }
 
   getSuggestions(){
     return this.mockSuggestions
+  }
+
+  getInvestmentPreferences(){
+    return this.mockInvestmentPreferences
   }
 }

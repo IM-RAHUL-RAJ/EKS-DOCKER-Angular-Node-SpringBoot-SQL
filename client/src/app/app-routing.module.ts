@@ -7,6 +7,7 @@ import { InvestmentPreferencesComponent } from './components/investment-preferen
 import { TradingHistoryComponent } from './components/trading-history/trading-history.component';
 import { TradeComponent } from './components/trade/trade.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { RoboAdvisorComponent } from './components/robo-advisor/robo-advisor/robo-advisor.component';
 
 const routes: Routes = [
     {
@@ -41,6 +42,10 @@ const routes: Routes = [
     {
         path: 'portfolio',
         component: PortfolioComponent
+    },
+    {
+        path:'robo-advisor',
+        component:RoboAdvisorComponent
     },
     {
         path: "**",

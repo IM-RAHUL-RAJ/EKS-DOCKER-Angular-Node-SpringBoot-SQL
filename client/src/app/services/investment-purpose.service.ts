@@ -15,7 +15,7 @@ export class InvestmentPurposeService {
    this.cliendID = '10001'
    this.investmentPreference = new InvestmentPreferences(this.cliendID,"College Fund","AVERAGE","60,001 - 80,000","0-5 years",false)
 
-   }
+  constructor(private clientService:ClientService) { }
 
   getInvestmentPreference() : Observable<InvestmentPreferences> {
     return of(this.investmentPreference)
@@ -23,5 +23,6 @@ export class InvestmentPurposeService {
 
   updateInvestmentPreference(investmentPreference : InvestmentPreferences) {
     this.investmentPreference = investmentPreference
+    this.clientService.getCurrentUser()
   }
 }
