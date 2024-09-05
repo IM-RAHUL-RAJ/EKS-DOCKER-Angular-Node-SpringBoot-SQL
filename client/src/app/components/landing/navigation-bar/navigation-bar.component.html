@@ -43,12 +43,12 @@
         </mat-menu>
 
         <mat-list-item>
-            <button mat-menu-item [matMenuTriggerFor]="accountMenu">
+            <button mat-menu-item [matMenuTriggerFor]="accountMenu" id="user">
                 <mat-icon>account_circle</mat-icon>
             </button>
         </mat-list-item>
         <mat-menu #accountMenu="matMenu" [overlapTrigger]="false">
-            <button *ngIf="!isLoggedIn" mat-menu-item routerLink="/login">
+            <button *ngIf="!isLoggedIn" mat-menu-item routerLink="/login" id="loginButton">
                 <mat-icon>login</mat-icon>
                 <span>Login</span>
             </button>
@@ -60,11 +60,11 @@
                 <mat-icon>manage_accounts</mat-icon>
                 <span>Account details</span>
             </button>
-            <button *ngIf="isLoggedIn" mat-menu-item routerLink="/preferences">
+            <button *ngIf="isLoggedIn" mat-menu-item routerLink="/preferences" id="investmentNavigation">
                 <mat-icon>tune</mat-icon>
                 <span>Investment Preferences</span>
             </button>
-            <button *ngIf="isLoggedIn" mat-menu-item (click)="logOut()">
+            <button *ngIf="isLoggedIn" mat-menu-item (click)="logOut()" id="logout">
                 <mat-icon>logout</mat-icon>
                 <span>Logout</span>
             </button>
