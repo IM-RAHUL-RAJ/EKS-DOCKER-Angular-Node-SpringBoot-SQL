@@ -1,0 +1,59 @@
+.robo-advisor-card {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.space-between{
+  justify-content: space-between;
+}
+
+.font-16{
+  font-size: 12px;
+}
+
+
+.robo-advisor-suggestions{
+  flex-basis: 2/3;
+}
+
+.preferences{
+  height: fit-content;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.stock-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25%;
+}
+
+.stock-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+section{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

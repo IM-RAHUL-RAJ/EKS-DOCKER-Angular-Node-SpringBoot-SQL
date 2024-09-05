@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Instruments } from 'src/app/models/instruments';
 import { Prices } from 'src/app/models/prices';
 import { InstrumentDataService } from 'src/app/services/instrument-data.service';
-import { Buy } from 'src/app/models/buy';
-import { TradeService } from 'src/app/services/trade.service';
 import { BuyFormComponent } from 'src/app/form/buy-form/buy-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SellFormComponent } from 'src/app/form/sell-form/sell-form.component';

@@ -41,8 +41,7 @@ export class TradingHistoryComponent implements AfterViewInit {
 
 
 
-  constructor(private tradingService: TradeService,private roboAdvisorService:RoboAdvisorService) {
-    this.roboAdvisorSuggestions = this.roboAdvisorService.getSuggestions()
+  constructor(private tradingService: TradeService) {
   }
   ngOnInit(): void {
     this.loadTradeData();
@@ -58,7 +57,6 @@ export class TradingHistoryComponent implements AfterViewInit {
   loadTradeData() {
     this.trades = this.tradingService.getTradeHistory();
   }
-
   
 
   filterData(searchText: any): void {

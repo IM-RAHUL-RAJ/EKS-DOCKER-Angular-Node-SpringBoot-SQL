@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { TradingHistoryComponent } from './components/trading-history/trading-history.component';
+import { RoboAdvisorComponent } from './components/robo-advisor/robo-advisor/robo-advisor.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TradingHistoryComponent } from './components/trading-history/trading-hi
     NavigationBarComponent,
     FooterComponent,
     HomepageComponent,
-    CarouselComponent
+    CarouselComponent,
+    RoboAdvisorComponent
   ],
   imports: [
     BrowserModule,

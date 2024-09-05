@@ -1,7 +1,21 @@
 
 footer {
-    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
+}
+
+.app-container{
+    min-height: 78vh;
+    padding: 20px;
+}
+
+.robo-advisor-btn{
+    width: 70px;
+    height: 70px;
+    background-color: #535353;
+    color: #fff;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }
