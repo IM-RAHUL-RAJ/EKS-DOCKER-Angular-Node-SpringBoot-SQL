@@ -11,7 +11,7 @@ export class ClientService {
   private baseUrl = 'http://localhost:3001'; // Main server URL
   private clientVerificationUrl = 'http://localhost:3000'; // URL for Fmts
   private storageSubject = new BehaviorSubject<string>(sessionStorage.getItem('currentUser') || '');
-
+  public availableCash: number = 100000;
   constructor(private http: HttpClient) {}
 
   // Method to get clientId from Fmts
@@ -49,5 +49,9 @@ export class ClientService {
   // Logout user
   logout() {
     sessionStorage.removeItem('currentUser');
+  }
+
+  getAvailCash(){
+    return this.availableCash;
   }
 }
