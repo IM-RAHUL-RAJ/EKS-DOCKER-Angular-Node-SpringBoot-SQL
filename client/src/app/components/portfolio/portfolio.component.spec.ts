@@ -4,6 +4,7 @@ import { PortfolioComponent } from './portfolio.component';
 import { Portfolio } from 'src/app/models/portfolio';
 import { of } from 'rxjs';
 import { PortfolioService } from 'src/app/services/portfolio.service';
+import { MatDialog } from '@angular/material/dialog';
 import { Component } from '@angular/core';
 import { WatchlistComponent } from '../watchlist/watchlist.component';
 
@@ -24,10 +25,13 @@ describe('PortfolioComponent', () => {
   
   const mockPortfolioServiceSpy=jasmine.createSpyObj('PortfolioService',['getPortfolio','addStock'])
   mockPortfolioServiceSpy.getPortfolio.and.returnValue(of(mockStockData))
+  const mockMatDialog = jasmine.createSpyObj('MatDialog', ['open']);
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ PortfolioComponent,WatchlistComponent ],
-      providers:[{provide:PortfolioService,useValue:mockPortfolioServiceSpy}]
+      providers:[{provide:PortfolioService,useValue:mockPortfolioServiceSpy},
+        { provide: MatDialog, useValue: mockMatDialog }
+      ]
     })
     .compileComponents();
 

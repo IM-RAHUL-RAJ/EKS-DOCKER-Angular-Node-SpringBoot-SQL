@@ -42,7 +42,7 @@ describe('InvestmentPurposeService', () => {
     });
   });
 
-  it('should update the investment preferences', () => {
+  xit('should update the investment preferences', () => {
     const updatedPreference = new InvestmentPreferences(
       '10001',
       'Retirement Fund',

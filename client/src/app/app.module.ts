@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 import { TradeComponent } from './components/trade/trade.component';
-import { OrdersComponent } from './components/orders/orders.component';
 import { BuyFormComponent } from './form/buy-form/buy-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +28,6 @@ import { RoboAdvisorComponent } from './components/robo-advisor/robo-advisor/rob
   declarations: [
     AppComponent,
     TradeComponent,
-    OrdersComponent,
     BuyFormComponent,
     SellFormComponent,
     RegistrationComponent,

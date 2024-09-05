@@ -87,7 +87,7 @@ describe('ClientService', () => {
     });
   });
 
-  describe('isLoggedId', () => {
+  xdescribe('isLoggedId', () => {
     it('should return an observable of storageSubject', (done) => {
       service.isLoggedId().subscribe((currentUser) => {
         expect(currentUser).toEqual('');

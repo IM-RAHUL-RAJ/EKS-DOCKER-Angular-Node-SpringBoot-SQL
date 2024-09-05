@@ -57,6 +57,18 @@
         }
       ],
       "clientId": 214237455
+    },
+    "ten@email.com": {
+      "email": "ten@email.com",
+      "password": "123456",
+      "fullName": "Test",
+      "dateOfBirth": "2024-09-10T18:30:00.000Z",
+      "country": "India",
+      "postalCode": "999999",
+      "identification": {
+        "value": "IFJPK5444E"
+      },
+      "clientId": 1486492276
     }
   }
 }
