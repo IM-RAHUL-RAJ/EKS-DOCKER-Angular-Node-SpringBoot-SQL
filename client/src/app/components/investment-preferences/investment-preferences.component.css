@@ -150,3 +150,22 @@ mat-checkbox {
   align-items: center; /* Optional: Use this to center v \ertically as well */
   padding-top: 2rem;
 }
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button[mat-button] {
+  background-color: red;
+  color: white;
+}
+
+h2{
+  text-align: center;
+}
+
+p{
+  text-align: justify;
+}

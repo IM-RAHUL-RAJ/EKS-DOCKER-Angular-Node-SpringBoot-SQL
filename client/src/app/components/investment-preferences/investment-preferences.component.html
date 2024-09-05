@@ -128,12 +128,13 @@
       <mat-checkbox id="roboadviserterms" formControlName="isRoboAdviserTermsAccepted">
         I accept the Robo-Advisor terms and conditions
       </mat-checkbox>
-    
-      <button mat-stroked-button color="primary" class="btn info" (click)="showTermsPopUp()">View Terms & Conditions</button>
+
+      <button mat-stroked-button color="primary" class="btn info" (click)="showTermsPopUp()">View Terms &
+        Conditions</button>
     </div>
 
     <div id="popupCard" class="popup-card" *ngIf="showTerms">
-      <div class="popup-card-content">
+      <mat-dialog-content class="popup-card-content">
         <h2>Robo-Advisor Terms & Conditions</h2>
         <p>By using our Robo-Advisor service, you agree to these Terms and Conditions. The Robo-Advisor helps you make
           investment decisions based on your preferences and goals. To use the service, you must be at least 18 years
@@ -142,21 +143,24 @@
           protecting your privacy as outlined in our Privacy Policy. We may modify or discontinue the service at our
           discretion, and we are not liable for any damages arising from your use of it. You may terminate the service
           at any time, and we may do so if you breach these Terms.</p>
-        <button (click)="closeTermsPopUp()">OK</button>
-      </div>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="closeTermsPopUp()">OK</button>
+      </mat-dialog-actions>
     </div>
 
     <div id="popupCard" class="popup-card" *ngIf="showSubmissionAlert">
-      <div class="popup-card-content">
+      <mat-dialog-content class="popup-card-content">
         <h2>Alert</h2>
         <p>Please accept the Robo-Advisor Terms & Condition</p>
-        <button (click)="closeSubmissionAlertPopUp()">OK</button>
-      </div>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="closeSubmissionAlertPopUp()">OK</button>
+      </mat-dialog-actions>
     </div>
-
     <div class="container">
       <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
     </div>
-    
+
   </form>
 </div>
