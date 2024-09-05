@@ -21,7 +21,7 @@ export class NavigationBarComponent {
 
   logOut() {
     this.clientService.logout();
-    this.router.navigate(['/login']).then(() => {
+    this.router.navigate(['/login'])?.then(() => {
       window.location.reload();
     });
   }

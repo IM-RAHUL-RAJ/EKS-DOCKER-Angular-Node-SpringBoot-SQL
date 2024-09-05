@@ -2,6 +2,8 @@ import { Component, Inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Buy } from 'src/app/models/buy';
+import { Portfolio } from 'src/app/models/portfolio';
+import { PortfolioService } from 'src/app/services/portfolio.service';
 
 @Component({
   selector: 'app-sell-form',
@@ -10,25 +12,36 @@ import { Buy } from 'src/app/models/buy';
 })
 export class SellFormComponent {
   sellform: FormGroup
-  @Input() instrumentId: number = -1
-  buy : Buy = new Buy('','',-1);
+  public updatePortfolio! : Portfolio
  
   constructor(public dialogRef: MatDialogRef<SellFormComponent>,
+    private portfolioService: PortfolioService,
     @Inject(MAT_DIALOG_DATA) public data: any,private fb: FormBuilder) {
     this.sellform = this.fb.group({
-      quantity: [null, [Validators.required, Validators.min(100), Validators.max(1000)]]
+      quantity: [null, [Validators.required]]
     });
    } 
 
+   getQuantity(): number {
+    return this.sellform.get('quantity')?.value;
+  }
+
+  pricePerStock : number = this.data.price;
+  calculateTotal(): number{
+    return this.getQuantity() * this.pricePerStock;
+  }
 
   onSubmit() {
     if (this.sellform.valid) {
       console.log('Form Submitted:', this.sellform.value);
+      this.updatePortfolio = 
+    new Portfolio(this.data.instrumentName, 'AAPL', this.getQuantity(), this.data.price, this.calculateTotal(), 155, 3.33, 50, 1.5)
+      this.portfolioService.removeStock(this.data.instrumentName, this.getQuantity())
       this.dialogRef.close();
     }
   }
-  
+ 
   ngOnInit() { 
-    this.buy = new Buy('','', this.instrumentId); 
+     
   }
 }

@@ -21,7 +21,7 @@ export class InvestmentPreferencesComponent implements OnInit{
     riskTolerance:  new FormControl('',Validators.required),
     incomeCategory:  new FormControl('',Validators.required),
     investmentYears:  new FormControl('',Validators.required),
-    isRoboAdviserTermsAccepted: new FormControl(''),
+    isRoboAdviserTermsAccepted: new FormControl(),
   })
 
   constructor(private investmentPreferenceService: InvestmentPurposeService, private router: Router){}
@@ -39,6 +39,15 @@ export class InvestmentPreferencesComponent implements OnInit{
     this.isSubmitted = true
     if(this.investmentPreferencesForm.valid && this.isRoboAdviserTermsAccepted.value){
       console.log('hello',this.investmentPreferencesForm)
+      let newPreference = new InvestmentPreferences(
+        this.clientID,
+        this.investmentPurpose?.value,
+        this.riskTolerance?.value,
+        this.incomeCategory?.value,
+        this.investmentYears?.value,
+        this.isRoboAdviserTermsAccepted?.value
+      )
+      this.investmentPreferenceService.updateInvestmentPreference(newPreference)
       this.isSubmitted = false
       this.router.navigate(['/home'])
 

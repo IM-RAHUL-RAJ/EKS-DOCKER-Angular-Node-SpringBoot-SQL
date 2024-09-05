@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     // this.isLoggedIn = this.clientService.isLoggedId()
-    this.clientService.isLoggedId().subscribe(value => {
+    this.clientService.isLoggedId()?.subscribe(value => {
       this.isLoggedIn = value? true: false;
     })
   }

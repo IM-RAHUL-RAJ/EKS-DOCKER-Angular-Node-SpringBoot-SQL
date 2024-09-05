@@ -13,4 +13,8 @@ export class TradeService {
   getTradeHistory():Trade[] {
     return this.trades
   }
+
+  addTradeHistory(trade:Trade){
+    this.trades.push(trade)
+  }
 }

@@ -29,17 +29,16 @@ export class LoginComponent {
     this.clientService.login(formValues.email, formValues.password).subscribe({
       next: (response) => {
         console.log('Login successful', response);
-        alert('Login successful');
         sessionStorage.setItem('currentUser', JSON.stringify(response));
         this.cdr.detectChanges()
-        this.router.navigate(['/home']).then(() => {
+        this.router.navigate(['/home'])?.then(() => {
           window.location.reload();
         });
 
       },
       error: (error) => {
         console.error('Login failed', error);
-        alert('Login failed: ' + error.error.message);
+        alert('Login failed: ' + error?.error?.message);
       }
     });
   }

@@ -34,7 +34,7 @@ export class WatchlistComponent implements OnInit {
       symbol: 'NEW',
       price: 100.00,
       change: 0.00,
-      logo: 'assets/logos/default.png'
+      logo: 'assets/images/nike.png'
     };
     this.watchlist.push(newStock);
   }

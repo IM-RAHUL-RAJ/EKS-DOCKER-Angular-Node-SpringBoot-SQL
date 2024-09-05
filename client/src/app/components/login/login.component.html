@@ -1,26 +1,29 @@
 <div class="container">
-  <div class="card">
-    <h2>Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <mat-form-field class="input_group">
-        <mat-label for="email">Email:</mat-label>
-        <input matInput id="email" formControlName="email" type="email">
-        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
-          <small *ngIf="loginForm.get('email')?.errors?.['email']">Enter a valid email address.</small>
-        </div>
-      </mat-form-field>
-    
-      <div class="input_group">
-        <label for="password">Password:</label>
-        <input id="password" formControlName="password" type="password">
-        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
-        </div>
-      </div>
-    
-      <button type="submit" [disabled]="loginForm.invalid">Login</button>
-    </form>
-  </div>
-</div>
+  <mat-card>
+    <mat-card-content>
+      <h2>Login to StockStream</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field class="input_group">
+          <mat-label for="email">Email</mat-label>
+          <input matInput id="email" formControlName="email" type="email">
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']">Enter a valid email address.</small>
+          </div>
+        </mat-form-field>
   
+        <mat-form-field class="input_group">
+          <mat-label for="password">Password:</mat-label>
+          <input matInput id="password" formControlName="password" type="password">
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+          </div>
+        </mat-form-field>
+        <button mat-fab type="submit" color="primary" extended [disabled]="loginForm.invalid">
+          <mat-icon color="">login</mat-icon>
+          Login
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
