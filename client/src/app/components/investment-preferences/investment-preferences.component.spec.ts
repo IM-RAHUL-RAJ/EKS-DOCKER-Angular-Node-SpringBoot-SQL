@@ -8,7 +8,7 @@ import { InvestmentPreferences } from 'src/app/models/investment-preferences';
 import { MaterialModule } from 'src/app/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-fdescribe('InvestmentPreferencesComponent', () => {
+describe('InvestmentPreferencesComponent', () => {
   let component: InvestmentPreferencesComponent;
   let fixture: ComponentFixture<InvestmentPreferencesComponent>;
   let investmentPreferenceService: jasmine.SpyObj<InvestmentPurposeService>;
