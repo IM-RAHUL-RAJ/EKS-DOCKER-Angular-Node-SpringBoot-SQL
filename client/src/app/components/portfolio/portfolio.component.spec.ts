@@ -4,6 +4,15 @@ import { PortfolioComponent } from './portfolio.component';
 import { Portfolio } from 'src/app/models/portfolio';
 import { of } from 'rxjs';
 import { PortfolioService } from 'src/app/services/portfolio.service';
+import { MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { WatchlistComponent } from '../watchlist/watchlist.component';
+
+@Component({
+  selector:'app-watchlist'
+})
+class mockWatchlistComponent{}
+
 
 describe('PortfolioComponent', () => {
   let component: PortfolioComponent;
@@ -16,10 +25,13 @@ describe('PortfolioComponent', () => {
   
   const mockPortfolioServiceSpy=jasmine.createSpyObj('PortfolioService',['getPortfolio','addStock'])
   mockPortfolioServiceSpy.getPortfolio.and.returnValue(of(mockStockData))
+  const mockMatDialog = jasmine.createSpyObj('MatDialog', ['open']);
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PortfolioComponent ],
-      providers:[{provide:PortfolioService,useValue:mockPortfolioServiceSpy}]
+      declarations: [ PortfolioComponent,WatchlistComponent ],
+      providers:[{provide:PortfolioService,useValue:mockPortfolioServiceSpy},
+        { provide: MatDialog, useValue: mockMatDialog }
+      ]
     })
     .compileComponents();
 
@@ -36,4 +48,30 @@ describe('PortfolioComponent', () => {
     component.ngOnInit();
     expect(mockPortfolioServiceSpy.getPortfolio).toHaveBeenCalled();
   })
+
+  it('should sort portfolio by name', () => {
+    const event = { target: { value: 'name' } } as unknown as Event;
+    component.sortPortfolio(event);
+    expect(component.portfolio[0].instrument).toBe('Alphabet Inc.');
+  });
+  
+  it('should sort portfolio by investedCapital', () => {
+    const event = { target: { value: 'investedCapital' } } as unknown as Event;
+    component.sortPortfolio(event);
+    expect(component.portfolio[0].investedCapital).toBe(1500);
+  });
+  
+  it('should sort portfolio by profitLoss', () => {
+    const event = { target: { value: 'profitLoss' } } as unknown as Event;
+    component.sortPortfolio(event);
+    expect(component.portfolio[0].profitLoss).toBe(-250);
+  });
+
+  it('should return "profit" for positive profitLoss', () => {
+    expect(component.profLossFunc(100)).toBe('profit');
+  });
+
+  it('should return "loss" for negative profitLoss', () => {
+    expect(component.profLossFunc(-100)).toBe('loss');
+  });
 });

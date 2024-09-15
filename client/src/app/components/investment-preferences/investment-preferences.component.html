@@ -1,111 +1,166 @@
-<div class="form-container">
+<section class="form-container">
   <form [formGroup]="investmentPreferencesForm">
-    <h2>Investment Preferences</h2>
+    <h1>Investment Preferences</h1>
     <p>Please fill out the form below to specify your investment preferences. This information will help us tailor
       investment options to suit your goals and risk tolerance.</p>
+    <mat-divider></mat-divider>
 
-    <div class="form-section">
-      <label class="label_text" for="investmentPurpose">Investment Purpose:</label>
-      <select id="investmentPurpose" formControlName="investmentPurpose">
-        <option value="" disabled>Select purpose</option>
-        <option value="College Fund">College Fund</option>
-        <option value="Retirement">Retirement</option>
-        <!-- Add more options as needed -->
-      </select>
-      <div *ngIf="investmentPurpose.invalid && (investmentPurpose.dirty || investmentPurpose.touched || isSubmitted)" class="alert">
+
+    <section class="form-section">
+      <mat-card appearance="outlined">
+        <mat-card-content>
+          <div class="image-card">
+            <div class="image-wrapper">
+              <img mat-card-image src="assets/images/investPurpose.jpg" alt="Image description">
+            </div>
+            <div class="content">
+              <h3 class="heading">Investment Purpose</h3>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-form-field appearance="fill">
+        <mat-label>Purpose of Investment</mat-label>
+        <input matInput formControlName="investmentPurpose">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>College Fund, Retirement, etc</mat-hint>
+      </mat-form-field>
+
+      <div *ngIf="investmentPurpose.invalid && (investmentPurpose.dirty || investmentPurpose.touched || isSubmitted)"
+        class="alert">
         <div *ngIf="investmentPurpose.errors?.['required']">This field is required.</div>
       </div>
+    </section>
+    <section class="form-section">
+      <mat-card appearance="outlined">
+        <mat-card-content>
+          <div class="image-card">
+            <div class="image-wrapper">
+              <img mat-card-image src="assets/images/risk.jpg" alt="Image description">
+            </div>
+            <div class="content">
+              <h3 class="heading">Risk Tolerance</h3>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
 
-      <div class="form-section">
-        <label class="label_text">Risk Tolerance:</label>
-        <div>
-          <input type="radio" id="conservative" formControlName="riskTolerance" value="CONSERVATIVE">
-          <label for="conservative">CONSERVATIVE</label>
-        </div>
-        <div>
-          <input type="radio" id="belowAverage" formControlName="riskTolerance" value="BELOW AVERAGE">
-          <label for="belowAverage">BELOW AVERAGE</label>
-        </div>
-        <div>
-          <input type="radio" id="average" formControlName="riskTolerance" value="AVERAGE">
-          <label for="average">AVERAGE</label>
-        </div>
-        <div>
-          <input type="radio" id="aboveAverage" formControlName="riskTolerance" value="ABOVE AVERAGE">
-          <label for="aboveAverage">ABOVE AVERAGE</label>
-        </div>
-        <div>
-          <input type="radio" id="aggressive" formControlName="riskTolerance" value="AGGRESSIVE">
-          <label for="aggressive">AGGRESSIVE</label>
-        </div>
-        <div *ngIf="riskTolerance.invalid && (riskTolerance.dirty || riskTolerance.touched || isSubmitted)" class="alert">
-          <div *ngIf="riskTolerance.errors?.['required']">This field is required.</div>
-        </div>
-      </div>
+      <mat-radio-group formControlName="riskTolerance">
+        <mat-radio-button id="conservative" value="CONSERVATIVE">CONSERVATIVE</mat-radio-button>
+        <mat-radio-button id="belowAverage" value="BELOW AVERAGE">BELOW AVERAGE</mat-radio-button>
+        <mat-radio-button id="average" value="AVERAGE">AVERAGE</mat-radio-button>
+        <mat-radio-button id="aboveAverage" value="ABOVE AVERAGE">ABOVE AVERAGE</mat-radio-button>
+        <mat-radio-button id="aggressive" value="AGGRESSIVE">AGGRESSIVE</mat-radio-button>
+      </mat-radio-group>
 
-      <div class="form-section">
-        <label class="label_text" for="incomeCategory">Income Category:</label>
-        <select id="incomeCategory" formControlName="incomeCategory">
-          <option value="" disabled>Select income category</option>
-          <option value="0 - 20,000">0 - 20,000</option>
-          <option value="20,001 - 40,000">20,001 - 40,000</option>
-          <option value="40,001 - 60,000">40,001 - 60,000</option>
-          <option value="60,001 - 80,000">60,001 - 80,000</option>
-          <option value="80,001 - 100,000">80,001 - 100,000</option>
-          <option value="100,001 - 150,000">100,001 - 150,000</option>
-          <option value="150,000+">150,000+</option>
-        </select>
-        <div *ngIf="incomeCategory.invalid && (incomeCategory.dirty || incomeCategory.touched || isSubmitted)" class="alert">
-          <div *ngIf="incomeCategory.errors?.['required']">This field is required.</div>
-        </div>
-      </div>
-
-      <div class="form-section">
-        <label class="label_text" for="investmentYears">Investment Years:</label>
-        <select id="investmentYears" formControlName="investmentYears">
-          <option value="" disabled>Select investment years</option>
-          <option value="0-5 years">0-5 years</option>
-          <option value="5-7 years">5-7 years</option>
-          <option value="7-10 years">7-10 years</option>
-          <option value="10-15 years">10-15 years</option>
-        </select>
-        <div *ngIf="investmentYears.invalid && (investmentYears.dirty || investmentYears.touched || isSubmitted)" class="alert">
-          <div *ngIf="investmentYears.errors?.['required']">This field is required.</div>
-        </div>
-      </div>
-
-      <div class="form-section">
-        <input type="checkbox" id="roboadviserterms" name="vehicle1" value="true"
-          formControlName="isRoboAdviserTermsAccepted">
-        <label class="label_text" for="roboadviserterms">I accept the Robo-Advisor terms and conditions</label>
-        <button class="btn info" (click)="showTermsPopUp()">View Terms & Conditions</button>
+      <div *ngIf="riskTolerance.invalid && (riskTolerance.dirty || riskTolerance.touched || isSubmitted)" class="alert">
+        <div *ngIf="riskTolerance.errors?.['required']">This field is required.</div>
       </div>
 
 
-      <div id="popupCard" class="popup-card" *ngIf="showTerms">
-        <div class="popup-card-content">
-          <h2>Robo-Advisor Terms & Conditions</h2>
-          <p>By using our Robo-Advisor service, you agree to these Terms and Conditions. The Robo-Advisor helps you make
-            investment decisions based on your preferences and goals. To use the service, you must be at least 18 years
-            old, provide accurate information, and accept any associated fees. Investing involves risks, and while the
-            Robo-Advisor aims to provide useful recommendations, we do not guarantee outcomes. We are committed to
-            protecting your privacy as outlined in our Privacy Policy. We may modify or discontinue the service at our
-            discretion, and we are not liable for any damages arising from your use of it. You may terminate the service
-            at any time, and we may do so if you breach these Terms.</p>
-          <button (click)="closeTermsPopUp()">OK</button>
-        </div>
+    </section>
+
+    <section class="form-section">
+      <mat-card appearance="outlined">
+        <mat-card-content>
+          <div class="image-card">
+            <div class="image-wrapper">
+              <img mat-card-image src="assets/images/income.png" alt="Image description">
+            </div>
+            <div class="content">
+              <h3 class="heading">Income Category</h3>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select Income Range</mat-label>
+        <mat-select id="incomeCategory" formControlName="incomeCategory">
+          <mat-option value="" disabled>Select income category</mat-option>
+          <mat-option value="0 - 20,000">0 - 20,000</mat-option>
+          <mat-option value="20,001 - 40,000">20,001 - 40,000</mat-option>
+          <mat-option value="40,001 - 60,000">40,001 - 60,000</mat-option>
+          <mat-option value="60,001 - 80,000">60,001 - 80,000</mat-option>
+          <mat-option value="80,001 - 100,000">80,001 - 100,000</mat-option>
+          <mat-option value="100,001 - 150,000">100,001 - 150,000</mat-option>
+          <mat-option value="150,000+">150,000+</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="incomeCategory.invalid && (incomeCategory.dirty || incomeCategory.touched || isSubmitted)"
+        class="alert">
+        <div *ngIf="incomeCategory.errors?.['required']">This field is required.</div>
       </div>
+    </section>
 
-      <div id="popupCard" class="popup-card" *ngIf="showSubmissionAlert">
-        <div class="popup-card-content">
-          <h2>Alert</h2>
-          <p>Please accept the Robo-Advisor Terms & Condition</p>
-          <button (click)="closeSubmissionAlertPopUp()">OK</button>
-        </div>
+    <section class="form-section">
+      <mat-card appearance="outlined">
+        <mat-card-content>
+          <div class="image-card">
+            <div class="image-wrapper">
+              <img mat-card-image src="assets/images/years.webp" alt="Image description">
+            </div>
+            <div class="content">
+              <h3 class="heading">Investment Years</h3>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-form-field>
+        <mat-label>Select Investment Years</mat-label>
+        <mat-select id="investmentYears" formControlName="investmentYears">
+          <mat-option value="" disabled>Select investment years</mat-option>
+          <mat-option value="0-5 years">0-5 years</mat-option>
+          <mat-option value="5-7 years">5-7 years</mat-option>
+          <mat-option value="7-10 years">7-10 years</mat-option>
+          <mat-option value="10-15 years">10-15 years</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="investmentYears.invalid && (investmentYears.dirty || investmentYears.touched || isSubmitted)"
+        class="alert">
+        <div *ngIf="investmentYears.errors?.['required']">This field is required.</div>
       </div>
+    </section>
 
+    <div class="form-section">
+      <mat-checkbox id="roboadviserterms" formControlName="isRoboAdviserTermsAccepted">
+        I accept the Robo-Advisor terms and conditions
+      </mat-checkbox>
 
-      <button type="submit" (click)="onSubmit()">Submit</button>
-  </div>
+      <button mat-stroked-button color="primary" class="btn info" (click)="showTermsPopUp()">View Terms &
+        Conditions</button>
+    </div>
+
+    <div id="popupCard" class="popup-card" *ngIf="showTerms">
+      <mat-dialog-content class="popup-card-content">
+        <h2>Robo-Advisor Terms & Conditions</h2>
+        <p>By using our Robo-Advisor service, you agree to these Terms and Conditions. The Robo-Advisor helps you make
+          investment decisions based on your preferences and goals. To use the service, you must be at least 18 years
+          old, provide accurate information, and accept any associated fees. Investing involves risks, and while the
+          Robo-Advisor aims to provide useful recommendations, we do not guarantee outcomes. We are committed to
+          protecting your privacy as outlined in our Privacy Policy. We may modify or discontinue the service at our
+          discretion, and we are not liable for any damages arising from your use of it. You may terminate the service
+          at any time, and we may do so if you breach these Terms.</p>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="closeTermsPopUp()">OK</button>
+      </mat-dialog-actions>
+    </div>
+
+    <div id="popupCard" class="popup-card" *ngIf="showSubmissionAlert">
+      <mat-dialog-content class="popup-card-content">
+        <h2>Alert</h2>
+        <p>Please accept the Robo-Advisor Terms & Condition</p>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="closeSubmissionAlertPopUp()">OK</button>
+      </mat-dialog-actions>
+    </div>
+    <div class="container">
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+    </div>
+
   </form>
-  </div>
+</section>

@@ -7,7 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { Direction, Trade } from 'src/app/models/trading-history/trade';
 import { TradeService } from 'src/app/services/trading-history/trade.service';
 
-fdescribe('TradingHistoryComponent', () => {
+describe('TradingHistoryComponent', () => {
   let component: TradingHistoryComponent;
   let fixture: ComponentFixture<TradingHistoryComponent>;
   let mockTradeService:any

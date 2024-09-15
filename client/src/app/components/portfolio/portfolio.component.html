@@ -68,6 +68,11 @@
             <div class="stock-metric">
                 <span>Day Change %:</span> {{stock.dayChangePercent | number:'1.2-2'}}%
             </div>
+            <div class="stock-metric">
+                <!-- <td mat-cell *matCellDef="let element"> -->
+                    <button  (click)="SellForm(stock.averagePrice)">Sell</button>
+                  <!-- </td> -->
+            </div>
         </div>
     </div>
 </div>

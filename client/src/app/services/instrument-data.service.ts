@@ -9,12 +9,6 @@ import { map, Observable, of } from 'rxjs';
 export class InstrumentDataService {
 
   category: string[] = ['STOCK', 'CD', 'GOVT'];
-  // instruments: { [key: string]: string[] } = {
-  //   'All Stocks': ['Q123', 'Q456', 'N123456', 'N123789','C100', 'T67890', 'T67894', 'T67895', 'T67897', 'T67899', 'T67880', 'T67883', 'T67878'],
-  //   'Stocks': ['Q123', 'Q456', 'N123456', 'N123789'],
-  //   'CD': ['C100'],
-  //   'GOVT': ['T67890', 'T67894', 'T67895', 'T67897', 'T67899', 'T67880', 'T67883', 'T67878']
-  // };
   instruments: Map<string, Prices[]> = new Map([
     ['GOVT', [{
       "askPrice": 1.03375,
@@ -52,15 +46,11 @@ getCategories(){
   console.log(this.category)
   return this.category;
 }
-// getInstruments(){
-//   return this.instruments;
-// }
+
 getInstrumentsByCategory(category: string){
   console.log(this.instruments)
   console.log(this.instruments.get(category))
   return this.instruments.get(category)
-  // console.log(this.instruments[0] || []);
-  // return this.instruments[category] || [];
 }
 
 getPricePerStock(){

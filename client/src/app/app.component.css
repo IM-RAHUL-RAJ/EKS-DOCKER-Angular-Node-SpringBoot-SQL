@@ -7,7 +7,9 @@ footer {
 
 .app-container{
     min-height: 78vh;
-    padding: 20px;
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 48px;
 }
 
 .robo-advisor-btn{

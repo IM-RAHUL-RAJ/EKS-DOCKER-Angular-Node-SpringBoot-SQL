@@ -24,5 +24,18 @@ export class PortfolioService {
 
   addStock(stock: Portfolio): void {
     this.mockPortfolio.push(stock);
+    console.log(this.mockPortfolio);
   }
+
+  removeStock(instrumentName: string, quantity: number): void {
+    const portfolioItem = this.mockPortfolio.find(p => p.instrument === instrumentName);
+    if (portfolioItem) {
+      if (portfolioItem.quantity > quantity) {
+        portfolioItem.quantity -= quantity;
+      } else {
+        this.mockPortfolio = this.mockPortfolio.filter(p => p.instrument !== instrumentName);
+      }
+    }
+  }
+
 }

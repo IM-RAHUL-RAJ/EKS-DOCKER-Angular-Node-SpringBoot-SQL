@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { InvestmentPreferences } from '../models/investment-preferences';
 import { Observable, of } from 'rxjs';
 import { ClientService } from './client.service';
+import { Client } from '../models/client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvestmentPurposeService {
 
-  private investmentPreference = new InvestmentPreferences("DPQR100","College Fund","AVERAGE","60,001 - 80,000","0-5 years",false)
-
-  constructor(private clientService:ClientService) { }
+  private investmentPreference! : InvestmentPreferences
+  private cliendID!: string
+  constructor(private clientService: ClientService) {
+   this.cliendID = '10001'
+   this.investmentPreference = new InvestmentPreferences(this.cliendID,"College Fund","AVERAGE","60,001 - 80,000","0-5 years",false)
+  }
 
   getInvestmentPreference() : Observable<InvestmentPreferences> {
     return of(this.investmentPreference)

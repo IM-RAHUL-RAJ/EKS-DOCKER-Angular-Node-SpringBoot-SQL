@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio';
 import { PortfolioService } from 'src/app/services/portfolio.service';
+import { SellFormComponent } from 'src/app/form/sell-form/sell-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-portfolio',
@@ -13,7 +15,7 @@ export class PortfolioComponent {
   totalValue=250000;
   portfolio:Portfolio[]=[];
   
-  constructor(private portfolioService:PortfolioService){
+  constructor(private portfolioService:PortfolioService,public dialog: MatDialog){
 
   }
   sortPortfolio(event: Event) {
@@ -39,6 +41,16 @@ export class PortfolioComponent {
 
   ngOnInit(){
     this.portfolioService.getPortfolio().subscribe((data)=>this.portfolio=data);
+    
+  }
+  SellForm(price:number) {
+    this.dialog.open(SellFormComponent, {
+      width: '250px',
+      data: { 
+      instrumentName: 'USA, Note 3.125 15nov2028 10Y',
+      price: price
+      } 
+    });
   }
 
   
