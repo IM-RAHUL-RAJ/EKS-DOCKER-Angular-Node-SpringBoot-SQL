@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fidelity.capstone.exceptions.RoboAdvisorException;
 import com.fidelity.capstone.stock_stream.Instrument;
-import com.fidelity.capstone.stock_stream.RoboAdvisorSuggestion;
+import com.fidelity.capstone.stock_stream.Price;
 
 class RoboAdvisorServiceTest {
 
@@ -40,7 +40,7 @@ class RoboAdvisorServiceTest {
                 "Adding a valid suggestion should not throw an exception");
 
         assertEquals(1, service.getAllSuggestions().size(), "There should be one suggestion in the list");
-        RoboAdvisorSuggestion suggestion = service.getAllSuggestions().get(0);
+        Price suggestion = service.getAllSuggestions().get(0);
         assertEquals(askPrice, suggestion.getAskPrice(), "Ask price should match");
         assertEquals(bidPrice, suggestion.getBidPrice(), "Bid price should match");
         assertEquals(now, suggestion.getPriceTimeStamp(), "Price timestamp should match");
@@ -88,7 +88,7 @@ class RoboAdvisorServiceTest {
         service.addSuggestion(askPrice, bidPrice, now, validInstrument);
 
         assertEquals(1, service.getAllSuggestions().size(), "There should be one suggestion in the list");
-        RoboAdvisorSuggestion suggestion = service.getAllSuggestions().get(0);
+        Price suggestion = service.getAllSuggestions().get(0);
         assertEquals(askPrice, suggestion.getAskPrice(), "Ask price should match");
         assertEquals(bidPrice, suggestion.getBidPrice(), "Bid price should match");
         assertEquals(now, suggestion.getPriceTimeStamp(), "Price timestamp should match");

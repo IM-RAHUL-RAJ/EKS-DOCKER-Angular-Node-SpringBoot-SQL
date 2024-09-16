@@ -2,69 +2,102 @@ package com.fidelity.capstone.stock_stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PriceTest {
 
-    @Test
-    void testSetAskPrice_Negative() {
-        Price price = new Price();
-        assertThrows(IllegalArgumentException.class, () -> price.setAskPrice(-1.0));
+	private Price price;
+    private Instrument instrument;
+
+    @BeforeEach
+    void setUp() {
+        price = new Price();
+        instrument = new Instrument();
     }
 
     @Test
-    void testSetAskPrice_Valid() {
-        Price price = new Price();
-        price.setAskPrice(100.0);
-        assertEquals(100.0, price.getAskPrice());
+    void testSetGetAskPrice() {
+        BigDecimal askPrice = new BigDecimal("100.00");
+        price.setAskPrice(askPrice);
+        assertEquals(askPrice, price.getAskPrice(), "Ask price should be set and retrieved correctly");
     }
 
     @Test
-    void testSetBidPrice_Negative() {
-        Price price = new Price();
-        assertThrows(IllegalArgumentException.class, () -> price.setBidPrice(-1.0));
+    void testSetGetBidPrice() {
+        BigDecimal bidPrice = new BigDecimal("99.99");
+        price.setBidPrice(bidPrice);
+        assertEquals(bidPrice, price.getBidPrice(), "Bid price should be set and retrieved correctly");
     }
 
     @Test
-    void testSetBidPrice_Valid() {
-        Price price = new Price();
-        price.setBidPrice(90.0);
-        assertEquals(90.0, price.getBidPrice());
+    void testSetGetPriceTimeStamp() {
+        LocalDateTime now = LocalDateTime.now();
+        price.setPriceTimeStamp(now);
+        assertEquals(now, price.getPriceTimeStamp(), "Price timestamp should be set and retrieved correctly");
     }
 
     @Test
-    void testSetPriceTimestamp_Null() {
-        Price price = new Price();
-        assertThrows(NullPointerException.class, () -> price.setPriceTimestamp(null));
-    }
-
-    @Test
-    void testSetPriceTimestamp_Empty() {
-        Price price = new Price();
-        assertThrows(IllegalArgumentException.class, () -> price.setPriceTimestamp(""));
-    }
-
-    @Test
-    void testSetPriceTimestamp_Valid() {
-        Price price = new Price();
-        price.setPriceTimestamp("2024-09-15T10:15:30");
-        assertEquals("2024-09-15T10:15:30", price.getPriceTimestamp());
-    }
-
-    @Test
-    void testSetInstrument_Null() {
-        Price price = new Price();
-        assertThrows(NullPointerException.class, () -> price.setInstrument(null));
-    }
-
-    @Test
-    void testSetInstrument_Valid() {
-        Price price = new Price();
-        Instrument instrument = new Instrument();
-        instrument.setInstrumentId("123");
+    void testSetGetInstrument() {
+        instrument.setInstrumentId("ID123");
+        instrument.setExternalIdType("TypeA");
+        instrument.setExternalId("ExtID456");
+        instrument.setCategoryId("Cat789");
+        instrument.setInstrumentDescription("Test Instrument");
+        instrument.setMaxQuantity(100);
+        instrument.setMinQuantity(1);
+        
         price.setInstrument(instrument);
-        assertEquals(instrument, price.getInstrument());
+        assertEquals(instrument, price.getInstrument(), "Instrument should be set and retrieved correctly");
     }
+
+    @Test
+    void testSetAskPriceNull() {
+        assertThrows(NullPointerException.class, () -> price.setAskPrice(null), "Ask Price cannot be null");
+    }
+
+    @Test
+    void testSetBidPriceNull() {
+        assertThrows(NullPointerException.class, () -> price.setBidPrice(null), "Bid Price cannot be null");
+    }
+
+    @Test
+    void testSetPriceTimeStampNull() {
+        assertThrows(NullPointerException.class, () -> price.setPriceTimeStamp(null), "Price TimeStamp cannot be null");
+    }
+
+    @Test
+    void testSetInstrumentNull() {
+        assertThrows(NullPointerException.class, () -> price.setInstrument(null), "Instrument cannot be null");
+    }
+
+    @Test
+    void testSetAskPriceNegative() {
+        assertThrows(IllegalArgumentException.class, () -> price.setAskPrice(new BigDecimal("-1.00")), "Ask Price cannot be negative");
+    }
+
+    @Test
+    void testSetBidPriceNegative() {
+        assertThrows(IllegalArgumentException.class, () -> price.setBidPrice(new BigDecimal("-1.00")), "Bid Price cannot be negative");
+    }
+
+    @Test
+    void testAskPriceScale() {
+        BigDecimal askPrice = new BigDecimal("100.12345");
+        price.setAskPrice(askPrice);
+        assertEquals(new BigDecimal("100.12"), price.getAskPrice(), "Ask Price should be scaled to 2 decimal places");
+    }
+
+    @Test
+    void testBidPriceScale() {
+        BigDecimal bidPrice = new BigDecimal("99.98765");
+        price.setBidPrice(bidPrice);
+        assertEquals(new BigDecimal("99.99"), price.getBidPrice(), "Bid Price should be scaled to 2 decimal places");
+    }
+
 }
