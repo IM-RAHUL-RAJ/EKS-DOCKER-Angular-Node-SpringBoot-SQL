@@ -71,8 +71,10 @@ public class RoboAdvisorService {
 	            })
 	            .sorted(Comparator.comparingDouble(Price::getRankScore).reversed()) // Sort by rankScore in descending order
 	            .collect(Collectors.toList());
+	    
+	    
 
-	    roboAdvisorSuggestionsList = new ArrayList<>(sortedPrices.subList(0, numberOfSuggestions));
+	    roboAdvisorSuggestionsList = new ArrayList<>(sortedPrices.subList(0, sortedPrices.size()> numberOfSuggestions ? numberOfSuggestions : sortedPrices.size()));
 		
 
 	}
@@ -81,26 +83,6 @@ public class RoboAdvisorService {
 		return roboAdvisorSuggestionsList;
 	}
 
-//	private static Price createPrice(BigDecimal askPrice, BigDecimal bidPrice, LocalDateTime timestamp, String instrumentId,
-//			String externalIdType, String externalId, String categoryId, String description, int maxQuantity,
-//			int minQuantity) {
-//		Price price = new Price();
-//		price.setAskPrice(askPrice);
-//		price.setBidPrice(bidPrice);
-//		price.setPriceTimeStamp(timestamp);
-//
-//		Instrument instrument = new Instrument();
-//		instrument.setInstrumentId(instrumentId);
-//		instrument.setExternalIdType(externalIdType);
-//		instrument.setExternalId(externalId);
-//		instrument.setCategoryId(categoryId);
-//		instrument.setInstrumentDescription(description);
-//		instrument.setMaxQuantity(maxQuantity);
-//		instrument.setMinQuantity(minQuantity);
-//
-//		price.setInstrument(instrument);
-//		return price;
-//	}
 	 private static double getRiskToleranceScore(RiskTolerance riskTolerance) {
 	        switch (riskTolerance) {
 	            case CONSERVATIVE:
