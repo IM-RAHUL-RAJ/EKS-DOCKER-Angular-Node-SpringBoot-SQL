@@ -134,10 +134,9 @@ public class RoboAdvisorServiceTest {
         roboAdvisorService.generateSuggestionBasedOnInvestmentPreferences(preference, allPrices, instrumentReports);
 
         List<Price> suggestions = roboAdvisorService.getAllSuggestions();
-        assertEquals(2, suggestions.size()); // Assuming you have more than 5 suggestions
+        assertEquals(2, suggestions.size()); 
 
-        // Validate the rank score and order of suggestions
-        // You need to adjust this validation based on your specific logic
-        assertTrue(suggestions.get(0).getRankScore() >= suggestions.get(1).getRankScore());
+        assertTrue(suggestions.get(0).getRankScore().compareTo(suggestions.get(1).getRankScore()) >= 0);
+       
     }
 }
