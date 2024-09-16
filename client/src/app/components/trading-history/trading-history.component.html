@@ -51,13 +51,19 @@
         </tr>
       </table>
     
+      <div class="no-data-view" *ngIf="!trades.length">
+        There is no data to display
+      </div>
+
+      <div class="no-data-view" *ngIf="!filteredTrades.length">
+        There is no matching data to display
+      </div>
+
       <mat-paginator *ngIf="trades.length" [pageSizeOptions]="[8,10]"
                      showFirstLastButtons
                      aria-label="Select page of periodic elements">
       </mat-paginator>
-      <div class="no-data-view" *ngIf="!trades.length">
-        There is no data to display
-      </div>
+      
     </div>
     
     </mat-card>
