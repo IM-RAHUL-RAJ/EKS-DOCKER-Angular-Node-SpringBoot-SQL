@@ -11,6 +11,8 @@ public class Portfolio {
     private double profitLoss;
     private double dayChangePercent;
     private String clientId;
+    
+    public Portfolio() {}  
 
     public Portfolio(String instrument, String instrumentId,String clientId, int quantity, double averagePrice, double investedCapital, double ltp, double percentChange, double profitLoss, double dayChangePercent) {
         this.instrument = instrument;
@@ -29,6 +31,9 @@ public class Portfolio {
 		return clientId;
 	}
 
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
 	
 
 	public String getInstrument() {

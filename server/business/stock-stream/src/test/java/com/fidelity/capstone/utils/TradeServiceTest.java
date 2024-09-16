@@ -34,7 +34,7 @@ class TradeServiceTest {
     }
 
     @Test
-    void testExecuteTrade_Valid() throws TradeException {
+    void testExecuteTrade_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         assertEquals(1, tradeService.listAllTrades().size());
     }
@@ -55,7 +55,7 @@ class TradeServiceTest {
 
     @Test
     void testValidateTrade_NullTrade() {
-        assertThrows(NullPointerException.class, () -> tradeService.validateTrade(null));
+        assertThrows(TradeException.class, () -> tradeService.validateTrade(null));
     }
 
     @Test
@@ -65,7 +65,7 @@ class TradeServiceTest {
     }
 
     @Test
-    void testCancelTrade_Valid() throws TradeException {
+    void testCancelTrade_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         tradeService.cancelTrade(trade.getTradeId());
         assertEquals(0, tradeService.listAllTrades().size());
@@ -77,7 +77,7 @@ class TradeServiceTest {
     }
 
     @Test
-    void testUpdateTrade_Valid() throws TradeException {
+    void testUpdateTrade_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         Trade updatedTrade = new Trade();
         updatedTrade.setInstrumentId("123");
@@ -100,7 +100,7 @@ class TradeServiceTest {
     }
 
     @Test
-    void testGetTradeById_Valid() throws TradeException {
+    void testGetTradeById_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         Trade foundTrade = tradeService.getTradeById(trade.getTradeId());
         assertEquals(trade.getTradeId(), foundTrade.getTradeId());
@@ -112,21 +112,28 @@ class TradeServiceTest {
     }
 
     @Test
-    void testListAllTrades() throws TradeException {
+    void testListAllTrades() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         List<Trade> trades = tradeService.listAllTrades();
         assertEquals(1, trades.size());
     }
+    
+    @Test
+    void testGetClientTradeHistory() throws TradeException, PortfolioException {
+        tradeService.executeTrade(trade);
+        List<Trade> tradeHistory = tradeService.getClientTradeHistory(trade.getClientId());
+        assertEquals(1, tradeHistory.size());
+    }
 
     @Test
-    void testListTradesByClient_Valid() throws TradeException {
+    void testListTradesByClient_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         List<Trade> trades = tradeService.listTradesByClient(trade.getClientId());
         assertEquals(1, trades.size());
     }
 
     @Test
-    void testListTradesByInstrument_Valid() throws TradeException {
+    void testListTradesByInstrument_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         List<Trade> trades = tradeService.listTradesByInstrument(trade.getInstrumentId());
         assertEquals(1, trades.size());

@@ -57,9 +57,7 @@ public class InvestmentPreferenceService {
 		}
 
 		this.investmentPreferences.add(investmentPreference);
-
-		System.out.println("Add Investment preference succeeded :" + investmentPreference.getClientId());
-
+		
 		return investmentPreference;
 
 	}
@@ -81,8 +79,6 @@ public class InvestmentPreferenceService {
 
 		investmentPreference.setInvestmentYear(updatedInvestmentPreference.getInvestmentYear());
 
-		System.out.println("Update Investment preference succeeded :" + investmentPreference.getClientId());
-
 		return investmentPreference;
 
 	}
@@ -93,8 +89,6 @@ public class InvestmentPreferenceService {
 		InvestmentPreference investmentPreference = this.getInvestmentPreference(clientId);
 		
 		this.investmentPreferences.remove(investmentPreference);
-
-		System.out.println("Remove Investment preference succeeded :" + investmentPreference.getClientId());
 		
 		return investmentPreference;
 
