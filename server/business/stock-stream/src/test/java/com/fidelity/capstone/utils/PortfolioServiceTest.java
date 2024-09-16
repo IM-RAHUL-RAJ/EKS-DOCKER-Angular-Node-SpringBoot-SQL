@@ -35,8 +35,11 @@ public class PortfolioServiceTest {
             fail("Setup failed: " + e.getMessage());
         }
     }
+    
+    
 
     @Test
+    @DisplayName("adding valid portfolio item")
     public void testAddPortfolioItem() {
         Portfolio portfolio3 = new Portfolio("StockC", "ID3", "Client2", 150, 40.0, 6000.0, 45.0, 12.5, 750.0, 1.5);
         try {
@@ -50,6 +53,7 @@ public class PortfolioServiceTest {
     }
 
     @Test
+    @DisplayName("Removing valid portfolio item")
     public void testRemovePortfolioItem() {
         try {
             portfolioService.removePortfolioItem(portfolio1, 50);
@@ -67,6 +71,7 @@ public class PortfolioServiceTest {
     }
 
     @Test
+    @DisplayName("Updating valid portfolio item")
     public void testUpdatePortfolioItem() {
         Portfolio updatedPortfolio = new Portfolio("StockA", "ID1", "Client1", 150, 52.0, 7800.0, 57.0, 9.62, 750.0, 2.5);
         try {
@@ -83,7 +88,42 @@ public class PortfolioServiceTest {
             fail("Update portfolio item failed: " + e.getMessage());
         }
     }
+    
     @Test
+    @DisplayName("adding invalid portfolio item")
+    public void testAddInvalidPortfolioItem() {
+        Portfolio invalidPortfolio = new Portfolio(null, "ID4", "Client2", 150, 40.0, 6000.0, 45.0, 12.5, 750.0, 1.5);
+        Exception exception = assertThrows(PortfolioException.class, () -> {
+            portfolioService.addPortfolioItem(invalidPortfolio);
+        });
+        assertEquals("Instrument ID is invalid.", exception.getMessage());
+    }
+    
+    @Test
+    @DisplayName("Removing more than existing quantity")
+    public void testRemoveMoreQuantityThanExists() {
+        try {
+            portfolioService.removePortfolioItem(portfolio1, 150);
+            List<Portfolio> client1Portfolios = portfolioService.getClientPortfolio("Client1");
+            assertEquals(1, client1Portfolios.size());
+            assertEquals("ID2", client1Portfolios.get(0).getInstrumentId());
+        } catch (PortfolioException e) {
+            fail("Remove portfolio item failed: " + e.getMessage());
+        }
+    }
+    
+    @Test
+    @DisplayName("Updating non existent portfolio item")
+    public void testUpdateNonExistentPortfolioItem() {
+        Portfolio nonExistentPortfolio = new Portfolio("StockC", "ID3", "Client1", 150, 52.0, 7800.0, 57.0, 9.62, 750.0, 2.5);
+        Exception exception = assertThrows(PortfolioException.class, () -> {
+            portfolioService.updatePortfolioItem(nonExistentPortfolio);
+        });
+        assertEquals("Portfolio with Instrument ID ID3 and Client ID Client1 not found.", exception.getMessage());
+    }
+    
+    @Test
+    @DisplayName("Retrieving invalid portfolio item")
     public void testGetClientPortfolio() {
         List<Portfolio> client1Portfolios = portfolioService.getClientPortfolio("Client1");
         assertEquals(2, client1Portfolios.size());
