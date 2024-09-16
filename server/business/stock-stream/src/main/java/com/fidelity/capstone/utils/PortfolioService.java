@@ -7,24 +7,70 @@ import java.util.stream.Collectors;
 
 import com.fidelity.capstone.stock_stream.Portfolio;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class PortfolioService {
 
     private List<Portfolio> portfolios;
 
     public PortfolioService() {
         this.portfolios = new ArrayList<>();
-        portfolios.add(new Portfolio("AAPL", "1", "6734GHJ",10, 150.0, 1500.0, 155.0, 3.33, 50.0, 1.5));
-        portfolios.add(new Portfolio("GOOGL", "2","8734GHJ" ,5, 1000.0, 5000.0, 1050.0, 5.0, 250.0, 2.0));
     }
 
+    public void addPortfolioItem(Portfolio portfolioItem) throws PortfolioException {
+        validatePortfolio(portfolioItem);
+        portfolios.add(portfolioItem);
+    }
+
+    public void removePortfolioItem(Portfolio portfolioItem, int quantityToRemove) throws PortfolioException {
+        validatePortfolio(portfolioItem);
+        Portfolio existingPortfolio = getPortfolioById(portfolioItem.getInstrumentId(), portfolioItem.getClientId());
+        if (existingPortfolio.getQuantity() > quantityToRemove) {
+            existingPortfolio.setQuantity(existingPortfolio.getQuantity() - quantityToRemove);
+        } else {
+            portfolios.remove(existingPortfolio);
+        }
+    }
+
+    public void updatePortfolioItem(Portfolio updatedPortfolioItem) throws PortfolioException {
+        validatePortfolio(updatedPortfolioItem);
+        Portfolio existingPortfolio = getPortfolioById(updatedPortfolioItem.getInstrumentId(), updatedPortfolioItem.getClientId());
+        existingPortfolio.setQuantity(updatedPortfolioItem.getQuantity());
+        existingPortfolio.setAveragePrice(updatedPortfolioItem.getAveragePrice());
+        existingPortfolio.setInvestedCapital(updatedPortfolioItem.getInvestedCapital());
+        existingPortfolio.setLtp(updatedPortfolioItem.getLtp());
+        existingPortfolio.setPercentChange(updatedPortfolioItem.getPercentChange());
+        existingPortfolio.setProfitLoss(updatedPortfolioItem.getProfitLoss());
+        existingPortfolio.setDayChangePercent(updatedPortfolioItem.getDayChangePercent());
+    }
     public List<Portfolio> getClientPortfolio(String clientId) {
-    	List<Portfolio> clientPortfolios = portfolios.stream()
+        List<Portfolio> clientPortfolios = portfolios.stream()
                 .filter(portfolio -> portfolio.getClientId().equals(clientId))
                 .collect(Collectors.toList());
-    	if (clientPortfolios.isEmpty()) {
-    		throw new NoSuchElementException("Client ID " + clientId + " not found.");
-    	}
-    	return clientPortfolios;
+        if (clientPortfolios.isEmpty()) {
+            throw new NoSuchElementException("Client ID " + clientId + " not found.");
+        }
+        return clientPortfolios;
+    }
 
+    private Portfolio getPortfolioById(String instrumentId, String clientId) throws PortfolioException {
+        return portfolios.stream()
+                .filter(portfolio -> portfolio.getInstrumentId().equals(instrumentId) && portfolio.getClientId().equals(clientId))
+                .findFirst()
+                .orElseThrow(() -> new PortfolioException("Portfolio with Instrument ID " + instrumentId + " and Client ID " + clientId + " not found."));
+    }
+
+    private void validatePortfolio(Portfolio portfolio) throws PortfolioException {
+        if (portfolio.getInstrumentId() == null || portfolio.getInstrumentId().isEmpty()) {
+            throw new PortfolioException("Instrument ID is invalid.");
+        }
+        if (portfolio.getClientId() == null || portfolio.getClientId().isEmpty()) {
+            throw new PortfolioException("Client ID is invalid.");
+        }
+        if (portfolio.getQuantity() < 0) {
+            throw new PortfolioException("Quantity cannot be negative.");
+        }
+        // Add more validation as needed
     }
 }
