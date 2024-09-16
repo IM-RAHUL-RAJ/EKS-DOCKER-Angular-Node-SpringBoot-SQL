@@ -21,7 +21,6 @@ public class PortfolioService {
 
     public void addPortfolioItem(Portfolio portfolioItem) throws PortfolioException {
     	if (portfolioItem.getInstrumentId() == null || portfolioItem.getInstrumentId().isEmpty() || portfolioItem.getInstrument()==null) {
-            System.out.println("Instrument ID is invalid.");
             throw new PortfolioException("Instrument ID is invalid.");
         }        portfolios.add(portfolioItem);
     }
