@@ -63,7 +63,7 @@ public class RoboAdvisorService {
 
                     return price;
 	            })
-	            .sorted(Comparator.comparing(Price::getRankScore).reversed()) // Sort by rankScore in descending order
+	            .sorted(Comparator.comparing(Price::getRankScore).reversed()) 
                 .collect(Collectors.toList());
 	    
 	    
@@ -97,13 +97,13 @@ public class RoboAdvisorService {
     private static BigDecimal adjustPeRatioForDuration(BigDecimal peRatio, InvestmentYear duration) {
         switch (duration) {
             case ZERO_TO_FIVE:
-                return peRatio.multiply(BigDecimal.valueOf(1.2)); // Example: Higher multiplier for short duration
+                return peRatio.multiply(BigDecimal.valueOf(1.2)); 
             case FIVE_TO_SEVEN:
                 return peRatio.multiply(BigDecimal.valueOf(1.1));
             case SEVEN_TO_TEN:
                 return peRatio.multiply(BigDecimal.valueOf(1.05));
             case TEN_TO_FIFTEEN:
-                return peRatio; // Base case: No adjustment
+                return peRatio; 
             default:
                 throw new IllegalArgumentException("Unknown investment duration: " + duration);
         }
