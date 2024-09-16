@@ -9,12 +9,12 @@ public class Price {
 	private BigDecimal bidPrice;
 	private LocalDateTime priceTimeStamp;
 	private Instrument instrument; 
-	private double rankScore;
+	private BigDecimal rankScore;
 	
-	public double getRankScore() {
+	public BigDecimal getRankScore() {
 		return rankScore;
 	}
-	public void setRankScore(double rankScore) {
+	public void setRankScore(BigDecimal rankScore) {
 		this.rankScore = rankScore;
 	}
 	public BigDecimal getAskPrice() {
