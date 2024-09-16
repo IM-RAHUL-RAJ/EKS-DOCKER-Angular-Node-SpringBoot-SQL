@@ -22,7 +22,14 @@ public class ClientService {
 
 	// to verify the existence of an email address
 	public boolean verifyEmailAddress(String email) {
-		return registeredClient != null && registeredClient.getEmail().equals(email);
+		for (Client cli : this.clients) {
+			if (cli != null && cli.getEmail().equals(email)) {
+				return true; // Email already registered
+			}
+		}
+		
+		return false;
+		
 	}
 
 	// to process client registration
