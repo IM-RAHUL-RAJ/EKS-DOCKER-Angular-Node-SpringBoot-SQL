@@ -17,10 +17,13 @@ public class PortfolioService {
     public PortfolioService() {
         this.portfolios = new ArrayList<>();
     }
+    
 
     public void addPortfolioItem(Portfolio portfolioItem) throws PortfolioException {
-        validatePortfolio(portfolioItem);
-        portfolios.add(portfolioItem);
+    	if (portfolioItem.getInstrumentId() == null || portfolioItem.getInstrumentId().isEmpty() || portfolioItem.getInstrument()==null) {
+            System.out.println("Instrument ID is invalid.");
+            throw new PortfolioException("Instrument ID is invalid.");
+        }        portfolios.add(portfolioItem);
     }
 
     public void removePortfolioItem(Portfolio portfolioItem, int quantityToRemove) throws PortfolioException {
@@ -71,6 +74,6 @@ public class PortfolioService {
         if (portfolio.getQuantity() < 0) {
             throw new PortfolioException("Quantity cannot be negative.");
         }
-        // Add more validation as needed
     }
+
 }
