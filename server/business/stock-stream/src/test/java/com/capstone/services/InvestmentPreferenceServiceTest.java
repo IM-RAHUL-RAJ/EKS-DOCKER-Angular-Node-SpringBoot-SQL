@@ -1,20 +1,23 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fidelity.capstone.exceptions.InvestmentPreferenceAlreadyExists;
-import com.fidelity.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
-import com.fidelity.capstone.exceptions.RoboAdvisorMandatoryException;
-import com.fidelity.capstone.exceptions.UserNotLoggedInToPerformAction;
-import com.fidelity.capstone.stock_stream.Client;
-import com.fidelity.capstone.stock_stream.IncomeCategory;
-import com.fidelity.capstone.stock_stream.InvestmentPreference;
-import com.fidelity.capstone.stock_stream.InvestmentPurpose;
-import com.fidelity.capstone.stock_stream.InvestmentYear;
-import com.fidelity.capstone.stock_stream.RiskTolerance;
+import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
+import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
+import com.capstone.exceptions.RoboAdvisorMandatoryException;
+import com.capstone.exceptions.UserNotLoggedInToPerformAction;
+import com.capstone.models.Client;
+import com.capstone.models.IncomeCategory;
+import com.capstone.models.InvestmentPreference;
+import com.capstone.models.InvestmentPurpose;
+import com.capstone.models.InvestmentYear;
+import com.capstone.models.RiskTolerance;
+import com.capstone.services.ClientService;
+import com.capstone.services.FmtsService;
+import com.capstone.services.InvestmentPreferenceService;
 
 class InvestmentPreferenceServiceTest {
 

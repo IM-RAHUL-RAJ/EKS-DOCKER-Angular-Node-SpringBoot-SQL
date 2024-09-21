@@ -1,13 +1,14 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fidelity.capstone.exceptions.TradeException;
-import com.fidelity.capstone.stock_stream.Order;
-import com.fidelity.capstone.stock_stream.Portfolio;
-import com.fidelity.capstone.stock_stream.Trade;
+import com.capstone.exceptions.TradeException;
+import com.capstone.models.Order;
+import com.capstone.models.Portfolio;
+import com.capstone.models.Trade;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

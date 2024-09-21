@@ -1,4 +1,4 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,13 +9,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.fidelity.capstone.exceptions.RoboAdvisorException;
-import com.fidelity.capstone.stock_stream.Instrument;
-import com.fidelity.capstone.stock_stream.InstrumentReport;
-import com.fidelity.capstone.stock_stream.InvestmentPreference;
-import com.fidelity.capstone.stock_stream.InvestmentYear;
-import com.fidelity.capstone.stock_stream.Price;
-import com.fidelity.capstone.stock_stream.RiskTolerance;
+import com.capstone.exceptions.RoboAdvisorException;
+import com.capstone.models.Instrument;
+import com.capstone.models.InstrumentReport;
+import com.capstone.models.InvestmentPreference;
+import com.capstone.models.InvestmentYear;
+import com.capstone.models.Price;
+import com.capstone.models.RiskTolerance;
 
 public class RoboAdvisorService {
 	private List<Price> roboAdvisorSuggestionsList = new ArrayList<Price>();

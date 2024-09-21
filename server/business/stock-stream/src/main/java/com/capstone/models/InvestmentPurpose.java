@@ -1,4 +1,4 @@
-package com.fidelity.capstone.stock_stream;
+package com.capstone.models;
 
 public enum InvestmentPurpose {
 	COLLEGE_FUND("Saving for higher education expenses"),

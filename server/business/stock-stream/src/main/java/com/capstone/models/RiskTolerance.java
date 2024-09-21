@@ -1,4 +1,4 @@
-package com.fidelity.capstone.stock_stream;
+package com.capstone.models;
 
 public enum RiskTolerance {
 	CONSERVATIVE("Focuses on capital preservation with low-risk investments and modest returns."),

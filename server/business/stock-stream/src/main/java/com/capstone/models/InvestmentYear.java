@@ -1,4 +1,4 @@
-package com.fidelity.capstone.stock_stream;
+package com.capstone.models;
 
 public enum InvestmentYear {
 	ZERO_TO_FIVE("0 - 5 years", 0, 5),

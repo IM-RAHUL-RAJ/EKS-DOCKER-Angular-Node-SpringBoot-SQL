@@ -1,4 +1,4 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,7 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.fidelity.capstone.stock_stream.ClientActivityReport;
+import com.capstone.models.ClientActivityReport;
+import com.capstone.services.ClientActivityReportService;
 
 public class ClientActivityReportServiceTest {
 

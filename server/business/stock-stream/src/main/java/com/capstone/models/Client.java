@@ -1,4 +1,4 @@
-package com.fidelity.capstone.stock_stream;
+package com.capstone.models;
 
 public class Client {
 	private String email;

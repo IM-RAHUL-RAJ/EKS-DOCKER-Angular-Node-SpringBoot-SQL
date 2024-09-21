@@ -1,12 +1,14 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.fidelity.capstone.exceptions.TradeException;
-import com.fidelity.capstone.stock_stream.Order;
-import com.fidelity.capstone.stock_stream.Trade;
+import com.capstone.exceptions.TradeException;
+import com.capstone.models.Order;
+import com.capstone.models.Trade;
+import com.capstone.services.PortfolioException;
+import com.capstone.services.TradeService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -121,6 +123,7 @@ class TradeServiceTest {
     @Test
     void testGetClientTradeHistory() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
+        
         List<Trade> tradeHistory = tradeService.getClientTradeHistory(trade.getClientId());
         assertEquals(1, tradeHistory.size());
     }

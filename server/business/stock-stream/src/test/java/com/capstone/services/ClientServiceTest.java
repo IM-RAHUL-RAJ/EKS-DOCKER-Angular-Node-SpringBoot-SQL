@@ -1,10 +1,12 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fidelity.capstone.stock_stream.Client;
+import com.capstone.models.Client;
+import com.capstone.services.ClientService;
+import com.capstone.services.FmtsService;
 
 public class ClientServiceTest {
 

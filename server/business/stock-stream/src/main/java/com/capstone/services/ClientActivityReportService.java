@@ -1,9 +1,9 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fidelity.capstone.stock_stream.ClientActivityReport;
+import com.capstone.models.ClientActivityReport;
 
 public class ClientActivityReportService {
 

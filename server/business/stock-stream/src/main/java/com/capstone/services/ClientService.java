@@ -1,11 +1,11 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import com.fidelity.capstone.stock_stream.Client;
+import com.capstone.models.Client;
 
 public class ClientService {
 

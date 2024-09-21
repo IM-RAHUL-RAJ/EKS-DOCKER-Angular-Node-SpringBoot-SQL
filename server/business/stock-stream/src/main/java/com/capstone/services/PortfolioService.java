@@ -1,11 +1,11 @@
-package com.fidelity.capstone.utils;
+package com.capstone.services;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import com.fidelity.capstone.stock_stream.Portfolio;
+import com.capstone.models.Portfolio;
 
 import java.util.*;
 import java.util.stream.Collectors;

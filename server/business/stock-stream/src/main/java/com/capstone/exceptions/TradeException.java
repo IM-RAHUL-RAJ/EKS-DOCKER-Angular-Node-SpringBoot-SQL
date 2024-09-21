@@ -1,4 +1,4 @@
-package com.fidelity.capstone.exceptions;
+package com.capstone.exceptions;
 
 public class TradeException extends RuntimeException {
     public TradeException(String message) {

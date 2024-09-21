@@ -1,4 +1,4 @@
-package com.fidelity.capstone.stock_stream;
+package com.capstone.models;
 
 public enum IncomeCategory {
 	BELOW_20000("Below $20,000", 0, 19999),

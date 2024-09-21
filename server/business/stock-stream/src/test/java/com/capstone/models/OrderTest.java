@@ -1,8 +1,11 @@
-package com.fidelity.capstone.stock_stream;
+package com.capstone.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import com.capstone.models.Order;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
