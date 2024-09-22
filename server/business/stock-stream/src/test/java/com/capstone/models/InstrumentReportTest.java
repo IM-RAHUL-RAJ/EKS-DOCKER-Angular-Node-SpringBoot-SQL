@@ -1,4 +1,4 @@
-package com.fidelity.capstone.stock_stream;
+package com.capstone.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
