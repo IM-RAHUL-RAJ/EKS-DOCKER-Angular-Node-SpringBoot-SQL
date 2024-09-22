@@ -5,13 +5,8 @@ import java.util.List;
 
 import com.fidelity.capstone.exceptions.InvestmentPreferenceAlreadyExists;
 import com.fidelity.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
-import com.fidelity.capstone.exceptions.RoboAdvisorMandatoryException;
 import com.fidelity.capstone.exceptions.UserNotLoggedInToPerformAction;
-import com.fidelity.capstone.stock_stream.IncomeCategory;
 import com.fidelity.capstone.stock_stream.InvestmentPreference;
-import com.fidelity.capstone.stock_stream.InvestmentPurpose;
-import com.fidelity.capstone.stock_stream.InvestmentYear;
-import com.fidelity.capstone.stock_stream.RiskTolerance;
 
 public class InvestmentPreferenceService {
 
