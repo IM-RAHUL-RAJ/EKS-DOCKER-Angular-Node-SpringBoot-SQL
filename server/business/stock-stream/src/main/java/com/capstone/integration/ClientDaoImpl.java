@@ -21,10 +21,42 @@ public class ClientDaoImpl implements ClientDao{
 		super();
 		this.dataSource = dataSource;
 	}
+	
+	@Override
+	public boolean verifyEmailAddress(String emailAddress) {
+		final String checkEmailQuery = "SELECT COUNT(*) as count FROM clients WHERE email = ?";
+		
+		if (emailAddress == null || emailAddress.isEmpty()) {
+			throw new IllegalArgumentException("Email cannot be null or empty");
+		}
+
+		try {
+			Connection connection = dataSource.getConnection();
+			try (PreparedStatement stmt = connection.prepareStatement(checkEmailQuery)) {
+
+				stmt.setString(1, emailAddress);
+				ResultSet resultSet = stmt.executeQuery();
+
+				if (resultSet.next()) {
+					int count = resultSet.getInt("count");
+					return count > 0;
+				}
+			}
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			throw new DatabaseException("Cannot verify emailAddress" + checkEmailQuery, e);
+
+		}
+		return false;
+	}
 
 	@Override
 	public void addClient(Client client) throws SQLException {
-		String sql = "INSERT INTO clients (username, password) VALUES (?, ?)";
+		if (client.getEmail() == null || client.getPassword() == null || client.getFullName() == null) {
+	        throw new DatabaseException("Cannot add user: Required fields are missing");
+	    }
+		String sql = "INSERT INTO clients (email, password, fullName, dateOfBirth, country, postalCode, identificationValue, clientId) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection connection = dataSource.getConnection();			
 			try (PreparedStatement statement = connection.prepareStatement(sql)) {
 			    statement.setString(1, client.getEmail());
@@ -36,21 +68,17 @@ public class ClientDaoImpl implements ClientDao{
 	            statement.setString(7, client.getIdentificationValue());
 	            statement.setString(8, client.getClientId());           
 	            statement.executeUpdate();
-	            ResultSet resultSet = statement.executeQuery();
-
-				if (resultSet.next()) {
-					int count = resultSet.getInt("count");
-					return;
-				}
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			throw new DatabaseException("Cannot add user",e);
 		}
 	}
-		
 			
 	@Override
 	public boolean verifyLogin(String username, String password) throws SQLException {
+			if ( password == null ||  password.isEmpty()) {
+			throw new IllegalArgumentException(" password cannot be null or empty");
+		}
 		String sql = "SELECT * FROM clients WHERE username = ? AND password = ?";
 		Connection connection = dataSource.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -62,5 +90,4 @@ public class ClientDaoImpl implements ClientDao{
             throw new SQLException("Error verifying client login", e);
         }
     }
-	
 }
