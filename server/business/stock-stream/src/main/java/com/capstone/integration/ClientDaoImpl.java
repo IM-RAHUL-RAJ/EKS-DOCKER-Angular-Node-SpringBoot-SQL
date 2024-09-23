@@ -55,7 +55,7 @@ public class ClientDaoImpl implements ClientDao{
 		if (client.getEmail() == null || client.getPassword() == null || client.getFullName() == null) {
 	        throw new DatabaseException("Cannot add user: Required fields are missing");
 	    }
-		String sql = "INSERT INTO clients (email, password, fullName, dateOfBirth, country, postalCode, identificationValue, clientId) "
+		String sql = "INSERT INTO clients (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber clientId) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection connection = dataSource.getConnection();			
 			try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -65,7 +65,8 @@ public class ClientDaoImpl implements ClientDao{
 	            statement.setString(4, client.getDateOfBirth());
 	            statement.setString(5, client.getCountry());
 	            statement.setString(6, client.getPostalCode());
-	            statement.setString(7, client.getIdentificationValue());
+	            statement.setString(7, client.getIdentificationType());
+	            statement.setString(7, client.getIdentificationNumber());
 	            statement.setString(8, client.getClientId());           
 	            statement.executeUpdate();
 		} catch (SQLException e) {

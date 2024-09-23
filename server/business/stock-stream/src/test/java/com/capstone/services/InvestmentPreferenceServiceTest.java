@@ -30,21 +30,21 @@ class InvestmentPreferenceServiceTest {
 		ClientService clientService = new ClientService(new FmtsService());
 
 		clientService.registerClient(new Client("test@example.com", "password123", "John Doe", "1990-01-01", "IN",
-				"123456", "ID123", "abdcabdc"));
+				 "PAN", "ID123", "ID123", "abdcabdc"));
 		
 		clientService.loginClient("test@example.com", "password123");
 
-		clientService.registerClient(new Client("test1@example.com", "password1234", "John Doe", "1990-01-01", "IN", "123456", "ID123",
+		clientService.registerClient(new Client("test1@example.com", "password1234", "John Doe", "1990-01-01", "IN", "123456", "PAN", "ID123",
 				"abcabcab"));
 
 		clientService.loginClient("test1@example.com", "password1234");
 		
-		clientService.registerClient(new Client("test2@example.com", "password12345", "John Doe", "1990-01-01", "IN", "123456", "ID123",
+		clientService.registerClient(new Client("test2@example.com", "password12345", "John Doe", "1990-01-01", "IN", "123456", "PAN", "ID123",
 				"abcabcjk"));
 
 		clientService.loginClient("test2@example.com", "password1235");
 		
-		clientService.registerClient(new Client("test3@example.com", "password12346", "John Doe", "1990-01-01", "IN", "123456", "ID123",
+		clientService.registerClient(new Client("test3@example.com", "password12346", "John Doe", "1990-01-01", "IN", "123456", "PAN", "ID123",
 				"aaaabbbb"));
 
 		clientService.loginClient("test3@example.com", "password12346");
