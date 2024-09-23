@@ -1,6 +1,6 @@
 package com.capstone.exceptions;
 
-public class RoboAdvisorMandatoryException extends Exception {
+public class RoboAdvisorMandatoryException extends RuntimeException {
 
 	public RoboAdvisorMandatoryException() {
 		// TODO Auto-generated constructor stub

@@ -44,7 +44,7 @@ public class InvestmentPreferenceService {
 
 	}
 
-	public boolean isValidInvestmentPreference(InvestmentPreference investmentPreference) {
+	private boolean isValidInvestmentPreference(InvestmentPreference investmentPreference) {
 		for (InvestmentPreference ip : this.investmentPreferences) {
 			if (ip.equals(investmentPreference)) {
 				return true;

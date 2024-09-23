@@ -10,5 +10,5 @@ public interface InvestmentPreferenceDoa {
 	
 	public InvestmentPreference updateInvestmentPreference(InvestmentPreference investmentPreference);
 	
-	public InvestmentPreference deleteInvestmentPreference(InvestmentPreference investmentPreference);
+	public InvestmentPreference removeInvestmentPreference(String clientId);
 }

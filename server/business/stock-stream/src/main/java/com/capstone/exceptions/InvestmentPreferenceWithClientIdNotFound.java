@@ -1,6 +1,6 @@
 package com.capstone.exceptions;
 
-public class InvestmentPreferenceWithClientIdNotFound extends Exception {
+public class InvestmentPreferenceWithClientIdNotFound extends RuntimeException {
 
 	public InvestmentPreferenceWithClientIdNotFound() {
 		// TODO Auto-generated constructor stub

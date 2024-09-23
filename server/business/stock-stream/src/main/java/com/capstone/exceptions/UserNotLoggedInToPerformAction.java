@@ -1,6 +1,6 @@
 package com.capstone.exceptions;
 
-public class UserNotLoggedInToPerformAction extends Exception {
+public class UserNotLoggedInToPerformAction extends RuntimeException {
 
 	public UserNotLoggedInToPerformAction() {
 		// TODO Auto-generated constructor stub
