@@ -1,6 +1,8 @@
 package com.capstone.models;
 
-public class Portfolio {
+import java.util.Objects;
+
+public class Holding {
     private String instrument;
     private String instrumentId;
     private int quantity;
@@ -12,9 +14,9 @@ public class Portfolio {
     private double dayChangePercent;
     private String clientId;
     
-    public Portfolio() {}  
+    public Holding() {}  
 
-    public Portfolio(String instrument, String instrumentId,String clientId, int quantity, double averagePrice, double investedCapital, double ltp, double percentChange, double profitLoss, double dayChangePercent) {
+    public Holding(String instrument, String instrumentId,String clientId, int quantity, double averagePrice, double investedCapital, double ltp, double percentChange, double profitLoss, double dayChangePercent) {
         this.instrument = instrument;
         this.instrumentId = instrumentId;
         this.quantity = quantity;
@@ -108,5 +110,41 @@ public class Portfolio {
 		this.dayChangePercent = dayChangePercent;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(averagePrice, clientId, dayChangePercent, instrument, instrumentId, investedCapital, ltp,
+				percentChange, profitLoss, quantity);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Holding other = (Holding) obj;
+		return Double.doubleToLongBits(averagePrice) == Double.doubleToLongBits(other.averagePrice)
+				&& Objects.equals(clientId, other.clientId)
+				&& Double.doubleToLongBits(dayChangePercent) == Double.doubleToLongBits(other.dayChangePercent)
+				&& Objects.equals(instrument, other.instrument) && Objects.equals(instrumentId, other.instrumentId)
+				&& Double.doubleToLongBits(investedCapital) == Double.doubleToLongBits(other.investedCapital)
+				&& Double.doubleToLongBits(ltp) == Double.doubleToLongBits(other.ltp)
+				&& Double.doubleToLongBits(percentChange) == Double.doubleToLongBits(other.percentChange)
+				&& Double.doubleToLongBits(profitLoss) == Double.doubleToLongBits(other.profitLoss)
+				&& quantity == other.quantity;
+	}
+
+	@Override
+	public String toString() {
+		return "Holding [instrument=" + instrument + ", instrumentId=" + instrumentId + ", quantity=" + quantity
+				+ ", averagePrice=" + averagePrice + ", investedCapital=" + investedCapital + ", ltp=" + ltp
+				+ ", percentChange=" + percentChange + ", profitLoss=" + profitLoss + ", dayChangePercent="
+				+ dayChangePercent + ", clientId=" + clientId + "]";
+	}
+
     // Getters and setters
+	
+	
 }

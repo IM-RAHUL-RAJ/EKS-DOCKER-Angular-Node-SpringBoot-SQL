@@ -6,29 +6,29 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import com.capstone.exceptions.PortfolioException;
-import com.capstone.models.Portfolio;
+import com.capstone.models.Holding;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PortfolioService {
+public class HoldingService {
 
-    private List<Portfolio> portfolios;
+    private List<Holding> portfolios;
 
-    public PortfolioService() {
+    public HoldingService() {
         this.portfolios = new ArrayList<>();
     }
     
 
-    public void addPortfolioItem(Portfolio portfolioItem) throws PortfolioException {
+    public void addPortfolioItem(Holding portfolioItem) throws PortfolioException {
     	if (portfolioItem.getInstrumentId() == null || portfolioItem.getInstrumentId().isEmpty() || portfolioItem.getInstrument()==null) {
             throw new PortfolioException("Instrument ID is invalid.");
         }        portfolios.add(portfolioItem);
     }
 
-    public void removePortfolioItem(Portfolio portfolioItem, int quantityToRemove) throws PortfolioException {
+    public void removePortfolioItem(Holding portfolioItem, int quantityToRemove) throws PortfolioException {
         validatePortfolio(portfolioItem);
-        Portfolio existingPortfolio = getPortfolioById(portfolioItem.getInstrumentId(), portfolioItem.getClientId());
+        Holding existingPortfolio = getPortfolioById(portfolioItem.getInstrumentId(), portfolioItem.getClientId());
         if (existingPortfolio.getQuantity() > quantityToRemove) {
             existingPortfolio.setQuantity(existingPortfolio.getQuantity() - quantityToRemove);
         } else {
@@ -36,9 +36,9 @@ public class PortfolioService {
         }
     }
 
-    public void updatePortfolioItem(Portfolio updatedPortfolioItem) throws PortfolioException {
+    public void updatePortfolioItem(Holding updatedPortfolioItem) throws PortfolioException {
         validatePortfolio(updatedPortfolioItem);
-        Portfolio existingPortfolio = getPortfolioById(updatedPortfolioItem.getInstrumentId(), updatedPortfolioItem.getClientId());
+        Holding existingPortfolio = getPortfolioById(updatedPortfolioItem.getInstrumentId(), updatedPortfolioItem.getClientId());
         existingPortfolio.setQuantity(updatedPortfolioItem.getQuantity());
         existingPortfolio.setAveragePrice(updatedPortfolioItem.getAveragePrice());
         existingPortfolio.setInvestedCapital(updatedPortfolioItem.getInvestedCapital());
@@ -47,8 +47,8 @@ public class PortfolioService {
         existingPortfolio.setProfitLoss(updatedPortfolioItem.getProfitLoss());
         existingPortfolio.setDayChangePercent(updatedPortfolioItem.getDayChangePercent());
     }
-    public List<Portfolio> getClientPortfolio(String clientId) {
-        List<Portfolio> clientPortfolios = portfolios.stream()
+    public List<Holding> getClientPortfolio(String clientId) {
+        List<Holding> clientPortfolios = portfolios.stream()
                 .filter(portfolio -> portfolio.getClientId().equals(clientId))
                 .collect(Collectors.toList());
         if (clientPortfolios.isEmpty()) {
@@ -57,14 +57,14 @@ public class PortfolioService {
         return clientPortfolios;
     }
 
-    private Portfolio getPortfolioById(String instrumentId, String clientId) throws PortfolioException {
+    private Holding getPortfolioById(String instrumentId, String clientId) throws PortfolioException {
         return portfolios.stream()
                 .filter(portfolio -> portfolio.getInstrumentId().equals(instrumentId) && portfolio.getClientId().equals(clientId))
                 .findFirst()
                 .orElseThrow(() -> new PortfolioException("Portfolio with Instrument ID " + instrumentId + " and Client ID " + clientId + " not found."));
     }
 
-    private void validatePortfolio(Portfolio portfolio) throws PortfolioException {
+    private void validatePortfolio(Holding portfolio) throws PortfolioException {
         if (portfolio.getInstrumentId() == null || portfolio.getInstrumentId().isEmpty()) {
             throw new PortfolioException("Instrument ID is invalid.");
         }
