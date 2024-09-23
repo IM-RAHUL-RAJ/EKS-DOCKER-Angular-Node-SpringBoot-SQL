@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.capstone.models.Portfolio;
-import com.capstone.services.PortfolioException;
 import com.capstone.services.PortfolioService;
 
 import java.util.List;
@@ -18,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.NoSuchElementException;
+import com.capstone.exceptions.PortfolioException;
 
 public class PortfolioServiceTest {
 

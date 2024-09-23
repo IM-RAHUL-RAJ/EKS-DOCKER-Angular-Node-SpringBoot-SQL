@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.capstone.exceptions.PortfolioException;
 import com.capstone.exceptions.TradeException;
 import com.capstone.models.Order;
 import com.capstone.models.Portfolio;

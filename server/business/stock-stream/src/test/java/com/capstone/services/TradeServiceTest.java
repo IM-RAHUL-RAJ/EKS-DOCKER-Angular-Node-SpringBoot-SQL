@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import com.capstone.exceptions.TradeException;
 import com.capstone.models.Order;
 import com.capstone.models.Trade;
-import com.capstone.services.PortfolioException;
+import com.capstone.exceptions.PortfolioException;
 import com.capstone.services.TradeService;
 
 import org.junit.jupiter.api.BeforeEach;
