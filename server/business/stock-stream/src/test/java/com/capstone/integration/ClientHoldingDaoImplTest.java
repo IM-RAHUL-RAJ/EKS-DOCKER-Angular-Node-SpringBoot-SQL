@@ -84,6 +84,36 @@ class ClientHoldingDaoImplTest {
 	}
 
 	@Test
+	void getClientHoldingToSucceed() {
+		
+		Holding holding1 = new Holding("Stock A", "INST001", "CLIENT001", 100, 150.50, 15050.00, 155.00, 3.00, 450.00,
+				2.50);
+		
+		Holding holding = dao.getClientHolding("CLIENT001", "INST001");
+		
+		assertEquals(holding, holding1);
+		
+	}
+	
+	@Test
+	void getClientHoldingToThrowDatabaseException() {
+		
+		assertThrows(DatabaseException.class, () -> {
+			dao.getClientHolding("CLIENT001", "INST003");
+		});
+		
+	}
+	
+	@Test
+	void getClientHoldingToThrowIllegalArgumentException() {
+		
+		assertThrows(IllegalArgumentException.class, () -> {
+			dao.getClientHolding(null,null);
+		});
+		
+	}
+	
+	@Test
 	void addClientHoldingToSucceed() throws SQLException {
 
 		Holding newHolding = new Holding("Stock A", "INST003", "CLIENT001", 100, 150.50, 15050.00, 155.00, 3.00, 450.00,
