@@ -2,6 +2,9 @@ package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +12,10 @@ import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
 import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
 import com.capstone.exceptions.RoboAdvisorMandatoryException;
 import com.capstone.exceptions.UserNotLoggedInToPerformAction;
+import com.capstone.integration.InvestmentPreferenceDao;
+import com.capstone.integration.InvestmentPreferenceDaoImpl;
+import com.capstone.integration.PoolableDataSource;
+import com.capstone.integration.TransactionManager;
 import com.capstone.models.Client;
 import com.capstone.models.IncomeCategory;
 import com.capstone.models.InvestmentPreference;
@@ -23,6 +30,33 @@ class InvestmentPreferenceServiceTest {
 
 	InvestmentPreferenceService investmentPreferenceService;
 
+	
+	private final String PREFERENCE_TABLE = "investment_preferences";
+
+	static PoolableDataSource dataSource;
+	InvestmentPreferenceDao dao;
+	TransactionManager transactionManager;
+	private InvestmentPreference investmentPreference1 = new InvestmentPreference("abcabcab",
+			InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.CONSERVATIVE,
+			IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
+
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		dataSource = new PoolableDataSource();
+
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		dataSource.shutdown();
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+		transactionManager.rollbackTransaction();
+	}
+	
+	
 	@BeforeEach
 	void setup()
 			throws InvestmentPreferenceAlreadyExists, RoboAdvisorMandatoryException, UserNotLoggedInToPerformAction {
@@ -45,21 +79,22 @@ class InvestmentPreferenceServiceTest {
 		clientService.loginClient("test2@example.com", "password1235");
 		
 		clientService.registerClient(new Client("test3@example.com", "password12346", "John Doe", "1990-01-01", "IN", "123456", "ID123",
-				"aaaabbbb"));
+				"abcddcba"));
 
 		clientService.loginClient("test3@example.com", "password12346");
 		
+		clientService.registerClient(new Client("test4@example.com", "password12346", "John Doe", "1990-01-01", "IN", "123456", "ID123",
+				"aaaabbbb"));
+
+		clientService.loginClient("test4@example.com", "password12346");
+		
+		dao = new InvestmentPreferenceDaoImpl(dataSource);
+		transactionManager = new TransactionManager(dataSource);
+		transactionManager.startTransaction();
 		
 
-		investmentPreferenceService = new InvestmentPreferenceService(clientService);
+		investmentPreferenceService = new InvestmentPreferenceService(clientService,dao);
 
-		this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("abdcabdc",
-				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.AVERAGE,
-				IncomeCategory.FROM_60000_TO_80000, InvestmentYear.ZERO_TO_FIVE, true));
-
-		this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("abcabcab",
-				InvestmentPurpose.BUSINESS_INVESTMENT, InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(),
-				RiskTolerance.CONSERVATIVE, IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, true));
 	}
 
 	@Test
@@ -67,16 +102,15 @@ class InvestmentPreferenceServiceTest {
 			throws InvestmentPreferenceAlreadyExists, RoboAdvisorMandatoryException, UserNotLoggedInToPerformAction {
 		
 		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.addInvestmentPreference(new InvestmentPreference("aaaabbbb", InvestmentPurpose.BUSINESS_INVESTMENT,
+				.addInvestmentPreference(new InvestmentPreference("abcddcba", InvestmentPurpose.BUSINESS_INVESTMENT,
 						InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(), RiskTolerance.CONSERVATIVE,
 						IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, true));
 
 		assertEquals(investmentPreference,
-				new InvestmentPreference("aaaabbbb", InvestmentPurpose.BUSINESS_INVESTMENT,
+				new InvestmentPreference("abcddcba", InvestmentPurpose.BUSINESS_INVESTMENT,
 						InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(), RiskTolerance.CONSERVATIVE,
 						IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, true));
 
-		assertEquals(3, this.investmentPreferenceService.getLength());
 	}
 
 	@Test

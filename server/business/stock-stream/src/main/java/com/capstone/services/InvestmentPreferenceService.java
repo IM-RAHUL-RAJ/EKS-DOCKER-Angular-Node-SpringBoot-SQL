@@ -7,6 +7,7 @@ import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
 import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
 import com.capstone.exceptions.RoboAdvisorMandatoryException;
 import com.capstone.exceptions.UserNotLoggedInToPerformAction;
+import com.capstone.integration.InvestmentPreferenceDao;
 import com.capstone.models.IncomeCategory;
 import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
@@ -17,9 +18,11 @@ public class InvestmentPreferenceService {
 
 	private List<InvestmentPreference> investmentPreferences = new ArrayList<InvestmentPreference>();
 	private ClientService clientService;
+	private InvestmentPreferenceDao investmentPreferenceDao;
 
-	public InvestmentPreferenceService(ClientService clientService) {
+	public InvestmentPreferenceService(ClientService clientService,InvestmentPreferenceDao investmentPreferenceDao) {
 		this.clientService = clientService;
+		this.investmentPreferenceDao = investmentPreferenceDao;
 	}
 
 	public int getLength() {
@@ -33,10 +36,10 @@ public class InvestmentPreferenceService {
 			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
 		}
 
-		for (InvestmentPreference investmentPreference : this.investmentPreferences) {
-			if (investmentPreference.getClientId().equals(clientId)) {
-				return investmentPreference;
-			}
+		InvestmentPreference investmentPreference = investmentPreferenceDao.getInvestmentPreference(clientId);
+		
+		if(investmentPreference !=null) {
+			return investmentPreference;
 		}
 
 		throw new InvestmentPreferenceWithClientIdNotFound(
@@ -64,28 +67,20 @@ public class InvestmentPreferenceService {
 							+ investmentPreference.getClientId());
 		}
 
-		this.investmentPreferences.add(investmentPreference);
+		InvestmentPreference insertedInvestmentPreference =  investmentPreferenceDao.addInvestmentPreference(investmentPreference);
 		
-		return investmentPreference;
+		return insertedInvestmentPreference;
 
 	}
 
 	public InvestmentPreference updateInvestmentPreference(InvestmentPreference updatedInvestmentPreference)
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 
-		InvestmentPreference investmentPreference = this
-				.getInvestmentPreference(updatedInvestmentPreference.getClientId());
-
-		investmentPreference.setInvestmentPurpose(updatedInvestmentPreference.getInvestmentPurpose());
-
-		investmentPreference
-				.setInvestmentPurposeDescription(updatedInvestmentPreference.getInvestmentPurposeDescription());
-
-		investmentPreference.setIncomeCategory(updatedInvestmentPreference.getIncomeCategory());
-
-		investmentPreference.setRiskTolerance(updatedInvestmentPreference.getRiskTolerance());
-
-		investmentPreference.setInvestmentYear(updatedInvestmentPreference.getInvestmentYear());
+		if (!clientService.isUserLoggedIn(updatedInvestmentPreference.getClientId())) {
+			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
+		}
+		
+		InvestmentPreference investmentPreference = this.investmentPreferenceDao.updateInvestmentPreference(updatedInvestmentPreference);
 
 		return investmentPreference;
 
@@ -94,9 +89,11 @@ public class InvestmentPreferenceService {
 	public InvestmentPreference removeInvestmentPreference(String clientId)
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 
-		InvestmentPreference investmentPreference = this.getInvestmentPreference(clientId);
-
-		this.investmentPreferences.remove(investmentPreference);
+		if (!clientService.isUserLoggedIn(clientId)) {
+			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
+		}
+		
+		InvestmentPreference investmentPreference = this.investmentPreferenceDao.removeInvestmentPreference(clientId);
 		
 		return investmentPreference;
 

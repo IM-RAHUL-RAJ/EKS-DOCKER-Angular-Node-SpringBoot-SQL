@@ -7,14 +7,17 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import com.capstone.exceptions.ClientWithIdNotFoundException;
 import com.capstone.exceptions.DatabaseException;
+import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
+import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
 import com.capstone.models.IncomeCategory;
 import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
 import com.capstone.models.InvestmentYear;
 import com.capstone.models.RiskTolerance;
 
-public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDoa {
+public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 
 	DataSource dataSource;
 
@@ -83,7 +86,7 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDoa {
 
 				return investmentPreference;
 			} else {
-				throw new DatabaseException("No data found for clientId : " + clientId);
+				throw new InvestmentPreferenceWithClientIdNotFound("No data found for clientId : " + clientId);
 			}
 
 		}
@@ -107,6 +110,13 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDoa {
 			return newInvestmentPreference;
 
 		} catch (SQLException e) {
+			if(e.getErrorCode()==2291) {
+				throw new ClientWithIdNotFoundException("The Client Id (parent key not found) !");
+			}
+			if(e.getErrorCode()==00001) {
+				throw new InvestmentPreferenceAlreadyExists();
+			}
+			
 			e.printStackTrace();
 			throw new DatabaseException();
 		}
@@ -217,7 +227,7 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDoa {
 			statement.setString(8, investmentPreference.getClientId());
 
 			if (statement.executeUpdate() == 0) {
-				throw new DatabaseException("No new rows where inserted..");
+				throw new InvestmentPreferenceWithClientIdNotFound("No rows where updated for client id : "+investmentPreference.getClientId());
 			}
 
 			return investmentPreference;

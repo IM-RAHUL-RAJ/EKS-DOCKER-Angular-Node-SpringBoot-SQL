@@ -1,6 +1,8 @@
 package com.capstone.integration;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
 
@@ -10,7 +12,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.capstone.exceptions.ClientWithIdNotFoundException;
 import com.capstone.exceptions.DatabaseException;
+import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
+import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
 import com.capstone.models.IncomeCategory;
 import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
@@ -22,7 +27,7 @@ class InvestmentPreferenceDoaImplTest {
 	private final String PREFERENCE_TABLE = "investment_preferences";
 
 	static PoolableDataSource dataSource;
-	InvestmentPreferenceDoa dao;
+	InvestmentPreferenceDao dao;
 	TransactionManager transactionManager;
 	private InvestmentPreference investmentPreference1 = new InvestmentPreference("abcabcab",
 			InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.CONSERVATIVE,
@@ -59,8 +64,8 @@ class InvestmentPreferenceDoaImplTest {
 	}
 
 	@Test
-	void getInvestmentPreferenceToThrowDatabaseException() {
-		assertThrows(DatabaseException.class, () -> {
+	void getInvestmentPreferenceToThrowInvestmentPreferenceWithClientIdNotFound() {
+		assertThrows(InvestmentPreferenceWithClientIdNotFound.class, () -> {
 			dao.getInvestmentPreference("dbcdbcdb");
 		});
 	}
@@ -72,6 +77,17 @@ class InvestmentPreferenceDoaImplTest {
 		});
 	}
 
+	@Test
+	void getInvestmentPreferenceToThrowDatabaseExceptionConnectionError() throws SQLException
+	{
+		PoolableDataSource dataSource = mock(PoolableDataSource.class);
+		when(dataSource.getConnection()).thenThrow(SQLException.class);
+		InvestmentPreferenceDao dao2 = new InvestmentPreferenceDaoImpl(dataSource);
+		assertThrows(DatabaseException.class,()->{
+			dao2.getInvestmentPreference("abcabcab");
+		});
+	}
+	
 	@Test
 	void insertInvestmentPreferenceToSucceed() throws SQLException {
 		InvestmentPreference newInvestmentPreference = new InvestmentPreference("abcddcba",
@@ -92,7 +108,7 @@ class InvestmentPreferenceDoaImplTest {
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
 
-		assertThrows(DatabaseException.class, () -> {
+		assertThrows(ClientWithIdNotFoundException.class, () -> {
 			dao.addInvestmentPreference(newInvestmentPreference);
 		});
 
@@ -104,7 +120,7 @@ class InvestmentPreferenceDoaImplTest {
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
 
-		assertThrows(DatabaseException.class, () -> {
+		assertThrows(InvestmentPreferenceAlreadyExists.class, () -> {
 			dao.addInvestmentPreference(newInvestmentPreference);
 		});
 
@@ -114,6 +130,17 @@ class InvestmentPreferenceDoaImplTest {
 	void insertInvestmentPreferenceToThrowIllegalArgumentException() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			dao.addInvestmentPreference(null);
+		});
+	}
+	
+	@Test
+	void insertInvestmentPreferenceToThrowDatabaseExceptionConnectionError() throws SQLException
+	{
+		PoolableDataSource dataSource = mock(PoolableDataSource.class);
+		when(dataSource.getConnection()).thenThrow(SQLException.class);
+		InvestmentPreferenceDao dao2 = new InvestmentPreferenceDaoImpl(dataSource);
+		assertThrows(DatabaseException.class,()->{
+			dao2.addInvestmentPreference(investmentPreference1);
 		});
 	}
 
@@ -136,7 +163,7 @@ class InvestmentPreferenceDoaImplTest {
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
 
-		assertThrows(DatabaseException.class, () -> {
+		assertThrows(InvestmentPreferenceWithClientIdNotFound.class, () -> {
 			dao.updateInvestmentPreference(newInvestmentPreference);
 		});
 
@@ -152,6 +179,17 @@ class InvestmentPreferenceDoaImplTest {
 	}
 
 	@Test
+	void updateInvestmentPreferenceToThrowDatabaseExceptionConnectionError() throws SQLException
+	{
+		PoolableDataSource dataSource = mock(PoolableDataSource.class);
+		when(dataSource.getConnection()).thenThrow(SQLException.class);
+		InvestmentPreferenceDao dao2 = new InvestmentPreferenceDaoImpl(dataSource);
+		assertThrows(DatabaseException.class,()->{
+			dao2.updateInvestmentPreference(investmentPreference1);
+		});
+	}
+	
+	@Test
 	void removeInvestmentPreferenceToSucceed() throws SQLException {
 		String clientIdToBeDeleted = "abcabcab";
 
@@ -163,11 +201,11 @@ class InvestmentPreferenceDoaImplTest {
 	}
 	
 	@Test
-	void removeInvestmentPreferenceToThrowDatabaseException() throws SQLException {
+	void removeInvestmentPreferenceToThrowInvestmentPreferenceWithClientIdNotFound() throws SQLException {
 
 		String clientIdToBeDeleted = "abcabczz";
 		
-		assertThrows(DatabaseException.class, () -> {
+		assertThrows(InvestmentPreferenceWithClientIdNotFound.class, () -> {
 			dao.removeInvestmentPreference(clientIdToBeDeleted);
 		});
 	}
@@ -177,6 +215,17 @@ class InvestmentPreferenceDoaImplTest {
 
 		assertThrows(IllegalArgumentException.class, () -> {
 			dao.removeInvestmentPreference(null);
+		});
+	}
+	
+	@Test
+	void removeInvestmentPreferenceToThrowDatabaseExceptionConnectionError() throws SQLException
+	{
+		PoolableDataSource dataSource = mock(PoolableDataSource.class);
+		when(dataSource.getConnection()).thenThrow(SQLException.class);
+		InvestmentPreferenceDao dao2 = new InvestmentPreferenceDaoImpl(dataSource);
+		assertThrows(DatabaseException.class,()->{
+			dao2.removeInvestmentPreference("abcabcab");
 		});
 	}
 

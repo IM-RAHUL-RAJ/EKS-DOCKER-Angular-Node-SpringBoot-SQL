@@ -2,7 +2,7 @@ package com.capstone.integration;
 
 import com.capstone.models.InvestmentPreference;
 
-public interface InvestmentPreferenceDoa {
+public interface InvestmentPreferenceDao {
 
 	public InvestmentPreference getInvestmentPreference(String clientId);
 	
