@@ -23,6 +23,12 @@ public class Client {
 		this.clientId = clientId;
 	}
 
+	public Client(String fullname, String password) {
+		this.password = password;
+		this.fullName = fullName;
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getEmail() {
 		return email;
 	}
