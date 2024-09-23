@@ -19,7 +19,6 @@ public class ClientPortfolioDaoImpl implements ClientPortfolioDao{
 
     private static final String GET_CLIENT_PORTFOLIO_QUERY = "SELECT * FROM portfolios WHERE clientId = ?";
 
-    private Connection connection;
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private DataSource dataSource;
 
