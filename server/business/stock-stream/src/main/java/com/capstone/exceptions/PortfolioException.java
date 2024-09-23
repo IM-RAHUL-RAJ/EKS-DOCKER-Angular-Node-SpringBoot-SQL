@@ -1,4 +1,4 @@
-package com.capstone.services;
+package com.capstone.exceptions;
 
 public class PortfolioException extends Exception {
 	   public PortfolioException(String message) {

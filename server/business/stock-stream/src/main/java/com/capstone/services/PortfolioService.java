@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import com.capstone.exceptions.PortfolioException;
 import com.capstone.models.Portfolio;
 
 import java.util.*;
