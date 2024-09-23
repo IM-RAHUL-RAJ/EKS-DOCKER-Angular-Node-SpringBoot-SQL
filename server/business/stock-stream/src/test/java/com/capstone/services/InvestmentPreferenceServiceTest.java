@@ -14,6 +14,7 @@ import com.capstone.models.IncomeCategory;
 import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
 import com.capstone.models.InvestmentYear;
+import com.capstone.models.ProfileStatus;
 import com.capstone.models.RiskTolerance;
 import com.capstone.services.ClientService;
 import com.capstone.services.FmtsService;
@@ -30,22 +31,22 @@ class InvestmentPreferenceServiceTest {
 		ClientService clientService = new ClientService(new FmtsService());
 
 		clientService.registerClient(new Client("test@example.com", "password123", "John Doe", "1990-01-01", "IN",
-				 "PAN", "ID123", "ID123", "abdcabdc"));
+				 "PAN", "ID123", "ID123",  ProfileStatus.COMPLETE,"abdcabdc"));
 		
 		clientService.loginClient("test@example.com", "password123");
 
 		clientService.registerClient(new Client("test1@example.com", "password1234", "John Doe", "1990-01-01", "IN", "123456", "PAN", "ID123",
-				"abcabcab"));
+				 ProfileStatus.COMPLETE,"abcabcab"));
 
 		clientService.loginClient("test1@example.com", "password1234");
 		
 		clientService.registerClient(new Client("test2@example.com", "password12345", "John Doe", "1990-01-01", "IN", "123456", "PAN", "ID123",
-				"abcabcjk"));
+				 ProfileStatus.COMPLETE,"abcabcjk"));
 
 		clientService.loginClient("test2@example.com", "password1235");
 		
 		clientService.registerClient(new Client("test3@example.com", "password12346", "John Doe", "1990-01-01", "IN", "123456", "PAN", "ID123",
-				"aaaabbbb"));
+				 ProfileStatus.COMPLETE,"aaaabbbb"));
 
 		clientService.loginClient("test3@example.com", "password12346");
 		

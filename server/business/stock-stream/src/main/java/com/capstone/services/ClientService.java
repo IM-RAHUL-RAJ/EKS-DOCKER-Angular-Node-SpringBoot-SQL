@@ -40,7 +40,7 @@ public class ClientService {
 				return false; // Email already registered
 			}
 		}
-		if (mockFmtsService.verifyClient(client.getIdentificationValue(), client.getCountry())) {
+		if (mockFmtsService.verifyClient(client.getIdentificationNumber(), client.getCountry())) {
 			registeredClient = client;
 
 			this.clients.add(client);

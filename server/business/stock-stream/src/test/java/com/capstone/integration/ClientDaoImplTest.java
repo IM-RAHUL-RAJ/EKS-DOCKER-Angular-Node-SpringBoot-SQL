@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import com.capstone.exceptions.DatabaseException;
 import com.capstone.models.Client;
+import com.capstone.models.ProfileStatus;
 
 class ClientDaoImplTest {
 	private static DataSource dataSource;
@@ -30,6 +31,7 @@ class ClientDaoImplTest {
 	private static PreparedStatement preparedStatement;
 	private static ResultSet resultSet;
 	private ClientDaoImpl dao;
+	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -102,7 +104,7 @@ class ClientDaoImplTest {
 
 	@Test
     public void testAddClient_Success() throws SQLException {
-        Client client = new Client("test@example.com", "password123", "Test User", "1990-01-01", "Country", "12345", "PAN", "ID123", "ClientId123");
+        Client client = new Client("test@example.com", "password123", "Test User", "1990-01-01", "Country", "12345", "PAN", "ID123", ProfileStatus.COMPLETE,"ClientId123");
         
         when(connection.prepareStatement(any(String.class))).thenReturn(preparedStatement);
         when(preparedStatement.executeUpdate()).thenReturn(1); // Simulate successful insert
@@ -113,7 +115,7 @@ class ClientDaoImplTest {
 
     @Test
     public void testAddClient_DuplicateEmail() throws SQLException {
-        Client client = new Client("test@example.com", "password123", "Test User", "1990-01-01", "Country", "12345", "PAN", "ID123", "ClientId123");
+        Client client = new Client("test@example.com", "password123", "Test User", "1990-01-01", "Country", "12345", "PAN", "ID123", ProfileStatus.PENDING, "ClientId123");
         
         when(connection.prepareStatement(any(String.class))).thenReturn(preparedStatement);
         when(preparedStatement.executeUpdate()).thenThrow(new SQLException("Duplicate entry"));
@@ -124,9 +126,8 @@ class ClientDaoImplTest {
 
     @Test
     public void testAddClient_MissingRequiredFields() {
-        Client client = new Client(null, "password123", "Test User", "1990-01-01", "Country", "12345", "PAN", "ID123", "ClientId123");
-
-        DatabaseException exception = assertThrows(DatabaseException.class, () -> dao.addClient(client));
+        Client client = new Client(null, "password123", "Test User", "1990-01-01", "Country", "12345", "PAN", "ID123", ProfileStatus.COMPLETE, "ClientId123");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> dao.addClient(client));
         assertEquals("Cannot add user: Required fields are missing", exception.getMessage());
     }
 
