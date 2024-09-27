@@ -2,6 +2,9 @@ package com.capstone.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 import org.junit.jupiter.api.Test;
 
 import com.capstone.models.Order;
@@ -52,19 +55,19 @@ class OrderTest {
     @Test
     void testSetTargetPrice_Zero() {
         Order order = new Order();
-        assertThrows(IllegalArgumentException.class, () -> order.setTargetPrice(0.0));
+        assertThrows(IllegalArgumentException.class, () -> order.setTargetPrice(BigDecimal.ZERO));
     }
 
     @Test
     void testSetTargetPrice_Negative() {
         Order order = new Order();
-        assertThrows(IllegalArgumentException.class, () -> order.setTargetPrice(-1.0));
+        assertThrows(IllegalArgumentException.class, () -> order.setTargetPrice(new BigDecimal(-1.0)));
     }
 
     @Test
     void testSetTargetPrice_Valid() {
         Order order = new Order();
-        order.setTargetPrice(100.0);
+        order.setTargetPrice(new BigDecimal(100.0));
         assertEquals(100.0, order.getTargetPrice());
     }
 
@@ -135,19 +138,14 @@ class OrderTest {
     @Test
     void testSetOrderDate_Null() {
         Order order = new Order();
-        assertThrows(NullPointerException.class, () -> order.setOrderDate(null));
-    }
-
-    @Test
-    void testSetOrderDate_Empty() {
-        Order order = new Order();
-        assertThrows(IllegalArgumentException.class, () -> order.setOrderDate(""));
+        assertThrows(NullPointerException.class, () -> order.setCreationTime(null));
     }
 
     @Test
     void testSetOrderDate_Valid() {
         Order order = new Order();
-        order.setOrderDate("2024-09-15");
-        assertEquals("2024-09-15", order.getOrderDate());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        order.setCreationTime(timestamp);
+        assertEquals(timestamp, order.getCreationTime());
     }
 }

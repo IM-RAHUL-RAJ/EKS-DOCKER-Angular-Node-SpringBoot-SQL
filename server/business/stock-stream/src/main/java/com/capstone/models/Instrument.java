@@ -10,7 +10,23 @@ public class Instrument {
     private int maxQuantity;
     private int minQuantity;
 
-    public String getInstrumentId() {
+    public Instrument(String instrumentId, String externalIdType, String externalId, String categoryId,
+			String instrumentDescription, int maxQuantity, int minQuantity) {
+		super();
+		this.instrumentId = instrumentId;
+		this.externalIdType = externalIdType;
+		this.externalId = externalId;
+		this.categoryId = categoryId;
+		this.instrumentDescription = instrumentDescription;
+		this.maxQuantity = maxQuantity;
+		this.minQuantity = minQuantity;
+	}
+
+	public Instrument() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getInstrumentId() {
         return instrumentId;
     }
 
