@@ -1,6 +1,7 @@
 package com.capstone.services;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,7 +21,7 @@ import com.capstone.models.RiskTolerance;
 public class RoboAdvisorService {
 	private List<Price> roboAdvisorSuggestionsList = new ArrayList<Price>();
 
-	public void addSuggestion(BigDecimal askPrice, BigDecimal bidPrice, LocalDateTime priceTimeStamp,
+	public void addSuggestion(BigDecimal askPrice, BigDecimal bidPrice, Timestamp priceTimeStamp,
 			Instrument instrument) {
 		Price newRoboAdvisorSuggestion = new Price();
 		try {

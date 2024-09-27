@@ -69,6 +69,18 @@
         "value": "IFJPK5444E"
       },
       "clientId": 1486492276
+    },
+    "fasdfsd@fsas.com": {
+      "email": "fasdfsd@fsas.com",
+      "password": "password",
+      "fullName": "asdfasf",
+      "dateOfBirth": "2024-09-12T18:30:00.000Z",
+      "country": "United States",
+      "postalCode": "34234",
+      "identification": {
+        "value": "AIEPK3777E"
+      },
+      "clientId": 764046905
     }
   }
 }

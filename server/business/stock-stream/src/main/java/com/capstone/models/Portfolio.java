@@ -1,12 +1,14 @@
 package com.capstone.models;
 
+import java.math.BigDecimal;
+
 public class Portfolio {
     private String instrument;
     private String instrumentId;
     private int quantity;
-    private double averagePrice;
+    private BigDecimal averagePrice;
     private double investedCapital;
-    private double ltp;
+    private BigDecimal ltp;
     private double percentChange;
     private double profitLoss;
     private double dayChangePercent;
@@ -14,7 +16,7 @@ public class Portfolio {
     
     public Portfolio() {}  
 
-    public Portfolio(String instrument, String instrumentId,String clientId, int quantity, double averagePrice, double investedCapital, double ltp, double percentChange, double profitLoss, double dayChangePercent) {
+    public Portfolio(String instrument, String instrumentId,String clientId, int quantity, BigDecimal averagePrice, double investedCapital, BigDecimal ltp, double percentChange, double profitLoss, double dayChangePercent) {
         this.instrument = instrument;
         this.instrumentId = instrumentId;
         this.quantity = quantity;
@@ -60,12 +62,12 @@ public class Portfolio {
 		this.quantity = quantity;
 	}
 
-	public double getAveragePrice() {
+	public BigDecimal getAveragePrice() {
 		return averagePrice;
 	}
 
-	public void setAveragePrice(double averagePrice) {
-		this.averagePrice = averagePrice;
+	public void setAveragePrice(BigDecimal bigDecimal) {
+		this.averagePrice = bigDecimal;
 	}
 
 	public double getInvestedCapital() {
@@ -76,12 +78,12 @@ public class Portfolio {
 		this.investedCapital = investedCapital;
 	}
 
-	public double getLtp() {
+	public BigDecimal getLtp() {
 		return ltp;
 	}
 
-	public void setLtp(double ltp) {
-		this.ltp = ltp;
+	public void setLtp(BigDecimal bigDecimal) {
+		this.ltp = bigDecimal;
 	}
 
 	public double getPercentChange() {

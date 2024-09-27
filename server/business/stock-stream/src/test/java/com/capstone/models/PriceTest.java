@@ -3,6 +3,8 @@ package com.capstone.models;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +44,7 @@ class PriceTest {
     @Test
     void testSetGetPriceTimeStamp() {
         LocalDateTime now = LocalDateTime.now();
-        price.setPriceTimeStamp(now);
+        price.setPriceTimeStamp(Timestamp.from(Instant.now()));
         assertEquals(now, price.getPriceTimeStamp(), "Price timestamp should be set and retrieved correctly");
     }
 
