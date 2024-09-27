@@ -6,18 +6,18 @@ public enum InvestmentYear {
     SEVEN_TO_TEN("7 - 10 years", 7, 10),
     TEN_TO_FIFTEEN("10 - 15 years", 10, 15);
 
-    private final String description;
+    private final String name;
     private final int minYears;
     private final int maxYears;
 
     InvestmentYear(String description, int minYears, int maxYears) {
-        this.description = description;
+        this.name = description;
         this.minYears = minYears;
         this.maxYears = maxYears;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
     public int getMinYears() {
@@ -28,8 +28,17 @@ public enum InvestmentYear {
         return maxYears;
     }
 
+    public static InvestmentYear of(String description) {
+        for (InvestmentYear category : values()) {
+            if (category.name.equalsIgnoreCase(description)) {
+                return category;
+            }
+        }
+        throw new IllegalArgumentException("No IncomeCategory for description: " + description);
+    }
+    
     @Override
     public String toString() {
-        return description;
+        return name;
     }
 }

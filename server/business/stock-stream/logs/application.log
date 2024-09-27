@@ -4785,3 +4785,16 @@ java.sql.SQLException: mockSQLException
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:757)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+Caused by: oracle.net.ns.NetException: ORA-12541: Cannot connect. No listener at host localhost port 1521. (CONNECTION_ID=yk3UHgKmQs64ZewitCG6wA==)
+https://docs.oracle.com/error-help/db/ora-12541/
+	at oracle.net.nt.TcpNTAdapter.establishSocket(TcpNTAdapter.java:311)
+	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:222)
+	at oracle.net.nt.ConnOption.connect(ConnOption.java:327)
+	at oracle.net.nt.ConnStrategy.executeConnOption(ConnStrategy.java:1144)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:718)
+	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:707)
+	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:938)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:327)
+	at oracle.jdbc.driver.T4CConnection.connectNetworkSessionProtocol(T4CConnection.java:2947)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:910)
+	... 92 common frames omitted

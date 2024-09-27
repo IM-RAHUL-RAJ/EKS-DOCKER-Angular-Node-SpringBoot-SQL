@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.capstone.exceptions.PortfolioException;
 import com.capstone.exceptions.TradeException;
 import com.capstone.models.Order;
-import com.capstone.models.Portfolio;
+import com.capstone.models.Holding;
 import com.capstone.models.Trade;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 public class TradeService {
     private List<Trade> trades = new ArrayList<>();
-    private PortfolioService portfolioService = new PortfolioService();
+    private HoldingService portfolioService = new HoldingService();
 
     public void executeTrade(Trade trade) throws TradeException, PortfolioException {
         try {
@@ -26,7 +27,7 @@ public class TradeService {
             }
             trades.add(trade);
             
-            Portfolio item = new Portfolio();
+            Holding item = new Holding();
             item.setAveragePrice(trade.getExecutionPrice());
             item.setClientId("Test");
             item.setInstrument("Test");
@@ -98,7 +99,7 @@ public class TradeService {
             trades.remove(existingTrade);
             trades.add(updatedTrade);
             
-            Portfolio item = new Portfolio();
+            Holding item = new Holding();
             item.setAveragePrice(updatedTrade.getExecutionPrice());
             item.setDayChangePercent(0);
             item.setClientId("Test");

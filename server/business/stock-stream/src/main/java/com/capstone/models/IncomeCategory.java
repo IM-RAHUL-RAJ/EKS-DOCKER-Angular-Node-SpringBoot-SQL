@@ -7,18 +7,18 @@ public enum IncomeCategory {
     FROM_60000_TO_80000("$60,000 - $80,000", 60000, 79999),
     ABOVE_80000("Above $80,000", 80000, Integer.MAX_VALUE);
 
-    private final String description;
+    private final String name;
     private final int minIncome;
     private final int maxIncome;
 
     IncomeCategory(String description, int minIncome, int maxIncome) {
-        this.description = description;
+        this.name = description;
         this.minIncome = minIncome;
         this.maxIncome = maxIncome;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
     public int getMinIncome() {
@@ -29,8 +29,17 @@ public enum IncomeCategory {
         return maxIncome;
     }
 
+    public static IncomeCategory of(String description) {
+        for (IncomeCategory category : values()) {
+            if (category.name.equalsIgnoreCase(description)) {
+                return category;
+            }
+        }
+        throw new IllegalArgumentException("No IncomeCategory for description: " + description);
+    }
+    
     @Override
     public String toString() {
-        return description;
+        return name;
     }
 }
