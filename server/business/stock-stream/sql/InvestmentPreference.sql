@@ -34,6 +34,8 @@ INSERT INTO investment_preferences
 VALUES
 ('C002','Retirement','Saving for retirement years','Average','$40,000 - $60,000','5 - 7 years',1);
 
-SELECT * FROM investment_preferences WHERE client_id='C002';
+COMMIT
+
+
 
 
