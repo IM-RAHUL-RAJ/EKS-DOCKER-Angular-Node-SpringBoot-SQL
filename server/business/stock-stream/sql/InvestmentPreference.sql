@@ -6,16 +6,18 @@
 --    CONSTRAINT client_id PRIMARY KEY(client_id) 
 --);
 
+DROP TABLE investment_preferences;
+
 CREATE TABLE investment_preferences (
-    client_id VARCHAR(255),
-    investment_purpose VARCHAR(50) NOT NULL,
-    investment_purpose_description VARCHAR(255),
-    risk_tolerance VARCHAR(50) NOT NULL,
-    income_category VARCHAR(50) NOT NULL,
-    investment_year VARCHAR(50) NOT NULL,
-    is_robo_advisor_terms_accepted NUMBER(1) CHECK (is_robo_advisor_terms_accepted IN (0, 1)),
-    PRIMARY KEY (client_id),
-    FOREIGN KEY (client_id) REFERENCES SS_CLIENT(client_id)
+    clientId VARCHAR(255),
+    investmentPurpose VARCHAR(50) NOT NULL,
+    investmentPurposeDescription VARCHAR(255),
+    riskTolerance VARCHAR(50) NOT NULL,
+    incomeCategory VARCHAR(50) NOT NULL,
+    investmentYear VARCHAR(50) NOT NULL,
+    isRoboAdvisorTermsAccepted NUMBER(1) CHECK (isRoboAdvisorTermsAccepted IN (0, 1)),
+    PRIMARY KEY (clientId),
+    FOREIGN KEY (clientId) REFERENCES SS_CLIENT(clientId)
 );
 
 
@@ -23,12 +25,12 @@ CREATE TABLE investment_preferences (
 --INSERT INTO clients (client_id,name,email_address,password) VALUES ('abcdabcd','Ryugen','ryugen@gmail.com','ryugen224');
 
 INSERT INTO investment_preferences 
-(client_id,investment_purpose,investment_purpose_description,risk_tolerance,income_category,investment_year,is_robo_advisor_terms_accepted)
+(clientId,investmentPurpose,investmentPurposeDescription,riskTolerance,incomeCategory,investmentYear,isRoboAdvisorTermsAccepted)
 VALUES
 ('C001','College Fund','Saving for higher education expenses','Conservative','Below $20,000','0 - 5 years',1);
 
 INSERT INTO investment_preferences 
-(client_id,investment_purpose,investment_purpose_description,risk_tolerance,income_category,investment_year,is_robo_advisor_terms_accepted)
+(clientId,investmentPurpose,investmentPurposeDescription,riskTolerance,incomeCategory,investmentYear,isRoboAdvisorTermsAccepted)
 VALUES
 ('C002','Retirement','Saving for retirement years','Average','$40,000 - $60,000','5 - 7 years',1);
 

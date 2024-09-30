@@ -52,15 +52,15 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 
 		String getInvestmentPreferenceQuery = """
 				SELECT
-				client_id,
-				investment_purpose,
-				investment_purpose_description,
-				risk_tolerance,
-				income_category,
-				investment_year,
-				is_robo_advisor_terms_accepted
+				clientId,
+				investmentPurpose,
+				investmentPurposeDescription,
+				riskTolerance,
+				incomeCategory,
+				investmentYear,
+				isRoboAdvisorTermsAccepted
 				FROM investment_preferences
-				WHERE client_id=?
+				WHERE clientId=?
 				""";
 
 		try (PreparedStatement statement = connection.prepareStatement(getInvestmentPreferenceQuery)) {
@@ -69,14 +69,14 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
-				InvestmentPurpose investmentPurpose = InvestmentPurpose.of(rs.getString("investment_purpose"));
-				String investmentPurposeDescription = rs.getString("investment_purpose_description");
-				RiskTolerance riskTolerance = RiskTolerance.of(rs.getString("risk_tolerance"));
-				IncomeCategory incomeCategory = IncomeCategory.of(rs.getString("income_category"));
-				InvestmentYear investmentYear = InvestmentYear.of(rs.getString("investment_year"));
+				InvestmentPurpose investmentPurpose = InvestmentPurpose.of(rs.getString("investmentPurpose"));
+				String investmentPurposeDescription = rs.getString("investmentPurposeDescription");
+				RiskTolerance riskTolerance = RiskTolerance.of(rs.getString("riskTolerance"));
+				IncomeCategory incomeCategory = IncomeCategory.of(rs.getString("incomeCategory"));
+				InvestmentYear investmentYear = InvestmentYear.of(rs.getString("investmentYear"));
 
 				boolean isRoboAdvisorTermsAccepted = false;
-				if (rs.getInt("is_robo_advisor_terms_accepted") == 1) {
+				if (rs.getInt("isRoboAdvisorTermsAccepted") == 1) {
 					isRoboAdvisorTermsAccepted = true;
 				}
 
@@ -128,13 +128,13 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 
 		String insertPreferenceQuery = """
 				INSERT INTO investment_preferences
-					(client_id,
-					investment_purpose,
-					investment_purpose_description,
-					risk_tolerance,
-					income_category,
-					investment_year,
-					is_robo_advisor_terms_accepted)
+					(clientId,
+					investmentPurpose,
+					investmentPurposeDescription,
+					riskTolerance,
+					incomeCategory,
+					investmentYear,
+					isRoboAdvisorTermsAccepted)
 					VALUES
 					(?,?,?,?,?,?,?)
 									""";
@@ -197,14 +197,14 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 		String updateInvestmentPreferenceQuery = """
 				UPDATE investment_preferences
 				SET
-				client_id=?,
-				investment_purpose=?,
-				investment_purpose_description=?,
-				risk_tolerance=?,
-				income_category=?,
-				investment_year=?,
-				is_robo_advisor_terms_accepted=?
-				WHERE client_id = ?
+				clientId=?,
+				investmentPurpose=?,
+				investmentPurposeDescription=?,
+				riskTolerance=?,
+				incomeCategory=?,
+				investmentYear=?,
+				isRoboAdvisorTermsAccepted=?
+				WHERE clientId = ?
 				""";
 
 		try (PreparedStatement statement = connection.prepareStatement(updateInvestmentPreferenceQuery)) {
@@ -261,7 +261,7 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 			throws SQLException {
 
 		String deletePreferenceQuery = """
-				DELETE FROM investment_preferences WHERE client_id=?
+				DELETE FROM investment_preferences WHERE clientId=?
 				""";
 		
 		InvestmentPreference investmentPreference = getInvestmentPreference(connection, clientId);
