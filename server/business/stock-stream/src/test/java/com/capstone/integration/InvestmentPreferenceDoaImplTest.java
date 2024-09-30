@@ -103,7 +103,7 @@ class InvestmentPreferenceDoaImplTest {
 	}
 
 	@Test
-	void insertInvestmentPreferenceToThrowDatabaseExceptionParentKeyNotPresent() throws SQLException {
+	void insertInvestmentPreferenceToThrowClientWithIdNotFoundException() throws SQLException {
 		InvestmentPreference newInvestmentPreference = new InvestmentPreference("abcabcda",
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
@@ -115,7 +115,7 @@ class InvestmentPreferenceDoaImplTest {
 	}
 
 	@Test
-	void insertInvestmentPreferenceToThrowDatabaseExceptionAlreadyExistsWithPrimaryKey() throws SQLException {
+	void insertInvestmentPreferenceToThrowInvestmentPreferenceAlreadyExists() throws SQLException {
 		InvestmentPreference newInvestmentPreference = new InvestmentPreference("abcabcab",
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
@@ -158,7 +158,7 @@ class InvestmentPreferenceDoaImplTest {
 	}
 
 	@Test
-	void updateInvestmentPreferenceToThrowDatabaseException() throws SQLException {
+	void updateInvestmentPreferenceToThrowInvestmentPreferenceWithClientIdNotFound() throws SQLException {
 		InvestmentPreference newInvestmentPreference = new InvestmentPreference("abcabcda",
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
