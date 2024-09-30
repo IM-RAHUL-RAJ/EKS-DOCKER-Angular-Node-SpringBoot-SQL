@@ -1,5 +1,6 @@
 package com.capstone.services;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -55,7 +56,7 @@ public class TradeService {
             order.setDirection(trade.getDirection());
             order.setClientId(trade.getClientId());
             order.setOrderId(trade.getTradeId());
-            order.setOrderDate(trade.getTradeDate());
+            order.setCreationTime(trade.getCreationTime());
         } catch (IllegalArgumentException e) {
             throw new TradeException.TradeValidationException("Invalid trade data: " + e.getMessage());
         } catch (NullPointerException e) {
@@ -72,10 +73,11 @@ public class TradeService {
         }
     }
 
-    public double calculateTradeValue(Trade trade) throws TradeException {
+    public BigDecimal calculateTradeValue(Trade trade) throws TradeException {
         validateTrade(trade);
         try {
-            return trade.getQuantity() * trade.getExecutionPrice();
+        	return trade.getExecutionPrice().multiply(new BigDecimal(trade.getQuantity()));
+            
         } catch (NullPointerException | IllegalArgumentException e) {
             throw new TradeException("Error calculating trade value: " + e.getMessage());
         }
@@ -132,7 +134,7 @@ public class TradeService {
     
     public List<Trade> getClientTradeHistory(String clientId) {
         List<Trade> tradeHistory = new ArrayList<>(listTradesByClient(clientId));
-        tradeHistory.sort((trade1, trade2) -> trade2.getTradeDate().compareTo(trade1.getTradeDate()));
+        tradeHistory.sort((trade1, trade2) -> trade2.getCreationTime().compareTo(trade1.getCreationTime()));
         if (tradeHistory.size() > 100) {
             return tradeHistory.subList(0, 100);
         }

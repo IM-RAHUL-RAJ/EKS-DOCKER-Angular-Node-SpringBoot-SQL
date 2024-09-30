@@ -1,16 +1,38 @@
 package com.capstone.models;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Objects;
 
+import com.capstone.enums.OrderStatus;
+
 public class Order {
+    private String orderId;
+    private String clientId;
     private String instrumentId;
     private int quantity;
-    private double targetPrice;
+    private BigDecimal targetPrice;
     private String direction;
-    private String clientId;
-    private String orderId;
-    private String orderDate;
+    private OrderStatus orderStatus;
+    private Timestamp creationTime;
 
-    public String getInstrumentId() {
+    public Order(String orderId, String clientId, String instrumentId, int quantity, BigDecimal targetPrice,
+			String direction, OrderStatus orderStatus, Timestamp creationTime) {
+		super();
+		this.orderId = orderId;
+		this.clientId = clientId;
+		this.instrumentId = instrumentId;
+		this.quantity = quantity;
+		this.targetPrice = targetPrice;
+		this.direction = direction;
+		this.orderStatus = orderStatus;
+		this.creationTime = creationTime;
+	}
+
+	public Order() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getInstrumentId() {
         return instrumentId;
     }
 
@@ -33,12 +55,12 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public double getTargetPrice() {
+    public BigDecimal getTargetPrice() {
         return targetPrice;
     }
 
-    public void setTargetPrice(double targetPrice) {
-        if (targetPrice <= 0) {
+    public void setTargetPrice(BigDecimal targetPrice) {
+        if (targetPrice.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Target price must be greater than zero");
         }
         this.targetPrice = targetPrice;
@@ -80,15 +102,20 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getOrderDate() {
-        return orderDate;
+    public Timestamp getCreationTime() {
+        return creationTime;
     }
 
-    public void setOrderDate(String orderDate) {
-        Objects.requireNonNull(orderDate, "Order date cannot be null");
-        if (orderDate.isEmpty()) {
-            throw new IllegalArgumentException("Order date cannot be empty");
-        }
-        this.orderDate = orderDate;
+    public void setCreationTime(Timestamp creationTime) {
+        Objects.requireNonNull(creationTime, "Order date cannot be null");
+        this.creationTime = creationTime;
     }
+
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 }

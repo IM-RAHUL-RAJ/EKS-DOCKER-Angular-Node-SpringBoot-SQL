@@ -1,6 +1,7 @@
 package com.capstone.services;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,7 +21,7 @@ import com.capstone.models.RiskTolerance;
 public class RoboAdvisorService {
 	private List<Price> roboAdvisorSuggestionsList = new ArrayList<Price>();
 
-	public void addSuggestion(BigDecimal askPrice, BigDecimal bidPrice, LocalDateTime priceTimeStamp,
+	public void addSuggestion(BigDecimal askPrice, BigDecimal bidPrice, Timestamp priceTimeStamp,
 			Instrument instrument) {
 		Price newRoboAdvisorSuggestion = new Price();
 		try {
@@ -63,7 +64,7 @@ public class RoboAdvisorService {
 
                     return price;
 	            })
-	            .sorted(Comparator.comparing(Price::getRankScore).reversed()) // Sort by rankScore in descending order
+	            .sorted(Comparator.comparing(Price::getRankScore).reversed()) 
                 .collect(Collectors.toList());
 	    
 	    
@@ -97,13 +98,13 @@ public class RoboAdvisorService {
     private static BigDecimal adjustPeRatioForDuration(BigDecimal peRatio, InvestmentYear duration) {
         switch (duration) {
             case ZERO_TO_FIVE:
-                return peRatio.multiply(BigDecimal.valueOf(1.2)); // Example: Higher multiplier for short duration
+                return peRatio.multiply(BigDecimal.valueOf(1.2)); 
             case FIVE_TO_SEVEN:
                 return peRatio.multiply(BigDecimal.valueOf(1.1));
             case SEVEN_TO_TEN:
                 return peRatio.multiply(BigDecimal.valueOf(1.05));
             case TEN_TO_FIFTEEN:
-                return peRatio; // Base case: No adjustment
+                return peRatio; 
             default:
                 throw new IllegalArgumentException("Unknown investment duration: " + duration);
         }

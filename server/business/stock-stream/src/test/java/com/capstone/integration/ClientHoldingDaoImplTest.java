@@ -18,7 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 
 import com.capstone.exceptions.DatabaseException;
 import com.capstone.models.Holding;
-
+import java.math.BigDecimal;
 class ClientHoldingDaoImplTest {
 
 	static PoolableDataSource dataSource;
@@ -85,8 +85,8 @@ class ClientHoldingDaoImplTest {
 
 	@Test
 	void getClientHoldingToSucceed() {
-		
-		Holding holding1 = new Holding("Stock A", "INST001", "CLIENT001", 100, 150.50, 15050.00, 155.00, 3.00, 450.00,
+
+		Holding holding1 = new Holding("Stock A", "INST001", "CLIENT001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
 				2.50);
 		
 		Holding holding = dao.getClientHolding("CLIENT001", "INST001");
@@ -116,7 +116,7 @@ class ClientHoldingDaoImplTest {
 	@Test
 	void addClientHoldingToSucceed() throws SQLException {
 
-		Holding newHolding = new Holding("Stock A", "INST003", "CLIENT001", 100, 150.50, 15050.00, 155.00, 3.00, 450.00,
+		Holding newHolding = new Holding("Stock A", "INST003", "CLIENT001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
 				2.50);
 
 		Holding holding = dao.addClientHolding(newHolding);
@@ -130,7 +130,7 @@ class ClientHoldingDaoImplTest {
 	@Test
 	void addClientHoldingToThrowDatabaseException() throws SQLException {
 
-		Holding newHolding = new Holding("Stock A", "INST002", "CLIENT001", 100, 150.50, 15050.00, 155.00, 3.00, 450.00,
+		Holding newHolding = new Holding("Stock A", "INST002", "CLIENT001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
 				2.50);
 
 		assertThrows(DatabaseException.class, () -> {
@@ -153,7 +153,7 @@ class ClientHoldingDaoImplTest {
 
 		Holding newHolding = dao.getClientHolding("CLIENT001", "INST002");
 
-		newHolding.setAveragePrice(22.2);
+		newHolding.setAveragePrice(new BigDecimal(22.2).setScale(2));
 
 		Holding holding = dao.updateClientHolding(newHolding);
 
@@ -163,14 +163,15 @@ class ClientHoldingDaoImplTest {
 
 	}
 
+
 	@Test
 	void updateClientHoldingToThrowDatabaseException() throws SQLException {
 
-		Holding newHolding = new Holding("Stock A", "INST003", "CLIENT001", 100, 150.50, 15050.00, 155.00, 3.00, 450.00,
+		Holding newHolding = new Holding("Stock A", "INST003", "CLIENT001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
 				2.50);
 		;
 
-		newHolding.setAveragePrice(22.2);
+		newHolding.setAveragePrice(new BigDecimal(22.2).setScale(2));
 
 		assertThrows(DatabaseException.class, () -> {
 

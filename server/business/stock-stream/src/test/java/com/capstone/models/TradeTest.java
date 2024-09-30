@@ -2,6 +2,9 @@ package com.capstone.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 import org.junit.jupiter.api.Test;
 
 import com.capstone.models.Order;
@@ -53,19 +56,19 @@ class TradeTest {
     @Test
     void testSetExecutionPrice_Zero() {
         Trade trade = new Trade();
-        assertThrows(IllegalArgumentException.class, () -> trade.setExecutionPrice(0.0));
+        assertThrows(IllegalArgumentException.class, () -> trade.setExecutionPrice(BigDecimal.ZERO));
     }
 
     @Test
     void testSetExecutionPrice_Negative() {
         Trade trade = new Trade();
-        assertThrows(IllegalArgumentException.class, () -> trade.setExecutionPrice(-1.0));
+        assertThrows(IllegalArgumentException.class, () -> trade.setExecutionPrice(new BigDecimal(-1.0)));
     }
 
     @Test
     void testSetExecutionPrice_Valid() {
         Trade trade = new Trade();
-        trade.setExecutionPrice(100.0);
+        trade.setExecutionPrice(new BigDecimal(100.0));
         assertEquals(100.0, trade.getExecutionPrice());
     }
 
@@ -164,19 +167,14 @@ class TradeTest {
     @Test
     void testSetTradeDate_Null() {
         Trade trade = new Trade();
-        assertThrows(NullPointerException.class, () -> trade.setTradeDate(null));
-    }
-
-    @Test
-    void testSetTradeDate_Empty() {
-        Trade trade = new Trade();
-        assertThrows(IllegalArgumentException.class, () -> trade.setTradeDate(""));
+        assertThrows(NullPointerException.class, () -> trade.setCreationTime(null));
     }
 
     @Test
     void testSetTradeDate_Valid() {
         Trade trade = new Trade();
-        trade.setTradeDate("2024-09-15");
-        assertEquals("2024-09-15", trade.getTradeDate());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        trade.setCreationTime(timestamp);
+        assertEquals(timestamp, trade.getCreationTime());
     }
 }

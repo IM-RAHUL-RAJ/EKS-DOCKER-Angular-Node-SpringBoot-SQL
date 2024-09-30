@@ -1,14 +1,15 @@
 package com.capstone.models;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Holding {
     private String instrument;
     private String instrumentId;
     private int quantity;
-    private double averagePrice;
+    private BigDecimal averagePrice;
     private double investedCapital;
-    private double ltp;
+    private BigDecimal ltp;
     private double percentChange;
     private double profitLoss;
     private double dayChangePercent;
@@ -16,7 +17,7 @@ public class Holding {
     
     public Holding() {}  
 
-    public Holding(String instrument, String instrumentId,String clientId, int quantity, double averagePrice, double investedCapital, double ltp, double percentChange, double profitLoss, double dayChangePercent) {
+    public Holding(String instrument, String instrumentId,String clientId, int quantity, BigDecimal averagePrice, double investedCapital, BigDecimal ltp, double percentChange, double profitLoss, double dayChangePercent) {
         this.instrument = instrument;
         this.instrumentId = instrumentId;
         this.quantity = quantity;
@@ -29,13 +30,6 @@ public class Holding {
         this.clientId=clientId;
     }
 
-	public String getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
 	
 
 	public String getInstrument() {
@@ -62,11 +56,11 @@ public class Holding {
 		this.quantity = quantity;
 	}
 
-	public double getAveragePrice() {
+	public BigDecimal getAveragePrice() {
 		return averagePrice;
 	}
 
-	public void setAveragePrice(double averagePrice) {
+	public void setAveragePrice(BigDecimal averagePrice) {
 		this.averagePrice = averagePrice;
 	}
 
@@ -78,11 +72,11 @@ public class Holding {
 		this.investedCapital = investedCapital;
 	}
 
-	public double getLtp() {
+	public BigDecimal getLtp() {
 		return ltp;
 	}
 
-	public void setLtp(double ltp) {
+	public void setLtp(BigDecimal ltp) {
 		this.ltp = ltp;
 	}
 
@@ -110,6 +104,14 @@ public class Holding {
 		this.dayChangePercent = dayChangePercent;
 	}
 
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(averagePrice, clientId, dayChangePercent, instrument, instrumentId, investedCapital, ltp,
@@ -125,12 +127,11 @@ public class Holding {
 		if (getClass() != obj.getClass())
 			return false;
 		Holding other = (Holding) obj;
-		return Double.doubleToLongBits(averagePrice) == Double.doubleToLongBits(other.averagePrice)
-				&& Objects.equals(clientId, other.clientId)
+		return Objects.equals(averagePrice, other.averagePrice) && Objects.equals(clientId, other.clientId)
 				&& Double.doubleToLongBits(dayChangePercent) == Double.doubleToLongBits(other.dayChangePercent)
 				&& Objects.equals(instrument, other.instrument) && Objects.equals(instrumentId, other.instrumentId)
 				&& Double.doubleToLongBits(investedCapital) == Double.doubleToLongBits(other.investedCapital)
-				&& Double.doubleToLongBits(ltp) == Double.doubleToLongBits(other.ltp)
+				&& Objects.equals(ltp, other.ltp)
 				&& Double.doubleToLongBits(percentChange) == Double.doubleToLongBits(other.percentChange)
 				&& Double.doubleToLongBits(profitLoss) == Double.doubleToLongBits(other.profitLoss)
 				&& quantity == other.quantity;
@@ -143,6 +144,8 @@ public class Holding {
 				+ ", percentChange=" + percentChange + ", profitLoss=" + profitLoss + ", dayChangePercent="
 				+ dayChangePercent + ", clientId=" + clientId + "]";
 	}
+
+	
 
     // Getters and setters
 	
