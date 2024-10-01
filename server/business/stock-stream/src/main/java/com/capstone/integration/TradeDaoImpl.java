@@ -45,7 +45,7 @@ public class TradeDaoImpl implements TradeDao {
 	private Order extractOrder(ResultSet rs) throws SQLException {
 		String orderId = rs.getString("ORDER_ID");
 		String instrumentId = rs.getString("INSTRUMENT_ID");
-		String clientId = rs.getString("CLIENT_ID");
+		String clientId = rs.getString("clientId");
 		int quantity = rs.getInt("QUANTITY");
 		BigDecimal targetPrice = rs.getBigDecimal("TARGET_PRICE");
 		String direction = rs.getString("DIRECTION");
@@ -61,7 +61,7 @@ public class TradeDaoImpl implements TradeDao {
 
 	private Trade extractTrade(ResultSet rs) throws SQLException {
 		String tradeId = rs.getString("TRADE_ID");
-		String clientId = rs.getString("CLIENT_ID");
+		String clientId = rs.getString("clientId");
 		String orderId = rs.getString("ORDER_ID");
 		String instrumentId = rs.getString("INSTRUMENT_ID");
 		int quantity = rs.getInt("QUANTITY");
@@ -180,7 +180,7 @@ public class TradeDaoImpl implements TradeDao {
 
 	@Override
 	public void insertTrade(Trade trade) {
-		String INSERT_TRADE_QUERY = "INSERT INTO SS_TRADES (TRADE_ID, CLIENT_ID, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) "
+		String INSERT_TRADE_QUERY = "INSERT INTO SS_TRADES (TRADE_ID, clientId, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			Connection conn = dataSource.getConnection();
@@ -265,7 +265,7 @@ public class TradeDaoImpl implements TradeDao {
 
 	@Override
 	public void insertOrder(Order order) {
-		String INSERT_ORDER_QUERY = "INSERT INTO SS_ORDERS (ORDER_ID, CLIENT_ID, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) "
+		String INSERT_ORDER_QUERY = "INSERT INTO SS_ORDERS (ORDER_ID, clientId, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			Connection conn = dataSource.getConnection();
@@ -307,7 +307,7 @@ public class TradeDaoImpl implements TradeDao {
 
 	@Override
 	public void modifyOrder(Order order) {
-		String MODIFY_ORDER_QUERY = "UPDATE ss_orders SET ORDER_ID = ?, CLIENT_ID = ?, INSTRUMENT_ID = ?, QUANTITY = ?, TARGET_PRICE = ?, DIRECTION = ?, STATUS = ?, CREATED_AT = ? WHERE ORDER_ID = ?";
+		String MODIFY_ORDER_QUERY = "UPDATE ss_orders SET ORDER_ID = ?, clientId = ?, INSTRUMENT_ID = ?, QUANTITY = ?, TARGET_PRICE = ?, DIRECTION = ?, STATUS = ?, CREATED_AT = ? WHERE ORDER_ID = ?";
 		try {
 			Connection connection = dataSource.getConnection();
 			try (PreparedStatement stmt = connection.prepareStatement(MODIFY_ORDER_QUERY)) {
