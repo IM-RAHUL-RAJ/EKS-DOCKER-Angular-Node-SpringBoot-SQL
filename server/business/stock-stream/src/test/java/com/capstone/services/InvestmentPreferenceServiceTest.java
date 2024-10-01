@@ -36,7 +36,7 @@ class InvestmentPreferenceServiceTest {
 	static PoolableDataSource dataSource;
 	InvestmentPreferenceDao dao;
 	TransactionManager transactionManager;
-	private InvestmentPreference investmentPreference1 = new InvestmentPreference("abcabcab",
+	private InvestmentPreference investmentPreference1 = new InvestmentPreference("C001",
 			InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.CONSERVATIVE,
 			IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
 
@@ -68,7 +68,7 @@ class InvestmentPreferenceServiceTest {
 		clientService.loginClient("test@example.com", "password123");
 
 		clientService.registerClient(new Client("test1@example.com", "password1234", "John Doe", "1990-01-01", "IN",
-				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "abcabcab"));
+				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "C001"));
 
 		clientService.loginClient("test1@example.com", "password1234");
 
@@ -116,7 +116,7 @@ class InvestmentPreferenceServiceTest {
 			throws InvestmentPreferenceAlreadyExists, RoboAdvisorMandatoryException {
 
 		assertThrows(InvestmentPreferenceAlreadyExists.class, () -> {
-			this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("abcabcab",
+			this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("C001",
 					InvestmentPurpose.BUSINESS_INVESTMENT, InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(),
 					RiskTolerance.CONSERVATIVE, IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, true));
 		});
@@ -148,7 +148,7 @@ class InvestmentPreferenceServiceTest {
 	void updateInvestmentPreferenceToSucceed()
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.getInvestmentPreference("abcabcab");
+				.getInvestmentPreference("C001");
 
 		investmentPreference.setIncomeCategory(IncomeCategory.FROM_40000_TO_60000);
 		investmentPreference.setInvestmentYear(InvestmentYear.TEN_TO_FIFTEEN);
@@ -198,9 +198,9 @@ class InvestmentPreferenceServiceTest {
 	void getInvestmentPreferenceToSucceed()
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.getInvestmentPreference("abcabcab");
+				.getInvestmentPreference("C001");
 
-		assertEquals(investmentPreference.getClientId(), "abcabcab");
+		assertEquals(investmentPreference.getClientId(), "C001");
 	}
 
 	@Test
@@ -223,7 +223,7 @@ class InvestmentPreferenceServiceTest {
 		InvestmentPreference investmentPreference = this.investmentPreferenceService
 				.removeInvestmentPreference("C001");
 
-		assertEquals(investmentPreference.getClientId(), "abcabcab");
+		assertEquals(investmentPreference.getClientId(), "C001");
 
 	}
 
