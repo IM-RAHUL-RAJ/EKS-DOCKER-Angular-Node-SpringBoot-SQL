@@ -1,6 +1,7 @@
 package com.capstone.integration;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.times;
@@ -39,5 +40,26 @@ class ClientMyBatisImplementaionTest {
 		assertTrue(dao.verifyEmailAddress(email));
 
 	}
+	
+	@Test
+	public void testVerifyEmailAddress_Fails() throws SQLException {
+	    String email = "nonexistent@example.com"; // This email does not exist in the database
+	    boolean result = dao.verifyEmailAddress(email);
+	    assertFalse(result);
+	}
+	
+	@Test
+	void test_verifyEmailAddress_emptyEmail() throws SQLException {
+		String email = "";
+		assertThrows(IllegalArgumentException.class, () -> dao.verifyEmailAddress(email));
+	}
+
+	@Test
+	void test_verifyEmailAddress_nullEmail() {
+		String email = null;
+		assertThrows(IllegalArgumentException.class, () -> dao.verifyEmailAddress(email));
+	}
+	
+
 
 }
