@@ -29,7 +29,7 @@ class InvestmentPreferenceDoaImplTest {
 	static PoolableDataSource dataSource;
 	InvestmentPreferenceDao dao;
 	TransactionManager transactionManager;
-	private InvestmentPreference investmentPreference1 = new InvestmentPreference("abcabcab",
+	private InvestmentPreference investmentPreference1 = new InvestmentPreference("C001",
 			InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.CONSERVATIVE,
 			IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
 
@@ -58,7 +58,7 @@ class InvestmentPreferenceDoaImplTest {
 
 	@Test
 	void getInvestmentPreferenceToSucceed() {
-		InvestmentPreference investmentPreference = dao.getInvestmentPreference("abcabcab");
+		InvestmentPreference investmentPreference = dao.getInvestmentPreference("C001");
 		assertNotNull(investmentPreference);
 		assertEquals(investmentPreference, investmentPreference1);
 	}
@@ -90,20 +90,20 @@ class InvestmentPreferenceDoaImplTest {
 	
 	@Test
 	void insertInvestmentPreferenceToSucceed() throws SQLException {
-		InvestmentPreference newInvestmentPreference = new InvestmentPreference("abcddcba",
+		InvestmentPreference newInvestmentPreference = new InvestmentPreference("C003",
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
 
 		InvestmentPreference insertedInvestmentPreference = dao.addInvestmentPreference(newInvestmentPreference);
 
 		assertEquals(1, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), PREFERENCE_TABLE,
-				"client_id='abcddcba'"));
+				"clientId='C003'"));
 		assertEquals(newInvestmentPreference, insertedInvestmentPreference);
 
 	}
 
 	@Test
-	void insertInvestmentPreferenceToThrowDatabaseExceptionParentKeyNotPresent() throws SQLException {
+	void insertInvestmentPreferenceToThrowClientWithIdNotFoundException() throws SQLException {
 		InvestmentPreference newInvestmentPreference = new InvestmentPreference("abcabcda",
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
@@ -115,8 +115,8 @@ class InvestmentPreferenceDoaImplTest {
 	}
 
 	@Test
-	void insertInvestmentPreferenceToThrowDatabaseExceptionAlreadyExistsWithPrimaryKey() throws SQLException {
-		InvestmentPreference newInvestmentPreference = new InvestmentPreference("abcabcab",
+	void insertInvestmentPreferenceToThrowInvestmentPreferenceAlreadyExists() throws SQLException {
+		InvestmentPreference newInvestmentPreference = new InvestmentPreference("C002",
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
 
@@ -152,13 +152,13 @@ class InvestmentPreferenceDoaImplTest {
 		InvestmentPreference insertedInvestmentPreference = dao.updateInvestmentPreference(newInvestmentPreference);
 
 		assertEquals(1, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), PREFERENCE_TABLE,
-				"client_id='abcabcab' AND income_category='Above $80,000'"));
+				"clientId='C001' AND incomeCategory='Above $80,000'"));
 		assertEquals(newInvestmentPreference, insertedInvestmentPreference);
 
 	}
 
 	@Test
-	void updateInvestmentPreferenceToThrowDatabaseException() throws SQLException {
+	void updateInvestmentPreferenceToThrowInvestmentPreferenceWithClientIdNotFound() throws SQLException {
 		InvestmentPreference newInvestmentPreference = new InvestmentPreference("abcabcda",
 				InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(),
 				RiskTolerance.CONSERVATIVE, IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
@@ -191,12 +191,12 @@ class InvestmentPreferenceDoaImplTest {
 	
 	@Test
 	void removeInvestmentPreferenceToSucceed() throws SQLException {
-		String clientIdToBeDeleted = "abcabcab";
+		String clientIdToBeDeleted = "C001";
 
 		InvestmentPreference deletedInvestmentPreference = dao.removeInvestmentPreference(clientIdToBeDeleted);
 
 		assertEquals(0, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), PREFERENCE_TABLE,
-				"client_id='abcabcab'"));
+				"clientId='C001'"));
 		assertEquals(clientIdToBeDeleted, deletedInvestmentPreference.getClientId());
 	}
 	
