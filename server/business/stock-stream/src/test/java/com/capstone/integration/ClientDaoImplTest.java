@@ -65,28 +65,25 @@ class ClientDaoImplTest {
 
 		assertTrue(dao.verifyEmailAddress(email));
 
-		// Verify that executeQuery was called the expected number of times
 		verify(preparedStatement, times(1)).setString(1, email);
-		verify(preparedStatement, atLeastOnce()).executeQuery(); // Adjust based on how many times it should be called
+		verify(preparedStatement, atLeastOnce()).executeQuery();
 	}
 
 	@Test
 	public void testVerifyEmailAddress_Fails() throws SQLException {
 	    String email = "nonexistent@example.com"; // This email does not exist in the database
 
-	    // Mocking the behavior for a non-existing email
 	    when(connection.prepareStatement(any(String.class))).thenReturn(preparedStatement);
 	    when(preparedStatement.executeQuery()).thenReturn(resultSet);
-	    when(resultSet.next()).thenReturn(true); // Simulate a result set with a row
-	    when(resultSet.getInt("count")).thenReturn(0); // Simulate that the count is 0, meaning the email doesn't exist
+	    when(resultSet.next()).thenReturn(true); 
+	    when(resultSet.getInt("count")).thenReturn(0);
 
-	    // Call the method and assert the result
 	    boolean result = dao.verifyEmailAddress(email);
 	    assertFalse(result);
 
 	    // Verify interactions
 	    verify(preparedStatement).setString(1, email);
-	    verify(preparedStatement, times(1)).executeQuery(); // Ensure executeQuery is called only once
+	    verify(preparedStatement, times(1)).executeQuery();
 	}
 
 	@Test
