@@ -221,7 +221,7 @@ class InvestmentPreferenceServiceTest {
 	void removeInvestmentPreferenceToSucceed()
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.removeInvestmentPreference("abcabcab");
+				.removeInvestmentPreference("C001");
 
 		assertEquals(investmentPreference.getClientId(), "abcabcab");
 
