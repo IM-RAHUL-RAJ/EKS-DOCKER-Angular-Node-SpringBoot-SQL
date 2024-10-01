@@ -1,19 +1,39 @@
 package com.capstone.models;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Trade {
+    private String tradeId;
+    private String clientId;
+    private String orderId;
     private String instrumentId;
     private int quantity;
-    private double executionPrice;
+    private BigDecimal executionPrice;
     private String direction;
-    private String clientId;
     private Order order;
-    private String tradeId;
     private double cashValue;
-    private String tradeDate;
+    private Timestamp creationTime;
 
-    public String getInstrumentId() {
+    public Trade(String tradeId, String clientId, String orderId, String instrumentId, int quantity,
+			BigDecimal executionPrice, String direction, Timestamp creationTime) {
+		super();
+		this.tradeId = tradeId;
+		this.clientId = clientId;
+		this.orderId = orderId;
+		this.instrumentId = instrumentId;
+		this.quantity = quantity;
+		this.executionPrice = executionPrice;
+		this.direction = direction;
+		this.creationTime = creationTime;
+	}
+
+	public Trade() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getInstrumentId() {
         return instrumentId;
     }
 
@@ -36,12 +56,12 @@ public class Trade {
         this.quantity = quantity;
     }
 
-    public double getExecutionPrice() {
+    public BigDecimal getExecutionPrice() {
         return executionPrice;
     }
 
-    public void setExecutionPrice(double executionPrice) {
-        if (executionPrice <= 0) {
+    public void setExecutionPrice(BigDecimal executionPrice) {
+        if (executionPrice.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Execution price must be greater than zero");
         }
         this.executionPrice = executionPrice;
@@ -102,15 +122,20 @@ public class Trade {
         this.cashValue = cashValue;
     }
 
-    public String getTradeDate() {
-        return tradeDate;
+    public Timestamp getCreationTime() {
+        return creationTime;
     }
 
-    public void setTradeDate(String tradeDate) {
-        Objects.requireNonNull(tradeDate, "Trade date cannot be null");
-        if (tradeDate.isEmpty()) {
-            throw new IllegalArgumentException("Trade date cannot be empty");
-        }
-        this.tradeDate = tradeDate;
+    public void setCreationTime(Timestamp creationTime) {
+        Objects.requireNonNull(creationTime, "Trade date cannot be null");
+        this.creationTime = creationTime;
     }
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
 }

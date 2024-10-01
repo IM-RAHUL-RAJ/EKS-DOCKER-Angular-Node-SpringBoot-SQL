@@ -1,6 +1,6 @@
 package com.capstone.exceptions;
 
-public class InvestmentPreferenceAlreadyExists extends Exception {
+public class InvestmentPreferenceAlreadyExists extends RuntimeException {
 
 	public InvestmentPreferenceAlreadyExists() {
 		// TODO Auto-generated constructor stub

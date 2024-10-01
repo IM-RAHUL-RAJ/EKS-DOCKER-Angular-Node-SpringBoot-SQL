@@ -24,7 +24,7 @@ public class ClientDaoImpl implements ClientDao{
 	
 	@Override
 	public boolean verifyEmailAddress(String emailAddress) {
-		final String checkEmailQuery = "SELECT COUNT(*) as count FROM clients WHERE email = ?";
+		final String checkEmailQuery = "SELECT COUNT(*) as count FROM SS_CLIENT WHERE email = ?";
 		
 		if (emailAddress == null || emailAddress.isEmpty()) {
 			throw new IllegalArgumentException("Email cannot be null or empty");
@@ -55,7 +55,7 @@ public class ClientDaoImpl implements ClientDao{
 		if (client.getEmail() == null || client.getPassword() == null || client.getFullName() == null) {
 	        throw new IllegalArgumentException("Cannot add user: Required fields are missing");
 	    }
-		String sql = "INSERT INTO clients (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, clientId) "
+		String sql = "INSERT INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, clientId) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection connection = dataSource.getConnection();			
 			try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -81,7 +81,7 @@ public class ClientDaoImpl implements ClientDao{
 			if ( password == null ||  password.isEmpty()) {
 			throw new IllegalArgumentException(" password cannot be null or empty");
 		}
-		String sql = "SELECT * FROM clients WHERE username = ? AND password = ?";
+		String sql = "SELECT * FROM SS_CLIENT WHERE username = ? AND password = ?";
 		Connection connection = dataSource.getConnection();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, username);

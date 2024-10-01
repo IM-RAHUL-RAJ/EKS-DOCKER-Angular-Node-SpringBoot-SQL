@@ -1,12 +1,14 @@
 package com.capstone.services;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.capstone.exceptions.PortfolioException;
 import com.capstone.exceptions.TradeException;
 import com.capstone.models.Order;
-import com.capstone.models.Portfolio;
+import com.capstone.models.Holding;
 import com.capstone.models.Trade;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.Objects;
 
 public class TradeService {
     private List<Trade> trades = new ArrayList<>();
-    private PortfolioService portfolioService = new PortfolioService();
+    private HoldingService portfolioService = new HoldingService();
 
     public void executeTrade(Trade trade) throws TradeException, PortfolioException {
         try {
@@ -25,7 +27,7 @@ public class TradeService {
             }
             trades.add(trade);
             
-            Portfolio item = new Portfolio();
+            Holding item = new Holding();
             item.setAveragePrice(trade.getExecutionPrice());
             item.setClientId("Test");
             item.setInstrument("Test");
@@ -54,7 +56,7 @@ public class TradeService {
             order.setDirection(trade.getDirection());
             order.setClientId(trade.getClientId());
             order.setOrderId(trade.getTradeId());
-            order.setOrderDate(trade.getTradeDate());
+            order.setCreationTime(trade.getCreationTime());
         } catch (IllegalArgumentException e) {
             throw new TradeException.TradeValidationException("Invalid trade data: " + e.getMessage());
         } catch (NullPointerException e) {
@@ -71,10 +73,11 @@ public class TradeService {
         }
     }
 
-    public double calculateTradeValue(Trade trade) throws TradeException {
+    public BigDecimal calculateTradeValue(Trade trade) throws TradeException {
         validateTrade(trade);
         try {
-            return trade.getQuantity() * trade.getExecutionPrice();
+        	return trade.getExecutionPrice().multiply(new BigDecimal(trade.getQuantity()));
+            
         } catch (NullPointerException | IllegalArgumentException e) {
             throw new TradeException("Error calculating trade value: " + e.getMessage());
         }
@@ -96,7 +99,7 @@ public class TradeService {
             trades.remove(existingTrade);
             trades.add(updatedTrade);
             
-            Portfolio item = new Portfolio();
+            Holding item = new Holding();
             item.setAveragePrice(updatedTrade.getExecutionPrice());
             item.setDayChangePercent(0);
             item.setClientId("Test");
@@ -131,7 +134,7 @@ public class TradeService {
     
     public List<Trade> getClientTradeHistory(String clientId) {
         List<Trade> tradeHistory = new ArrayList<>(listTradesByClient(clientId));
-        tradeHistory.sort((trade1, trade2) -> trade2.getTradeDate().compareTo(trade1.getTradeDate()));
+        tradeHistory.sort((trade1, trade2) -> trade2.getCreationTime().compareTo(trade1.getCreationTime()));
         if (tradeHistory.size() > 100) {
             return tradeHistory.subList(0, 100);
         }
