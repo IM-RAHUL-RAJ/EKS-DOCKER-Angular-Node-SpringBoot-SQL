@@ -46,9 +46,9 @@ public class ClientHoldingDaoImpl implements ClientHoldingDao {
 						portfolio.setInstrumentId(rs.getString("instrumentId"));
 						portfolio.setClientId(rs.getString("clientId"));
 						portfolio.setQuantity(rs.getInt("quantity"));
-						portfolio.setAveragePrice(rs.getBigDecimal("averagePrice"));
+						portfolio.setAveragePrice(rs.getBigDecimal("averagePrice").setScale(2));
 						portfolio.setInvestedCapital(rs.getDouble("investedCapital"));
-						portfolio.setLtp(rs.getBigDecimal("ltp"));
+						portfolio.setLtp(rs.getBigDecimal("ltp").setScale(2));
 						portfolio.setPercentChange(rs.getDouble("percentChange"));
 						portfolio.setProfitLoss(rs.getDouble("profitLoss"));
 						portfolio.setDayChangePercent(rs.getDouble("dayChangePercent"));
@@ -84,9 +84,9 @@ public class ClientHoldingDaoImpl implements ClientHoldingDao {
 						holding.setInstrumentId(rs.getString("instrumentId"));
 						holding.setClientId(rs.getString("clientId"));
 						holding.setQuantity(rs.getInt("quantity"));
-						holding.setAveragePrice(rs.getBigDecimal("averagePrice"));
+						holding.setAveragePrice(rs.getBigDecimal("averagePrice").setScale(2));
 						holding.setInvestedCapital(rs.getDouble("investedCapital"));
-						holding.setLtp(rs.getBigDecimal("ltp"));
+						holding.setLtp(rs.getBigDecimal("ltp").setScale(2));
 						holding.setPercentChange(rs.getDouble("percentChange"));
 						holding.setProfitLoss(rs.getDouble("profitLoss"));
 						holding.setDayChangePercent(rs.getDouble("dayChangePercent"));

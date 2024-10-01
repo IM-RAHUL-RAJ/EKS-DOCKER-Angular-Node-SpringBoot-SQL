@@ -56,7 +56,7 @@ class ClientHoldingDaoImplTest {
 	@DisplayName("Successful get method")
 	void testGetClients() throws SQLException {
 		Connection conn = dataSource.getConnection();
-		List<Holding> querClients = dao.getClientHoldings("CLIENT002");
+		List<Holding> querClients = dao.getClientHoldings("C002");
 		assertEquals(2, querClients.size());
 
 	}
@@ -86,10 +86,10 @@ class ClientHoldingDaoImplTest {
 	@Test
 	void getClientHoldingToSucceed() {
 
-		Holding holding1 = new Holding("Stock A", "INST001", "CLIENT001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
+		Holding holding1 = new Holding("Stock A", "INST001", "C001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
 				2.50);
 		
-		Holding holding = dao.getClientHolding("CLIENT001", "INST001");
+		Holding holding = dao.getClientHolding("C001", "INST001");
 		
 		assertEquals(holding, holding1);
 		
@@ -116,13 +116,13 @@ class ClientHoldingDaoImplTest {
 	@Test
 	void addClientHoldingToSucceed() throws SQLException {
 
-		Holding newHolding = new Holding("Stock A", "INST003", "CLIENT001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
+		Holding newHolding = new Holding("Stock A", "INST003", "C001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
 				2.50);
 
 		Holding holding = dao.addClientHolding(newHolding);
 
 		assertEquals(1, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), "holdings",
-				"clientid='CLIENT001' AND instrumentid='INST003'"));
+				"clientid='C001' AND instrumentid='INST003'"));
 		assertEquals(holding, newHolding);
 
 	}
@@ -151,14 +151,14 @@ class ClientHoldingDaoImplTest {
 	@Test
 	void updateClientHoldingToSucceed() throws SQLException {
 
-		Holding newHolding = dao.getClientHolding("CLIENT001", "INST002");
+		Holding newHolding = dao.getClientHolding("C001", "INST002");
 
-		newHolding.setAveragePrice(new BigDecimal(22.2).setScale(2));
+		newHolding.setAveragePrice(BigDecimal.valueOf(22.2).setScale(2));
 
 		Holding holding = dao.updateClientHolding(newHolding);
 
 		assertEquals(1, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), "holdings",
-				"clientid='CLIENT001' AND instrumentid='INST002'"));
+				"clientid='C001' AND instrumentid='INST002'"));
 		assertEquals(holding, newHolding);
 
 	}
@@ -167,11 +167,11 @@ class ClientHoldingDaoImplTest {
 	@Test
 	void updateClientHoldingToThrowDatabaseException() throws SQLException {
 
-		Holding newHolding = new Holding("Stock A", "INST003", "CLIENT001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
+		Holding newHolding = new Holding("Stock A", "INST003", "C001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
 				2.50);
 		;
 
-		newHolding.setAveragePrice(new BigDecimal(22.2).setScale(2));
+		newHolding.setAveragePrice(BigDecimal.valueOf(22.2).setScale(2));
 
 		assertThrows(DatabaseException.class, () -> {
 
@@ -193,10 +193,10 @@ class ClientHoldingDaoImplTest {
 	@Test
 	void removeClientHoldingToSucceed() throws SQLException {
 
-		Holding holdingToBeDeleted = dao.getClientHolding("CLIENT001", "INST002");
+		Holding holdingToBeDeleted = dao.getClientHolding("C001", "INST002");
 
 
-		Holding deletedHolding = dao.removeClientHolding("CLIENT001", "INST002");
+		Holding deletedHolding = dao.removeClientHolding("C001", "INST002");
 
 		assertEquals(0, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), "holdings",
 				"clientid='CLIENT001' AND instrumentid='INST002'"));
