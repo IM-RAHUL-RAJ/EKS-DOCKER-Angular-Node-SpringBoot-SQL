@@ -46,7 +46,7 @@
 	<!-- Enable component scanning and autowire for the integration and services 
 		packages (beware that this does not enable mapper scanning!) -->
 	<context:component-scan
-		base-package="com.capstone.integration" />
+		base-package="com.capstone.integration, com.capstone.integration.mapper" />
 
 	<!-- Enable transaction demarcation with annotations -->
 	<tx:annotation-driven />
@@ -57,8 +57,9 @@
 		<property name="dataSource" ref="datasource" />
 		<property name="typeAliasesPackage"
 			value="com.capstone.business" />
-		<property name="mapperLocations"
-			value="classpath*:com/capstone/**/*.xml" />
+		<property name="mapperLocations" 
+		value="classpath:com/capstone/integration/mapper/ClientMapper.xml" />
+		
 	</bean>
 
 	<!-- Scan for mappers and let them be autowired -->
