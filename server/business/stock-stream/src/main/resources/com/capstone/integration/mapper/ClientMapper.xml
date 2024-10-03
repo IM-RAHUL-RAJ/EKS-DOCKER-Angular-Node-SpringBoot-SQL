@@ -18,11 +18,11 @@
 	<insert id="addClient" parameterType="com.capstone.models.Client">
 		INSERT INTO SS_CLIENT
 		(email, password, fullName, dateOfBirth, country, postalCode,
-		identificationType, identificationNumber, clientId)
+		identificationType, identificationNumber, clientId,profileStatus)
 		VALUES
 		(#{email}, #{password}, #{fullName}, #{dateOfBirth}, #{country},
 		#{postalCode}, #{identificationType}, #{identificationNumber},
-		#{clientId})
+		#{clientId},#{profileStatus.status})
 	</insert>
 
 </mapper>
