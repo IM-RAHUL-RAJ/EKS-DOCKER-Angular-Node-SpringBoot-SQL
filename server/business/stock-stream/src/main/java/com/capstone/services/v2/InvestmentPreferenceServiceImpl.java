@@ -1,4 +1,4 @@
-package com.capstone.services;
+package com.capstone.services.v2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
 import com.capstone.models.InvestmentYear;
 import com.capstone.models.RiskTolerance;
+import com.capstone.services.ClientService;
 
 @Service
 @Primary
@@ -35,6 +36,7 @@ public class InvestmentPreferenceServiceImpl implements InvestmentPreferenceServ
 		return this.investmentPreferences.size();
 	}
 
+	@Override
 	public void setClientService(ClientService clientService) {
 		this.clientService = clientService;
 	}
