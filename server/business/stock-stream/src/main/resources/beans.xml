@@ -56,9 +56,9 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="datasource" />
 		<property name="typeAliasesPackage"
-			value="com.capstone.business" />
+			value="com.capstone.models" />
 		<property name="mapperLocations" 
-		value="classpath:com/capstone/integration/mapper/ClientMapper.xml" />
+		value="classpath:com/capstone/**/*.xml" />
 		
 	</bean>
 
