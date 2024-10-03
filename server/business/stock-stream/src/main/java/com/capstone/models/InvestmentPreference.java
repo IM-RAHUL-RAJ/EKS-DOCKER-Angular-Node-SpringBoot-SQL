@@ -2,7 +2,10 @@ package com.capstone.models;
 
 import java.util.Objects;
 
+import org.springframework.stereotype.Repository;
+
 import com.capstone.exceptions.RoboAdvisorMandatoryException;
+
 
 public class InvestmentPreference {
 	private String clientId;

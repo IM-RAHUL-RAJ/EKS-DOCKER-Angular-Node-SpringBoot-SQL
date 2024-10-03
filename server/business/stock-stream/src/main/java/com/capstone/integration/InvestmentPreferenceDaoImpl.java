@@ -7,19 +7,30 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
+
 import com.capstone.exceptions.ClientWithIdNotFoundException;
 import com.capstone.exceptions.DatabaseException;
 import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
 import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
+import com.capstone.integration.mapper.InvestmentPreferenceMapper;
 import com.capstone.models.IncomeCategory;
 import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
 import com.capstone.models.InvestmentYear;
 import com.capstone.models.RiskTolerance;
 
+@Repository("investmentPreferenceDao")
+@Primary
 public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 
+	
 	DataSource dataSource;
+	
+	@Autowired
+	InvestmentPreferenceMapper investmentPreferenceMapper;
 
 	public InvestmentPreferenceDaoImpl(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -32,66 +43,16 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 			throw new IllegalArgumentException("client id cannot be null or blank");
 		}
 
-		InvestmentPreference investmentPreference = null;
+		InvestmentPreference investmentPreference = investmentPreferenceMapper.getInvestmentPreference(clientId);
 
-		try {
-			Connection connection = dataSource.getConnection();
-
-			investmentPreference = getInvestmentPreference(connection, clientId);
-
-			return investmentPreference;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DatabaseException();
+		if(investmentPreference == null) {
+			throw new InvestmentPreferenceWithClientIdNotFound();
 		}
+		
+		return investmentPreference;
+		
 	}
 
-	private InvestmentPreference getInvestmentPreference(Connection connection, String clientId) throws SQLException {
-
-		String getInvestmentPreferenceQuery = """
-				SELECT
-				clientId,
-				investmentPurpose,
-				investmentPurposeDescription,
-				riskTolerance,
-				incomeCategory,
-				investmentYear,
-				isRoboAdvisorTermsAccepted
-				FROM investment_preferences
-				WHERE clientId=?
-				""";
-
-		try (PreparedStatement statement = connection.prepareStatement(getInvestmentPreferenceQuery)) {
-
-			statement.setString(1, clientId);
-
-			ResultSet rs = statement.executeQuery();
-			if (rs.next()) {
-				InvestmentPurpose investmentPurpose = InvestmentPurpose.of(rs.getString("investmentPurpose"));
-				String investmentPurposeDescription = rs.getString("investmentPurposeDescription");
-				RiskTolerance riskTolerance = RiskTolerance.of(rs.getString("riskTolerance"));
-				IncomeCategory incomeCategory = IncomeCategory.of(rs.getString("incomeCategory"));
-				InvestmentYear investmentYear = InvestmentYear.of(rs.getString("investmentYear"));
-
-				boolean isRoboAdvisorTermsAccepted = false;
-				if (rs.getInt("isRoboAdvisorTermsAccepted") == 1) {
-					isRoboAdvisorTermsAccepted = true;
-				}
-
-				InvestmentPreference investmentPreference = new InvestmentPreference(clientId, investmentPurpose,
-						investmentPurposeDescription, riskTolerance, incomeCategory, investmentYear,
-						isRoboAdvisorTermsAccepted);
-
-				return investmentPreference;
-			} else {
-				throw new InvestmentPreferenceWithClientIdNotFound("No data found for clientId : " + clientId);
-			}
-
-		}
-
-	}
 
 	@Override
 	public InvestmentPreference addInvestmentPreference(InvestmentPreference investmentPreference) {
@@ -99,72 +60,13 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 		if (investmentPreference == null) {
 			throw new IllegalArgumentException("Investment preference cannot be null..");
 		}
-
-		InvestmentPreference newInvestmentPreference;
-
-		try {
-			Connection connection = dataSource.getConnection();
-
-			newInvestmentPreference = addInvestmentPreference(connection, investmentPreference);
-
+		
+		if(investmentPreferenceMapper.addInvestmentPreference(investmentPreference)==1) {
+			InvestmentPreference newInvestmentPreference = getInvestmentPreference(investmentPreference.getClientId());
 			return newInvestmentPreference;
-
-		} catch (SQLException e) {
-			if(e.getErrorCode()==2291) {
-				throw new ClientWithIdNotFoundException("The Client Id (parent key not found) !");
-			}
-			if(e.getErrorCode()==00001) {
-				throw new InvestmentPreferenceAlreadyExists();
-			}
-			
-			e.printStackTrace();
-			throw new DatabaseException();
 		}
-
-	}
-
-	private InvestmentPreference addInvestmentPreference(Connection connection,
-			InvestmentPreference investmentPreference) throws SQLException {
-
-		String insertPreferenceQuery = """
-				INSERT INTO investment_preferences
-					(clientId,
-					investmentPurpose,
-					investmentPurposeDescription,
-					riskTolerance,
-					incomeCategory,
-					investmentYear,
-					isRoboAdvisorTermsAccepted)
-					VALUES
-					(?,?,?,?,?,?,?)
-									""";
-
-		try (PreparedStatement statement = connection.prepareStatement(insertPreferenceQuery)) {
-
-			statement.setString(1, investmentPreference.getClientId());
-			statement.setString(2, investmentPreference.getInvestmentPurpose().getName());
-
-			if (investmentPreference.getInvestmentPurposeDescription() == null
-					|| investmentPreference.getInvestmentPurposeDescription().isBlank()) {
-				investmentPreference
-						.setInvestmentPurposeDescription(investmentPreference.getInvestmentPurpose().getDescription());
-			}
-
-			statement.setString(3, investmentPreference.getInvestmentPurposeDescription());
-			statement.setString(4, investmentPreference.getRiskTolerance().getName());
-			statement.setString(5, investmentPreference.getIncomeCategory().getName());
-			statement.setString(6, investmentPreference.getInvestmentYear().getName());
-
-			int roboAdvisorBoolean = investmentPreference.isRoboAdvisorTermsAccepted() ? 1 : 0;
-
-			statement.setInt(7, roboAdvisorBoolean);
-
-			if (statement.executeUpdate() == 0) {
-				throw new DatabaseException("No new rows where inserted..");
-			}
-
-			return investmentPreference;
-
+		else {
+			throw new DatabaseException();
 		}
 
 	}
@@ -176,62 +78,12 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 			throw new IllegalArgumentException("investment preference cannot be null");
 		}
 
-		try {
-			Connection connection = dataSource.getConnection();
-
-			InvestmentPreference updatedInvestmentPreference = updateInvestmentPreference(connection,
-					investmentPreference);
-
+		if(investmentPreferenceMapper.updateInvestmentPreference(investmentPreference)==1) {
+			InvestmentPreference updatedInvestmentPreference = getInvestmentPreference(investmentPreference.getClientId());
 			return updatedInvestmentPreference;
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-			throw new DatabaseException(e.getErrorCode() + e.getMessage());
 		}
-
-	}
-
-	private InvestmentPreference updateInvestmentPreference(Connection connection,
-			InvestmentPreference investmentPreference) throws SQLException {
-		String updateInvestmentPreferenceQuery = """
-				UPDATE investment_preferences
-				SET
-				clientId=?,
-				investmentPurpose=?,
-				investmentPurposeDescription=?,
-				riskTolerance=?,
-				incomeCategory=?,
-				investmentYear=?,
-				isRoboAdvisorTermsAccepted=?
-				WHERE clientId = ?
-				""";
-
-		try (PreparedStatement statement = connection.prepareStatement(updateInvestmentPreferenceQuery)) {
-			statement.setString(1, investmentPreference.getClientId());
-			statement.setString(2, investmentPreference.getInvestmentPurpose().getName());
-
-			if (investmentPreference.getInvestmentPurposeDescription() == null
-					|| investmentPreference.getInvestmentPurposeDescription().isBlank()) {
-				investmentPreference
-						.setInvestmentPurposeDescription(investmentPreference.getInvestmentPurpose().getDescription());
-			}
-
-			statement.setString(3, investmentPreference.getInvestmentPurposeDescription());
-			statement.setString(4, investmentPreference.getRiskTolerance().getName());
-			statement.setString(5, investmentPreference.getIncomeCategory().getName());
-			statement.setString(6, investmentPreference.getInvestmentYear().getName());
-			int roboAdvisorBoolean = investmentPreference.isRoboAdvisorTermsAccepted() ? 1 : 0;
-
-			statement.setInt(7, roboAdvisorBoolean);
-			statement.setString(8, investmentPreference.getClientId());
-
-			if (statement.executeUpdate() == 0) {
-				throw new InvestmentPreferenceWithClientIdNotFound("No rows where updated for client id : "+investmentPreference.getClientId());
-			}
-
-			return investmentPreference;
-
+		else {
+			throw new InvestmentPreferenceWithClientIdNotFound();
 		}
 
 	}
@@ -259,26 +111,13 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 
 	private InvestmentPreference removeInvestmentPreference(Connection connection, String clientId)
 			throws SQLException {
-
-		String deletePreferenceQuery = """
-				DELETE FROM investment_preferences WHERE clientId=?
-				""";
 		
-		InvestmentPreference investmentPreference = getInvestmentPreference(connection, clientId);
+		InvestmentPreference investmentPreference = getInvestmentPreference(clientId);
 		
-		if(investmentPreference!=null) {
-			try(PreparedStatement statement = connection.prepareStatement(deletePreferenceQuery)){
-				statement.setString(1, investmentPreference.getClientId());
-				
-				if(statement.executeUpdate()==0) {
-					throw new DatabaseException("No rows where deleted..");
-				}
-				
-				return investmentPreference;
-				
-			}
+		if(investmentPreferenceMapper.removeInvestmentPreference(clientId)==1) {
+			return investmentPreference;
 		}else {
-			throw new DatabaseException("No data exists for client id : "+clientId);
+			throw new DatabaseException();
 		}
 		
 	}
