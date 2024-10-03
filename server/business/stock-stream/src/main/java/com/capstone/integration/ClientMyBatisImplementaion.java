@@ -18,12 +18,10 @@ public class ClientMyBatisImplementaion implements ClientDao {
 
 	@Override
 	public boolean verifyEmailAddress(String emailAddress) {
-		// TODO Auto-generated method stub
 		 if (emailAddress == null || emailAddress.isEmpty()) {
 	            throw new IllegalArgumentException("Email cannot be null or empty");
 	        }
 
-	        // Call the mapper method
 	        int count = clientMapper.verifyEmailAddress(emailAddress);
 	        
 	        // Return true if count > 0, otherwise false
@@ -33,14 +31,20 @@ public class ClientMyBatisImplementaion implements ClientDao {
 
 	@Override
 	public void addClient(Client client) throws SQLException {
-		// TODO Auto-generated method stub
-
+		 if (client.getEmail() == null || client.getPassword() == null || client.getFullName() == null) {
+	            throw new IllegalArgumentException("Cannot add user: Required fields are missing");
+	        }
+		 clientMapper.addClient(client);
 	}
 
 	@Override
-	public boolean verifyLogin(String username, String password) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean verifyLogin(String email, String password) throws SQLException {
+		
+		if ( password == null ||  password.isEmpty()) {
+			throw new IllegalArgumentException(" password cannot be null or empty");
+		}
+		int count = clientMapper.verifyLogin(email, password);
+		return count>0;
 	}
 
 }
