@@ -57,9 +57,8 @@
 		<property name="dataSource" ref="datasource" />
 		<property name="typeAliasesPackage"
 			value="com.capstone.models" />
-		<property name="mapperLocations" 
-		value="classpath:com/capstone/**/*.xml" />
-		
+		<property name="mapperLocations"
+			value="classpath*:com/capstone/**/*.xml" />
 	</bean>
 
 	<!-- Scan for mappers and let them be autowired -->
