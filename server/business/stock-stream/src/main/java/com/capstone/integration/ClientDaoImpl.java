@@ -9,10 +9,12 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.capstone.exceptions.DatabaseException;
 import com.capstone.models.Client;
 
+@Component
 public class ClientDaoImpl implements ClientDao{
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	private DataSource dataSource;

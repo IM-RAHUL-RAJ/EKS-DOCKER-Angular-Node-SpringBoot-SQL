@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.capstone.integration.mapper.ClientHoldingsMapper">
+
+    <select id="getAllHoldings" resultType="com.capstone.models.Holding">
+        SELECT instrument, instrumentId, clientId, quantity, averagePrice, investedCapital, ltp, percentChange, profitLoss, dayChangePercent
+        FROM holdings
+        WHERE clientId = #{clientId}
+    </select>
+
+    <select id="getHolding" resultType="com.capstone.models.Holding">
+        SELECT instrument, instrumentId, clientId, quantity, averagePrice, investedCapital, ltp, percentChange, profitLoss, dayChangePercent
+        FROM holdings
+        WHERE clientId = #{clientId} AND instrumentId = #{instrumentId}
+    </select>
+
+    <insert id="insertHolding">
+        INSERT INTO holdings (instrument, instrumentId, clientId, quantity, averagePrice, investedCapital, ltp, percentChange, profitLoss, dayChangePercent)
+        VALUES (#{instrument}, #{instrumentId}, #{clientId}, #{quantity}, #{averagePrice}, #{investedCapital}, #{ltp}, #{percentChange}, #{profitLoss}, #{dayChangePercent})
+    </insert>
+
+    <update id="updateHolding">
+        UPDATE holdings
+        SET instrument = #{instrument}, instrumentId = #{instrumentId}, clientId = #{clientId}, quantity = #{quantity}, averagePrice = #{averagePrice}, investedCapital = #{investedCapital}, ltp = #{ltp}, percentChange = #{percentChange}, profitLoss = #{profitLoss}, dayChangePercent = #{dayChangePercent}
+        WHERE clientId = #{clientId} AND instrumentId = #{instrumentId}
+    </update>
+
+    <delete id="deleteHolding">
+        DELETE FROM holdings
+        WHERE clientId = #{clientId} AND instrumentId = #{instrumentId}
+    </delete>
+
+</mapper>

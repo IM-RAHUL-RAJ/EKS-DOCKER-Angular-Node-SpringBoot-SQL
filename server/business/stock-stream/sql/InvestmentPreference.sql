@@ -27,12 +27,12 @@ CREATE TABLE investment_preferences (
 INSERT INTO investment_preferences 
 (clientId,investmentPurpose,investmentPurposeDescription,riskTolerance,incomeCategory,investmentYear,isRoboAdvisorTermsAccepted)
 VALUES
-('C001','College Fund','Saving for higher education expenses','Conservative','Below $20,000','0 - 5 years',1);
+('C001','COLLEGE_FUND','Saving for higher education expenses','CONSERVATIVE','BELOW_20000','ZERO_TO_FIVE',1);
 
 INSERT INTO investment_preferences 
 (clientId,investmentPurpose,investmentPurposeDescription,riskTolerance,incomeCategory,investmentYear,isRoboAdvisorTermsAccepted)
 VALUES
-('C002','Retirement','Saving for retirement years','Average','$40,000 - $60,000','5 - 7 years',1);
+('C002','RETIREMENT','Saving for retirement years','AVERAGE','FROM_40000_TO_60000','FIVE_TO_SEVEN',1);
 
 COMMIT
 

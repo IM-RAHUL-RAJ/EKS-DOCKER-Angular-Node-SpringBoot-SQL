@@ -72,7 +72,7 @@ public class Order {
 
     public void setDirection(String direction) {
         Objects.requireNonNull(direction, "Direction cannot be null");
-        if (!"buy".equalsIgnoreCase(direction) && !"sell".equalsIgnoreCase(direction)) {
+        if (!"B".equalsIgnoreCase(direction) && !"S".equalsIgnoreCase(direction)) {
             throw new IllegalArgumentException("Direction must be 'buy' or 'sell'");
         }
         this.direction = direction;

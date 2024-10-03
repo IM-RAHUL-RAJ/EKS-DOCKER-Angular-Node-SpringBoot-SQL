@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.capstone.integration.mapper.InvestmentPreferenceMapper">
+
+	<resultMap id="InvestmentPreferenceResultMap" type="InvestmentPreference">
+		<result property="clientId" column="clientId" />
+		<result property="investmentPurpose" column="investmentPurpose" />
+		<result property="investmentPurposeDescription"
+			column="investmentPurposeDescription" />
+		<result property="riskTolerance" column="riskTolerance" />
+		<result property="incomeCategory" column="incomeCategory" />
+		<result property="investmentYear" column="investmentYear" />
+		<result property="isRoboAdvisorTermsAccepted"
+			column="isRoboAdvisorTermsAccepted" />
+	</resultMap>
+
+
+	<select id="getInvestmentPreference"
+		resultMap="InvestmentPreferenceResultMap">
+		SELECT clientId,
+		investmentPurpose,
+		investmentPurposeDescription,
+		riskTolerance,
+		incomeCategory,
+		investmentYear,
+		isRoboAdvisorTermsAccepted
+		FROM investment_preferences
+		WHERE clientId = #{clientId}
+	</select>
+
+	<insert id="addInvestmentPreference" parameterType="InvestmentPreference">
+		INSERT INTO investment_preferences
+		(clientId,
+		investmentPurpose,
+		investmentPurposeDescription,
+		riskTolerance,
+		incomeCategory,
+		investmentYear,
+		isRoboAdvisorTermsAccepted)
+		VALUES
+		(#{clientId},#{investmentPurpose},#{investmentPurposeDescription},
+		#{riskTolerance},#{incomeCategory},#{investmentYear},#{isRoboAdvisorTermsAccepted})
+	</insert>
+
+	<update id="updateInvestmentPreference" parameterType="InvestmentPreference">
+		UPDATE investment_preferences
+		SET
+		clientId=#{clientId},
+		investmentPurpose=#{investmentPurpose},
+		investmentPurposeDescription=#{investmentPurposeDescription},
+		riskTolerance=#{riskTolerance},
+		incomeCategory=#{incomeCategory},
+		investmentYear=#{investmentYear},
+		isRoboAdvisorTermsAccepted=#{isRoboAdvisorTermsAccepted}
+		WHERE clientId = #{clientId}
+	</update>
+
+	<delete id="removeInvestmentPreference" parameterType="String">
+		DELETE FROM investment_preferences WHERE clientId=#{clientId}
+	</delete>
+
+</mapper>
