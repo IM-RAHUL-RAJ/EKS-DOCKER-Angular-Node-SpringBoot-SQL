@@ -12,17 +12,17 @@
 	<select id="verifyLogin" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM SS_CLIENT
-		WHERE clientId = #{clientId} AND password = #{password}
+		WHERE client_id = #{clientId} AND password = #{password}
 	</select>
 
 	<insert id="addClient" parameterType="com.capstone.models.Client">
 		INSERT INTO SS_CLIENT
-		(email, password, fullName, dateOfBirth, country, postalCode,
-		identificationType, identificationNumber, clientId)
+		(email, password, full_name, date_of_birth, country, postal_code,
+		identification_type, identification_number, client_id,profile_status)
 		VALUES
 		(#{email}, #{password}, #{fullName}, #{dateOfBirth}, #{country},
 		#{postalCode}, #{identificationType}, #{identificationNumber},
-		#{clientId})
+		#{clientId},#{profileStatus.status})
 	</insert>
 
 </mapper>

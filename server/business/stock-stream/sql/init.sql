@@ -10,87 +10,89 @@ drop table SS_CLIENT;
 CREATE TABLE SS_CLIENT (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    fullName VARCHAR(100),
-    dateOfBirth DATE,
+    full_name VARCHAR(100),
+    date_of_birth DATE,
     country VARCHAR(100),
-    postalCode VARCHAR(20),
-    identificationType VARCHAR(50),
-    identificationNumber VARCHAR(50),
-	profileStatus VARCHAR(50),
-    clientId VARCHAR(50) PRIMARY KEY
+    postal_code VARCHAR(20),
+    identification_type VARCHAR(50),
+    identification_number VARCHAR(50),
+	profile_status VARCHAR(50),
+    client_id VARCHAR(50) PRIMARY KEY
 );
 INSERT ALL
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus, clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status, client_id) 
 	VALUES ('john.doe@example.com', 'password123', 'John Doe', TO_DATE('1990-05-15', 'YYYY-MM-DD'), 'USA', '90210', 'SSN', 'ID123456', 'Complete', 'C001')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus, clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status, client_id) 
 	VALUES ('jane.smith@example.com', 'mypassword', 'Jane Smith', TO_DATE('1985-03-22', 'YYYY-MM-DD'), 'India', 'H2Y1A1','PAN', 'ID654321', 'Pending','C002')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus, clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status, client_id) 
     VALUES ('mark.jones@example.com', 'securepass', 'Mark Jones', TO_DATE('1992-11-30', 'YYYY-MM-DD'), 'UK', 'SW1A2AA', 'UTR','ID789012', 'Complete','C003')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus, clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status, client_id) 
     VALUES ('linda.brown@example.com', 'hello123', 'Linda Brown', TO_DATE('1988-07-19', 'YYYY-MM-DD'), 'Australia', '2000', 'TFN','ID345678', 'Pending', 'C004')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus, clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status, client_id) 
     VALUES ('paul.wilson@example.com', 'admin123', 'Paul Wilson', TO_DATE('1975-12-01', 'YYYY-MM-DD'), 'India', '6011', 'PAN', 'ID567890', 'Complete', 'C005')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus, clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status, client_id) 
     VALUES ('emma.johnson@example.com', 'qwertyuiop', 'Emma Johnson', TO_DATE('1995-02-28', 'YYYY-MM-DD'), 'Ireland', 'D02ABC', 'PPS', 'ID246810', 'Pending', 'C006')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus,clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status,client_id) 
     VALUES ('michael.white@example.com', 'passw0rd', 'Michael White', TO_DATE('1980-08-14', 'YYYY-MM-DD'), 'USA', '10001','SSN','ID135791', 'Complete', 'C007')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus, clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status, client_id) 
     VALUES ('susan.lee@example.com', 'myp@ssw0rd', 'Susan Lee', TO_DATE('1993-09-09', 'YYYY-MM-DD'), 'UK', 'E1 6AN', 'UTR', 'ID987654', 'Pending', 'C008')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus,clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status,client_id) 
     VALUES ('david.kim@example.com', 'password1', 'David Kim', TO_DATE('1987-04-05', 'YYYY-MM-DD'), 'USA', '06000', 'SSN','ID543216', 'Complete', 'C009')
-	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus,clientId) 
+	INTO SS_CLIENT (email, password, full_name, date_of_birth, country, postal_code, identification_type, identification_number, profile_status,client_id) 
     VALUES ('olivia.martin@example.com', 'abc12345', 'Olivia Martin', TO_DATE('1991-10-10', 'YYYY-MM-DD'), 'USA', '33101', 'SSN','ID102938', 'Pending', 'C010')
 SELECT * FROM dual;
 
-
 CREATE TABLE investment_preferences (
-    clientId VARCHAR(255),
-    investmentPurpose VARCHAR(50) NOT NULL,
-    investmentPurposeDescription VARCHAR(255),
-    riskTolerance VARCHAR(50) NOT NULL,
-    incomeCategory VARCHAR(50) NOT NULL,
-    investmentYear VARCHAR(50) NOT NULL,
-    isRoboAdvisorTermsAccepted NUMBER(1) CHECK (isRoboAdvisorTermsAccepted IN (0, 1)),
-    PRIMARY KEY (clientId),
-    FOREIGN KEY (clientId) REFERENCES SS_CLIENT(clientId)
+    client_id VARCHAR(255),
+    investment_purpose VARCHAR(50) NOT NULL,
+    investment_purpose_description VARCHAR(255),
+    risk_tolerance VARCHAR(50) NOT NULL,
+    income_category VARCHAR(50) NOT NULL,
+    investment_year VARCHAR(50) NOT NULL,
+    is_robo_advisor_terms_accepted NUMBER(1) CHECK (is_robo_advisor_terms_accepted IN (0, 1)),
+    PRIMARY KEY (client_id),
+    FOREIGN KEY (client_id) REFERENCES SS_CLIENT(client_id)
 );
-
+ 
 INSERT INTO investment_preferences 
-(clientId,investmentPurpose,investmentPurposeDescription,riskTolerance,incomeCategory,investmentYear,isRoboAdvisorTermsAccepted)
+(client_id,investment_purpose,investment_purpose_description,risk_tolerance,income_category,investment_year,is_robo_advisor_terms_accepted)
 VALUES
 ('C001','COLLEGE_FUND','Saving for higher education expenses','CONSERVATIVE','BELOW_20000','ZERO_TO_FIVE',1);
-
+ 
 INSERT INTO investment_preferences 
-(clientId,investmentPurpose,investmentPurposeDescription,riskTolerance,incomeCategory,investmentYear,isRoboAdvisorTermsAccepted)
+(client_id,investment_purpose,investment_purpose_description,risk_tolerance,income_category,investment_year,is_robo_advisor_terms_accepted)
 VALUES
 ('C002','RETIREMENT','Saving for retirement years','AVERAGE','FROM_40000_TO_60000','FIVE_TO_SEVEN',1);
 
 CREATE TABLE HOLDINGS (
     INSTRUMENT VARCHAR2(255 BYTE) NOT NULL,
-    INSTRUMENTID VARCHAR2(255 BYTE) NOT NULL,
-    clientId VARCHAR2(255 BYTE) NOT NULL,
+    INSTRUMENT_ID VARCHAR2(255 BYTE) NOT NULL,
+    CLIENT_ID VARCHAR2(255 BYTE) NOT NULL,
     QUANTITY NUMBER(10, 0) NOT NULL,
-    AVERAGEPRICE NUMBER(10, 2) NOT NULL,
-    INVESTEDCAPITAL NUMBER(15, 2) NOT NULL,
+    AVERAGE_PRICE NUMBER(10, 2) NOT NULL,
+    INVESTED_CAPITAL NUMBER(15, 2) NOT NULL,
     LTP NUMBER(10, 2) NOT NULL,
-    PERCENTCHANGE NUMBER(5, 2) NOT NULL,
-    PROFITLOSS NUMBER(15, 2) NOT NULL,
-    DAYCHANGEPERCENT NUMBER(5, 2) NOT NULL,
-    PRIMARY KEY (INSTRUMENTID, clientId),
-    FOREIGN KEY (clientId) REFERENCES SS_CLIENT(clientId)
+    PERCENT_CHANGE NUMBER(5, 2) NOT NULL,
+    PROFIT_LOSS NUMBER(15, 2) NOT NULL,
+    DAY_CHANGE_PERCENT NUMBER(5, 2) NOT NULL,
+    PRIMARY KEY (INSTRUMENT_ID, CLIENT_ID),
+    FOREIGN KEY (CLIENT_ID) REFERENCES SS_CLIENT(CLIENT_ID)
 );
-
-
-
-INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENTID, clientId, QUANTITY, AVERAGEPRICE, INVESTEDCAPITAL, LTP, PERCENTCHANGE, PROFITLOSS, DAYCHANGEPERCENT) VALUES
+ 
+ 
+INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENT_ID, CLIENT_ID, QUANTITY, AVERAGE_PRICE, INVESTED_CAPITAL, LTP, PERCENT_CHANGE, PROFIT_LOSS, DAY_CHANGE_PERCENT) VALUES
 ('Stock A', 'INST001', 'C001', 100, 150.50, 15050.00, 155.00, 3.00, 450.00, 2.50);
-INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENTID, clientId, QUANTITY, AVERAGEPRICE, INVESTEDCAPITAL, LTP, PERCENTCHANGE, PROFITLOSS, DAYCHANGEPERCENT) VALUES
+ 
+INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENT_ID, CLIENT_ID, QUANTITY, AVERAGE_PRICE, INVESTED_CAPITAL, LTP, PERCENT_CHANGE, PROFIT_LOSS, DAY_CHANGE_PERCENT) VALUES
 ('Stock B', 'INST002', 'C001', 50, 200.00, 10000.00, 195.00, -2.50, -250.00, -1.25);
-INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENTID, clientId, QUANTITY, AVERAGEPRICE, INVESTEDCAPITAL, LTP, PERCENTCHANGE, PROFITLOSS, DAYCHANGEPERCENT) VALUES
+ 
+INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENT_ID, CLIENT_ID, QUANTITY, AVERAGE_PRICE, INVESTED_CAPITAL, LTP, PERCENT_CHANGE, PROFIT_LOSS, DAY_CHANGE_PERCENT) VALUES
 ('Stock C', 'INST003', 'C002', 200, 75.00, 15000.00, 80.00, 6.67, 1000.00, 3.00);
-INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENTID, clientId, QUANTITY, AVERAGEPRICE, INVESTEDCAPITAL, LTP, PERCENTCHANGE, PROFITLOSS, DAYCHANGEPERCENT) VALUES
+ 
+INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENT_ID, CLIENT_ID, QUANTITY, AVERAGE_PRICE, INVESTED_CAPITAL, LTP, PERCENT_CHANGE, PROFIT_LOSS, DAY_CHANGE_PERCENT) VALUES
 ('Stock D', 'INST004', 'C002', 150, 120.00, 18000.00, 118.00, -1.67, -300.00, -0.83);
-INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENTID, clientId, QUANTITY, AVERAGEPRICE, INVESTEDCAPITAL, LTP, PERCENTCHANGE, PROFITLOSS, DAYCHANGEPERCENT) VALUES
+ 
+INSERT INTO HOLDINGS (INSTRUMENT, INSTRUMENT_ID, CLIENT_ID, QUANTITY, AVERAGE_PRICE, INVESTED_CAPITAL, LTP, PERCENT_CHANGE, PROFIT_LOSS, DAY_CHANGE_PERCENT) VALUES
 ('Stock E', 'INST005', 'C003', 80, 250.00, 20000.00, 260.00, 4.00, 800.00, 2.00);
 
 
@@ -115,7 +117,7 @@ CREATE TABLE SS_PRICE (
 
 CREATE TABLE SS_ORDERS (
     ORDER_ID VARCHAR(100) NOT NULL PRIMARY KEY,
-    clientId VARCHAR(100) NOT NULL,
+    client_id VARCHAR(100) NOT NULL,
     INSTRUMENT_ID VARCHAR(100) NOT NULL,
     QUANTITY INT NOT NULL,
     TARGET_PRICE NUMERIC(6, 2) NOT NULL,
@@ -123,19 +125,19 @@ CREATE TABLE SS_ORDERS (
     STATUS NUMERIC(1, 0) NOT NULL,
     CREATED_AT TIMESTAMP NOT NULL,
     FOREIGN KEY (INSTRUMENT_ID) REFERENCES SS_INSTRUMENTS(INSTRUMENT_ID),
-    FOREIGN KEY (clientId) REFERENCES SS_CLIENT(clientId)  
+    FOREIGN KEY (client_id) REFERENCES SS_CLIENT(client_id)  
 );
 
 CREATE TABLE SS_TRADES (
     TRADE_ID VARCHAR(100) NOT NULL PRIMARY KEY,
-    clientId VARCHAR(100) NOT NULL,
+    client_id VARCHAR(100) NOT NULL,
     ORDER_ID VARCHAR(100) NOT NULL,
     INSTRUMENT_ID VARCHAR(100) NOT NULL,
     QUANTITY INT NOT NULL,
     EXECUTION_PRICE NUMERIC(6, 2) NOT NULL,
     DIRECTION VARCHAR(1) NOT NULL CHECK (DIRECTION IN ('B', 'S')),  
     EXECUTED_AT TIMESTAMP NOT NULL,
-    FOREIGN KEY (clientId) REFERENCES SS_CLIENT(clientId), 
+    FOREIGN KEY (client_id) REFERENCES SS_CLIENT(client_id), 
     FOREIGN KEY (ORDER_ID) REFERENCES SS_ORDERS(ORDER_ID),    
     FOREIGN KEY (INSTRUMENT_ID) REFERENCES SS_INSTRUMENTS(INSTRUMENT_ID) 
 );
@@ -154,16 +156,16 @@ INSERT INTO SS_PRICE (INSTRUMENT_ID, ASKPRICE, BIDPRICE, UPDATED_AT) VALUES ('I0
 INSERT INTO SS_PRICE (INSTRUMENT_ID, ASKPRICE, BIDPRICE, UPDATED_AT) VALUES ('I004', 450.00, 440.00, TO_TIMESTAMP('2023-01-04 18:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 INSERT INTO SS_PRICE (INSTRUMENT_ID, ASKPRICE, BIDPRICE, UPDATED_AT) VALUES ('I005', 550.00, 540.00, TO_TIMESTAMP('2023-01-05 19:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
-INSERT INTO SS_ORDERS (ORDER_ID, clientId, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O001', 'C001', 'I001', 10, 145.00, 'B', 1, TO_TIMESTAMP('2023-01-01 20:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO SS_ORDERS (ORDER_ID, clientId, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O002', 'C002', 'I002', 20, 245.00, 'S', 2, TO_TIMESTAMP('2023-01-02 21:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO SS_ORDERS (ORDER_ID, clientId, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O003', 'C003', 'I003', 30, 345.00, 'B', 0, TO_TIMESTAMP('2023-01-03 22:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO SS_ORDERS (ORDER_ID, clientId, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O004', 'C004', 'I004', 40, 445.00, 'S', 1, TO_TIMESTAMP('2023-01-04 23:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO SS_ORDERS (ORDER_ID, clientId, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O005', 'C005', 'I005', 50, 545.00, 'B', 2, TO_TIMESTAMP('2023-01-05 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_ORDERS (ORDER_ID, client_id, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O001', 'C001', 'I001', 10, 145.00, 'B', 1, TO_TIMESTAMP('2023-01-01 20:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_ORDERS (ORDER_ID, client_id, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O002', 'C002', 'I002', 20, 245.00, 'S', 2, TO_TIMESTAMP('2023-01-02 21:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_ORDERS (ORDER_ID, client_id, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O003', 'C003', 'I003', 30, 345.00, 'B', 0, TO_TIMESTAMP('2023-01-03 22:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_ORDERS (ORDER_ID, client_id, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O004', 'C004', 'I004', 40, 445.00, 'S', 1, TO_TIMESTAMP('2023-01-04 23:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_ORDERS (ORDER_ID, client_id, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) VALUES ('O005', 'C005', 'I005', 50, 545.00, 'B', 2, TO_TIMESTAMP('2023-01-05 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
-INSERT INTO SS_TRADES (TRADE_ID, clientId, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T001', 'C001', 'O001', 'I001', 10, 145.00, 'B', TO_TIMESTAMP('2023-01-01 21:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO SS_TRADES (TRADE_ID, clientId, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T002', 'C002', 'O002', 'I002', 20, 245.00, 'S', TO_TIMESTAMP('2023-01-02 22:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO SS_TRADES (TRADE_ID, clientId, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T003', 'C003', 'O003', 'I003', 30, 345.00, 'B', TO_TIMESTAMP('2023-01-03 23:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO SS_TRADES (TRADE_ID, clientId, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T004', 'C004', 'O004', 'I004', 40, 445.00, 'S', TO_TIMESTAMP('2023-01-04 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO SS_TRADES (TRADE_ID, clientId, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T005', 'C005', 'O005', 'I005', 50, 545.00, 'B', TO_TIMESTAMP('2023-01-05 01:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T001', 'C001', 'O001', 'I001', 10, 145.00, 'B', TO_TIMESTAMP('2023-01-01 21:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T002', 'C002', 'O002', 'I002', 20, 245.00, 'S', TO_TIMESTAMP('2023-01-02 22:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T003', 'C003', 'O003', 'I003', 30, 345.00, 'B', TO_TIMESTAMP('2023-01-03 23:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T004', 'C004', 'O004', 'I004', 40, 445.00, 'S', TO_TIMESTAMP('2023-01-04 00:00:00', 'YYYY-MM-DD HH24:MI:SS'));
+INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) VALUES ('T005', 'C005', 'O005', 'I005', 50, 545.00, 'B', TO_TIMESTAMP('2023-01-05 01:00:00', 'YYYY-MM-DD HH24:MI:SS'));
 
 COMMIT;

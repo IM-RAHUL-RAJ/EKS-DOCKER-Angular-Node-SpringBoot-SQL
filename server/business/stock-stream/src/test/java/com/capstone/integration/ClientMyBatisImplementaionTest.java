@@ -21,6 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.exceptions.DatabaseException;
+import com.capstone.integration.mapper.ClientMapper;
 import com.capstone.models.Client;
 import com.capstone.models.ProfileStatus;
 
@@ -28,6 +29,9 @@ import com.capstone.models.ProfileStatus;
 @ContextConfiguration("classpath:beans.xml")
 @Transactional
 class ClientMyBatisImplementaionTest {
+	
+	@Autowired
+	ClientMapper clientMapper;
 
 	@Autowired
 	private ClientMyBatisImplementaion dao;
@@ -83,7 +87,6 @@ class ClientMyBatisImplementaionTest {
 	 @Test
 	    public void testAddClient_Success() {
 	        Client client = new Client("test@example.com", "password123", "Test User", "22-MAR-85", "Country", "12345", "PAN", "ID1236780", ProfileStatus.COMPLETE,"ClientId1236745");
-
 	        assertDoesNotThrow(() -> dao.addClient(client));
 	    }
 
