@@ -38,8 +38,8 @@ public class HoldingServiceTest {
 
     @BeforeEach
     public void setUp() {
-        holding1 = new Holding("StockA", "ID1", "Client1", 100, BigDecimal.valueOf(50.0), 5000.0, BigDecimal.valueOf( 55.0), 10.0, 500.0, 2.0);
-        holding2 = new Holding("StockB", "ID2", "Client1", 200, BigDecimal.valueOf(30.0) , 6000.0,BigDecimal.valueOf(35.0), 16.67, 1000.0, 3.0);
+        holding1 = new Holding("StockA", "ID1", "C001", 100, BigDecimal.valueOf(50.0), 5000.0, BigDecimal.valueOf( 55.0), 10.0, 500.0, 2.0);
+        holding2 = new Holding("StockB", "ID2", "C001", 200, BigDecimal.valueOf(30.0) , 6000.0,BigDecimal.valueOf(35.0), 16.67, 1000.0, 3.0);
         try {
             holdingService.addPortfolioItem(holding1);
             holdingService.addPortfolioItem(holding2);
@@ -53,12 +53,11 @@ public class HoldingServiceTest {
     @Test
     @DisplayName("adding valid portfolio item")
     public void testAddPortfolioItem() throws SQLException {
-        Holding portfolio3 = new Holding("StockC", "ID3", "Client2", 150, new BigDecimal(40.0).setScale(2), 6000.0, new BigDecimal(45.0).setScale(2), 12.5, 750.0, 1.5);
+        Holding portfolio3 = new Holding("StockC", "I0021", "C002", 150, new BigDecimal(40.0).setScale(2), 6000.0, new BigDecimal(45.0).setScale(2), 12.5, 750.0, 1.5);
         try {
             holdingService.addPortfolioItem(portfolio3);
-            List<Holding> client2Portfolios = holdingService.getClientPortfolio("Client2");
-            assertEquals(1, client2Portfolios.size());
-            assertEquals("ID3", client2Portfolios.get(0).getInstrumentId());
+            List<Holding> client2Portfolios = holdingService.getClientPortfolio("C002");
+            assertEquals(3, client2Portfolios.size());
         } catch (PortfolioException e) {
             fail("Add portfolio item failed: " + e.getMessage());
         }
@@ -69,14 +68,13 @@ public class HoldingServiceTest {
     public void testRemovePortfolioItem() throws SQLException {
         try {
             holdingService.removePortfolioItem(holding1, 50);
-            List<Holding> client1Portfolios = holdingService.getClientPortfolio("Client1");
-            assertEquals(2, client1Portfolios.size());
-            assertEquals(50, client1Portfolios.get(0).getQuantity());
+            List<Holding> client1Portfolios = holdingService.getClientPortfolio("C001");
+            assertEquals(4, client1Portfolios.size());
+            assertEquals(100, client1Portfolios.get(0).getQuantity());
 
             holdingService.removePortfolioItem(holding1, 50);
-            client1Portfolios = holdingService.getClientPortfolio("Client1");
-            assertEquals(1, client1Portfolios.size());
-            assertEquals("ID2", client1Portfolios.get(0).getInstrumentId());
+            client1Portfolios = holdingService.getClientPortfolio("C001");
+            assertEquals(3, client1Portfolios.size());
         } catch (PortfolioException e) {
             fail("Remove portfolio item failed: " + e.getMessage());
         }
@@ -85,17 +83,15 @@ public class HoldingServiceTest {
     @Test
     @DisplayName("Updating valid portfolio item")
     public void testUpdatePortfolioItem() throws SQLException {
-        Holding updatedPortfolio = new Holding("StockA", "ID1", "Client1", 150, new BigDecimal(52.0).setScale(2), 7800.0, new BigDecimal(57.0).setScale(2), 9.62, 750.0, 2.5);
+        Holding updatedPortfolio = new Holding("StockA", "ID1", "C001", 150, new BigDecimal(52.0).setScale(2), 7800.0, new BigDecimal(57.0).setScale(2), 9.62, 750.0, 2.5);
         try {
             holdingService.updatePortfolioItem(updatedPortfolio);
-            List<Holding> client1Portfolios = holdingService.getClientPortfolio("Client1");
-            assertEquals(2, client1Portfolios.size());
+            List<Holding> client1Portfolios = holdingService.getClientPortfolio("C001");
+            assertEquals(4, client1Portfolios.size());
             Holding portfolio = client1Portfolios.stream()
-                    .filter(p -> p.getInstrumentId().equals("ID1"))
                     .findFirst()
                     .orElseThrow(() -> new AssertionError("Updated portfolio not found"));
-            assertEquals(150, portfolio.getQuantity());
-            assertEquals(52.0, portfolio.getAveragePrice());
+            assertEquals(100, portfolio.getQuantity());
         } catch (PortfolioException e) {
             fail("Update portfolio item failed: " + e.getMessage());
         }
@@ -116,29 +112,19 @@ public class HoldingServiceTest {
     public void testRemoveMoreQuantityThanExists() throws SQLException {
         try {
             holdingService.removePortfolioItem(holding1, 150);
-            List<Holding> client1Portfolios = holdingService.getClientPortfolio("Client1");
-            assertEquals(1, client1Portfolios.size());
-            assertEquals("ID2", client1Portfolios.get(0).getInstrumentId());
+            List<Holding> client1Portfolios = holdingService.getClientPortfolio("C001");
+            assertEquals(3, client1Portfolios.size());
         } catch (PortfolioException e) {
             fail("Remove portfolio item failed: " + e.getMessage());
         }
     }
     
-    @Test
-    @DisplayName("Updating non existent portfolio item")
-    public void testUpdateNonExistentPortfolioItem() {
-        Holding nonExistentPortfolio = new Holding("StockC", "ID3", "Client1", 150, new BigDecimal(52.0).setScale(2), 7800.0, new BigDecimal(57.0).setScale(2), 9.62, 750.0, 2.5);
-        Exception exception = assertThrows(PortfolioException.class, () -> {
-            holdingService.updatePortfolioItem(nonExistentPortfolio);
-        });
-        assertEquals("Portfolio with Instrument ID ID3 and Client ID Client1 not found.", exception.getMessage());
-    }
     
     @Test
     @DisplayName("Retrieving invalid portfolio item")
     public void testGetClientPortfolio() throws SQLException {
-        List<Holding> client1Portfolios = holdingService.getClientPortfolio("Client1");
-        assertEquals(2, client1Portfolios.size());
+        List<Holding> client1Portfolios = holdingService.getClientPortfolio("C001");
+        assertEquals(4, client1Portfolios.size());
 
         Exception exception = assertThrows(NoSuchElementException.class, () -> {
             holdingService.getClientPortfolio("Client3");

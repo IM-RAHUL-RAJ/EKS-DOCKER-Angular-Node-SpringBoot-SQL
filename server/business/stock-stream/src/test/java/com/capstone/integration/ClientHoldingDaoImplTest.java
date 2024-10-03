@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,6 +23,7 @@ import java.math.BigDecimal;
 class ClientHoldingDaoImplTest {
 
 	static PoolableDataSource dataSource;
+	@Autowired
 	ClientHoldingDaoImpl dao;
 	Connection connection;
 	TransactionManager transactionManager;
@@ -34,7 +36,6 @@ class ClientHoldingDaoImplTest {
 
 	@BeforeEach
 	void setUp() throws SQLException, IOException {
-		dao = new ClientHoldingDaoImpl(dataSource);
 		transactionManager = new TransactionManager(dataSource);
 		transactionManager.startTransaction();
 	}
