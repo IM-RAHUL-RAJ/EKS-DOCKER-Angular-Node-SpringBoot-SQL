@@ -20,9 +20,11 @@ public class Price {
 		this.bidPrice = bidPrice;
 		this.updateTime = updateTime;
 	}
+	
 	public Price() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public BigDecimal getRankScore() {
 		return rankScore;
 	}
