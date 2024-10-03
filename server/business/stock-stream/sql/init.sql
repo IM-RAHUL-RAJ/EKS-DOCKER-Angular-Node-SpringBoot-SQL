@@ -10,14 +10,14 @@ drop table SS_CLIENT;
 CREATE TABLE SS_CLIENT (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    fullName VARCHAR(100),
-    dateOfBirth DATE,
+    full_name VARCHAR(100),
+    date_of_birth DATE,
     country VARCHAR(100),
-    postalCode VARCHAR(20),
-    identificationType VARCHAR(50),
-    identificationNumber VARCHAR(50),
-	profileStatus VARCHAR(50),
-    clientId VARCHAR(50) PRIMARY KEY
+    postal_code VARCHAR(20),
+    identification_type VARCHAR(50),
+    identification_number VARCHAR(50),
+	profile_status VARCHAR(50),
+    clien_id VARCHAR(50) PRIMARY KEY
 );
 INSERT ALL
 	INTO SS_CLIENT (email, password, fullName, dateOfBirth, country, postalCode, identificationType, identificationNumber, profileStatus, clientId) 
