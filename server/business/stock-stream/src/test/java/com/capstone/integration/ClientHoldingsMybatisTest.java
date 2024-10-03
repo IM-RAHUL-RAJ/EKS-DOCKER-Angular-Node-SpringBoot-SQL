@@ -58,12 +58,14 @@ class ClientHoldingsMybatisTest {
         assertTrue(portfolios.isEmpty());
     }
 
+    //Client with no holdings
     @Test
     void testGetClientPortfolio_PortfolioNotFound() throws SQLException {
         List<Holding> portfolios = dao.getClientHoldings("C010");
         assertTrue(portfolios.isEmpty());
     }
 
+    //obtain holdings of a particular stock of a client
     @Test
     void getClientHoldingToSucceed() {
         Holding expectedHolding = new Holding("Stock A", "INST001", "C001", 100, new BigDecimal("150.5"), 15050, new BigDecimal("155"), 3.00, 450.00, 2.50);
@@ -72,11 +74,13 @@ class ClientHoldingsMybatisTest {
     }
 
     
+    //illegal argument exception
     @Test
     void getClientHoldingToThrowIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> dao.getClientHolding(null, null));
     }
 
+    //insert successfully
     @Test
     void addClientHoldingToSucceed() throws SQLException {
         Holding newHolding = new Holding("Stock A", "INST003", "C001", 100, new BigDecimal("150.50"), 15050.00, new BigDecimal("155.00"), 3.00, 450.00, 2.50);
@@ -84,6 +88,7 @@ class ClientHoldingsMybatisTest {
         assertEquals(1, countRowsInTableWhere(jdbcTemplate, "holdings", "clientid='C001' AND instrumentid='INST003'"));
     }
 
+    //insert failed
     @Test
     void addClientHoldingToThrowDatabaseException() {
         Holding newHolding = new Holding("Stock A", "INST002", "CLIENT001", 100, new BigDecimal("150.50"), 15050.00, new BigDecimal("155.00"), 3.00, 450.00, 2.50);
