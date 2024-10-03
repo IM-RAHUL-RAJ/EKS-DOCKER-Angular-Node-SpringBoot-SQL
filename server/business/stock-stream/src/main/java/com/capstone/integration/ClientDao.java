@@ -7,5 +7,5 @@ import com.capstone.models.Client;
 public interface ClientDao {
     boolean verifyEmailAddress(String emailAddress);
     void addClient(Client client) throws SQLException;
-    boolean verifyLogin(String username, String password) throws SQLException;
+    boolean verifyLogin(String clientId, String password) throws SQLException;
 }
