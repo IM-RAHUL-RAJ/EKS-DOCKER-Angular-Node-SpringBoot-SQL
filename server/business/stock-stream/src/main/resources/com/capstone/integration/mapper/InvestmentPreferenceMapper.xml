@@ -18,26 +18,26 @@
 
 	<select id="getInvestmentPreference"
 		resultMap="InvestmentPreferenceResultMap">
-		SELECT clientId,
-		investmentPurpose,
-		investmentPurposeDescription,
-		riskTolerance,
-		incomeCategory,
-		investmentYear,
-		isRoboAdvisorTermsAccepted
+		SELECT client_id,
+		investment_purpose,
+		investment_purpose_description,
+		risk_tolerance,
+		income_category,
+		investment_year,
+		is_robo_advisor_terms_accepted
 		FROM investment_preferences
-		WHERE clientId = #{clientId}
+		WHERE client_id = #{clientId}
 	</select>
 
 	<insert id="addInvestmentPreference" parameterType="InvestmentPreference">
 		INSERT INTO investment_preferences
-		(clientId,
-		investmentPurpose,
-		investmentPurposeDescription,
-		riskTolerance,
-		incomeCategory,
-		investmentYear,
-		isRoboAdvisorTermsAccepted)
+		(client_id,
+		investment_purpose,
+		investment_purpose_description,
+		risk_tolerance,
+		income_category,
+		investment_year,
+		is_robo_advisor_terms_accepted)
 		VALUES
 		(#{clientId},#{investmentPurpose},#{investmentPurposeDescription},
 		#{riskTolerance},#{incomeCategory},#{investmentYear},#{isRoboAdvisorTermsAccepted})
@@ -46,18 +46,18 @@
 	<update id="updateInvestmentPreference" parameterType="InvestmentPreference">
 		UPDATE investment_preferences
 		SET
-		clientId=#{clientId},
-		investmentPurpose=#{investmentPurpose},
-		investmentPurposeDescription=#{investmentPurposeDescription},
-		riskTolerance=#{riskTolerance},
-		incomeCategory=#{incomeCategory},
-		investmentYear=#{investmentYear},
-		isRoboAdvisorTermsAccepted=#{isRoboAdvisorTermsAccepted}
-		WHERE clientId = #{clientId}
+		client_id=#{clientId},
+		investment_purpose=#{investmentPurpose},
+		investment_purpose_description=#{investmentPurposeDescription},
+		risk_tolerance=#{riskTolerance},
+		income_category=#{incomeCategory},
+		investment_year=#{investmentYear},
+		is_robo_advisor_terms_accepted=#{isRoboAdvisorTermsAccepted}
+		WHERE client_id = #{clientId}
 	</update>
 
 	<delete id="removeInvestmentPreference" parameterType="String">
-		DELETE FROM investment_preferences WHERE clientId=#{clientId}
+		DELETE FROM investment_preferences WHERE client_id=#{clientId}
 	</delete>
 
 </mapper>
