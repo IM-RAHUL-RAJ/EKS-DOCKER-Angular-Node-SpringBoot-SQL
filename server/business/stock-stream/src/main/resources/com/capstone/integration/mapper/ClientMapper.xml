@@ -3,10 +3,26 @@
 
 <mapper namespace="com.capstone.integration.mapper.ClientMapper">
 
-    <select id="verifyEmailAddress" resultType="int">
-        SELECT COUNT(*) AS count 
-        FROM SS_CLIENT 
-        WHERE email = #{emailAddress}
-    </select>
+	<select id="verifyEmailAddress" resultType="int">
+		SELECT COUNT(*) AS count
+		FROM SS_CLIENT
+		WHERE email = #{emailAddress}
+	</select>
+
+	<select id="verifyLogin" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM SS_CLIENT
+		WHERE clientId = #{clientId} AND password = #{password}
+	</select>
+
+	<insert id="addClient" parameterType="com.capstone.models.Client">
+		INSERT INTO SS_CLIENT
+		(email, password, fullName, dateOfBirth, country, postalCode,
+		identificationType, identificationNumber, clientId)
+		VALUES
+		(#{email}, #{password}, #{fullName}, #{dateOfBirth}, #{country},
+		#{postalCode}, #{identificationType}, #{identificationNumber},
+		#{clientId})
+	</insert>
 
 </mapper>

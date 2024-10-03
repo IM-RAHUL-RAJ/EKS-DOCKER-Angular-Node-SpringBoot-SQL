@@ -1,12 +1,14 @@
-drop table SS_CLIENT;
+
 DROP TABLE SS_TRADES;
 DROP TABLE SS_ORDERS;
 DROP TABLE SS_PRICE;
 DROP TABLE SS_INSTRUMENTS;
+drop table holdings;
 DROP TABLE investment_preferences;
+drop table SS_CLIENT;
 
 CREATE TABLE SS_CLIENT (
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255)unique NOT NULL,
     password VARCHAR(255) NOT NULL,
     fullName VARCHAR(100),
     dateOfBirth DATE,

@@ -1,16 +1,21 @@
 package com.capstone.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.capstone.integration.ClientMybatisHoldingsDaoImpl;
 import com.capstone.models.Client;
 import com.capstone.models.ProfileStatus;
-import com.capstone.services.ClientService;
-import com.capstone.services.FmtsService;
 
 public class ClientServiceTest {
 
+	@Autowired
+    private ClientMybatisHoldingsDaoImpl clientHoldingsDao;
+	
 	private ClientService clientService;
 	private FmtsService mockFMTSService;
 
