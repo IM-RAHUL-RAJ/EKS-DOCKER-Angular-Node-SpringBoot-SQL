@@ -7,6 +7,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
 import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
@@ -25,36 +30,17 @@ import com.capstone.models.ProfileStatus;
 import com.capstone.models.RiskTolerance;
 import com.capstone.services.ClientService;
 import com.capstone.services.FmtsService;
-import com.capstone.services.InvestmentPreferenceService;
+import com.capstone.services.InvestmentPreferenceServiceImpl;
 
-class InvestmentPreferenceServiceTest {
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration("classpath:beans.xml")
+@Transactional
+class InvestmentPreferenceServiceImplTest {
 
-	InvestmentPreferenceService investmentPreferenceService;
+	@Autowired
+	InvestmentPreferenceServiceImpl investmentPreferenceService;
 
 	private final String PREFERENCE_TABLE = "investment_preferences";
-
-	static PoolableDataSource dataSource;
-	InvestmentPreferenceDao dao;
-	TransactionManager transactionManager;
-	private InvestmentPreference investmentPreference1 = new InvestmentPreference("abcabcab",
-			InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.CONSERVATIVE,
-			IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
-
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-		dataSource = new PoolableDataSource();
-
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-		dataSource.shutdown();
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-		transactionManager.rollbackTransaction();
-	}
 
 	@BeforeEach
 	void setup()
@@ -63,35 +49,21 @@ class InvestmentPreferenceServiceTest {
 		ClientService clientService = new ClientService(new FmtsService());
 
 		clientService.registerClient(new Client("test@example.com", "password123", "John Doe", "1990-01-01", "IN",
-				"PAN", "ID123", "ID123", ProfileStatus.COMPLETE, "abdcabdc"));
+				"PAN", "ID123", "ID123", ProfileStatus.COMPLETE, "C001"));
 
 		clientService.loginClient("test@example.com", "password123");
 
 		clientService.registerClient(new Client("test1@example.com", "password1234", "John Doe", "1990-01-01", "IN",
-				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "abcabcab"));
+				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "C002"));
 
 		clientService.loginClient("test1@example.com", "password1234");
 
 		clientService.registerClient(new Client("test2@example.com", "password12345", "John Doe", "1990-01-01", "IN",
-				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "abcabcjk"));
+				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "C003"));
 
-		clientService.loginClient("test2@example.com", "password1235");
+		clientService.loginClient("test2@example.com", "password12345");
 
-		clientService.registerClient(new Client("test3@example.com", "password12346", "John Doe", "1990-01-01", "IN",
-				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "aaaabbbb"));
-
-		clientService.loginClient("test3@example.com", "password12346");
-
-		clientService.registerClient(new Client("test4@example.com", "password12346", "John Doe", "1990-01-01", "IN",
-				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "aaaabbbb"));
-
-		clientService.loginClient("test4@example.com", "password12346");
-
-		dao = new InvestmentPreferenceDaoImpl(dataSource);
-		transactionManager = new TransactionManager(dataSource);
-		transactionManager.startTransaction();
-
-		investmentPreferenceService = new InvestmentPreferenceService(clientService, dao);
+		investmentPreferenceService.setClientService(clientService);
 
 	}
 
@@ -100,12 +72,12 @@ class InvestmentPreferenceServiceTest {
 			throws InvestmentPreferenceAlreadyExists, RoboAdvisorMandatoryException, UserNotLoggedInToPerformAction {
 
 		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.addInvestmentPreference(new InvestmentPreference("abcddcba", InvestmentPurpose.BUSINESS_INVESTMENT,
+				.addInvestmentPreference(new InvestmentPreference("C003", InvestmentPurpose.BUSINESS_INVESTMENT,
 						InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(), RiskTolerance.CONSERVATIVE,
 						IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, true));
 
 		assertEquals(investmentPreference,
-				new InvestmentPreference("abcddcba", InvestmentPurpose.BUSINESS_INVESTMENT,
+				new InvestmentPreference("C003", InvestmentPurpose.BUSINESS_INVESTMENT,
 						InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(), RiskTolerance.CONSERVATIVE,
 						IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, true));
 
@@ -116,7 +88,7 @@ class InvestmentPreferenceServiceTest {
 			throws InvestmentPreferenceAlreadyExists, RoboAdvisorMandatoryException {
 
 		assertThrows(InvestmentPreferenceAlreadyExists.class, () -> {
-			this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("abcabcab",
+			this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("C001",
 					InvestmentPurpose.BUSINESS_INVESTMENT, InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(),
 					RiskTolerance.CONSERVATIVE, IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, true));
 		});
@@ -127,7 +99,7 @@ class InvestmentPreferenceServiceTest {
 			throws InvestmentPreferenceAlreadyExists, RoboAdvisorMandatoryException {
 
 		assertThrows(RoboAdvisorMandatoryException.class, () -> {
-			this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("abcabcda",
+			this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("C001",
 					InvestmentPurpose.BUSINESS_INVESTMENT, InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(),
 					RiskTolerance.CONSERVATIVE, IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, false));
 		});
@@ -138,7 +110,7 @@ class InvestmentPreferenceServiceTest {
 			throws InvestmentPreferenceAlreadyExists, RoboAdvisorMandatoryException {
 
 		assertThrows(UserNotLoggedInToPerformAction.class, () -> {
-			this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("abcabcll",
+			this.investmentPreferenceService.addInvestmentPreference(new InvestmentPreference("C004",
 					InvestmentPurpose.BUSINESS_INVESTMENT, InvestmentPurpose.BUSINESS_INVESTMENT.getDescription(),
 					RiskTolerance.CONSERVATIVE, IncomeCategory.ABOVE_80000, InvestmentYear.SEVEN_TO_TEN, true));
 		});
@@ -147,8 +119,7 @@ class InvestmentPreferenceServiceTest {
 	@Test
 	void updateInvestmentPreferenceToSucceed()
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
-		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.getInvestmentPreference("abcabcab");
+		InvestmentPreference investmentPreference = this.investmentPreferenceService.getInvestmentPreference("C001");
 
 		investmentPreference.setIncomeCategory(IncomeCategory.FROM_40000_TO_60000);
 		investmentPreference.setInvestmentYear(InvestmentYear.TEN_TO_FIFTEEN);
@@ -165,7 +136,7 @@ class InvestmentPreferenceServiceTest {
 	@Test
 	void updateInvestmentPreferenceToThrowInvestmentPreferenceWithClientIdNotFound()
 			throws InvestmentPreferenceWithClientIdNotFound, RoboAdvisorMandatoryException {
-		InvestmentPreference investmentPreference = new InvestmentPreference("aaaabbbb", InvestmentPurpose.COLLEGE_FUND,
+		InvestmentPreference investmentPreference = new InvestmentPreference("C003", InvestmentPurpose.COLLEGE_FUND,
 				InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.AVERAGE,
 				IncomeCategory.FROM_60000_TO_80000, InvestmentYear.ZERO_TO_FIVE, true);
 
@@ -181,7 +152,7 @@ class InvestmentPreferenceServiceTest {
 	@Test
 	void updateInvestmentPreferenceToThrowUserNotLoggedInToPerformAction()
 			throws InvestmentPreferenceWithClientIdNotFound, RoboAdvisorMandatoryException {
-		InvestmentPreference investmentPreference = new InvestmentPreference("adfadfaa", InvestmentPurpose.COLLEGE_FUND,
+		InvestmentPreference investmentPreference = new InvestmentPreference("C004", InvestmentPurpose.COLLEGE_FUND,
 				InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.AVERAGE,
 				IncomeCategory.FROM_60000_TO_80000, InvestmentYear.ZERO_TO_FIVE, true);
 
@@ -198,32 +169,31 @@ class InvestmentPreferenceServiceTest {
 	void getInvestmentPreferenceToSucceed()
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.getInvestmentPreference("abcabcab");
+				.getInvestmentPreference("C001");
 
-		assertEquals(investmentPreference.getClientId(), "abcabcab");
+		assertEquals(investmentPreference.getClientId(), "C001");
 	}
 
 	@Test
 	void getInvestmentPreferenceToThrowInvestmentPreferenceWithClientIdNotFound() {
 		assertThrows(InvestmentPreferenceWithClientIdNotFound.class, () -> {
-			this.investmentPreferenceService.getInvestmentPreference("aaaabbbb");
+			this.investmentPreferenceService.getInvestmentPreference("C003");
 		});
 	}
 
 	@Test
 	void getInvestmentPreferenceToThrowUserNotLoggedInToPerformAction() {
 		assertThrows(UserNotLoggedInToPerformAction.class, () -> {
-			this.investmentPreferenceService.getInvestmentPreference("aaaabvvb");
+			this.investmentPreferenceService.getInvestmentPreference("C004");
 		});
 	}
 
 	@Test
 	void removeInvestmentPreferenceToSucceed()
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
-		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.removeInvestmentPreference("C001");
+		InvestmentPreference investmentPreference = this.investmentPreferenceService.removeInvestmentPreference("C001");
 
-		assertEquals(investmentPreference.getClientId(), "abcabcab");
+		assertEquals(investmentPreference.getClientId(), "C001");
 
 	}
 
@@ -233,7 +203,7 @@ class InvestmentPreferenceServiceTest {
 			RoboAdvisorMandatoryException {
 
 		assertThrows(InvestmentPreferenceWithClientIdNotFound.class, () -> {
-			this.investmentPreferenceService.removeInvestmentPreference("aaaabbbb");
+			this.investmentPreferenceService.removeInvestmentPreference("C003");
 		});
 
 	}
@@ -243,7 +213,7 @@ class InvestmentPreferenceServiceTest {
 			InvestmentPreferenceWithClientIdNotFound, RoboAdvisorMandatoryException {
 
 		assertThrows(UserNotLoggedInToPerformAction.class, () -> {
-			this.investmentPreferenceService.removeInvestmentPreference("aaaabbkk");
+			this.investmentPreferenceService.removeInvestmentPreference("C004");
 		});
 
 	}

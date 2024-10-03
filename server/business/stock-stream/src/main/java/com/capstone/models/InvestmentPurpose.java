@@ -42,9 +42,6 @@ public enum InvestmentPurpose {
         throw new IllegalArgumentException("No enum constant for code: " + name);
     }
 
-    @Override
-    public String toString() {
-        return name + ": " + description;
-    }
+    
 }
 

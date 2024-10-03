@@ -31,9 +31,4 @@ public enum RiskTolerance {
         }
         throw new IllegalArgumentException("No enum constant for code: " + code);
     }
-
-    @Override
-    public String toString() {
-        return name + ": " + description;
-    }
 }

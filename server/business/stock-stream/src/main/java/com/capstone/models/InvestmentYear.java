@@ -37,8 +37,5 @@ public enum InvestmentYear {
         throw new IllegalArgumentException("No IncomeCategory for description: " + description);
     }
     
-    @Override
-    public String toString() {
-        return name;
-    }
+
 }
