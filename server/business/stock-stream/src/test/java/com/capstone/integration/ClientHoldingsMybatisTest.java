@@ -38,7 +38,6 @@ class ClientHoldingsMybatisTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    //success test
     @Test
     void testGetClients() throws SQLException {
         List<Holding> queriedClients = dao.getClientHoldings("C002");
@@ -58,12 +57,14 @@ class ClientHoldingsMybatisTest {
         assertTrue(portfolios.isEmpty());
     }
 
+    //Client with no holdings
     @Test
     void testGetClientPortfolio_PortfolioNotFound() throws SQLException {
         List<Holding> portfolios = dao.getClientHoldings("C010");
         assertTrue(portfolios.isEmpty());
     }
 
+    //obtain holdings of a particular stock of a client
     @Test
     void getClientHoldingToSucceed() {
         Holding expectedHolding = new Holding("Stock A", "INST001", "C001", 100, new BigDecimal("150.5"), 15050, new BigDecimal("155"), 3.00, 450.00, 2.50);
@@ -71,19 +72,21 @@ class ClientHoldingsMybatisTest {
         assertEquals(expectedHolding, actualHolding);
     }
 
-    
+    //illegal argument exception
     @Test
     void getClientHoldingToThrowIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> dao.getClientHolding(null, null));
     }
 
+    //insert successfully
     @Test
     void addClientHoldingToSucceed() throws SQLException {
         Holding newHolding = new Holding("Stock A", "INST003", "C001", 100, new BigDecimal("150.50"), 15050.00, new BigDecimal("155.00"), 3.00, 450.00, 2.50);
         dao.addClientHolding(newHolding);
-        assertEquals(1, countRowsInTableWhere(jdbcTemplate, "holdings", "clientid='C001' AND instrumentid='INST003'"));
+        assertEquals(1, countRowsInTableWhere(jdbcTemplate, "holdings", "client_id='C001' AND instrument_id='INST003'"));
     }
 
+    //insert failed
     @Test
     void addClientHoldingToThrowDatabaseException() {
         Holding newHolding = new Holding("Stock A", "INST002", "CLIENT001", 100, new BigDecimal("150.50"), 15050.00, new BigDecimal("155.00"), 3.00, 450.00, 2.50);
@@ -100,7 +103,7 @@ class ClientHoldingsMybatisTest {
         Holding holdingToUpdate = dao.getClientHolding("C001", "INST002");
         holdingToUpdate.setAveragePrice(BigDecimal.valueOf(22.2).setScale(2));
         dao.updateClientHolding(holdingToUpdate);
-        assertEquals(1, countRowsInTableWhere(jdbcTemplate, "holdings", "clientid='C001' AND instrumentid='INST002'"));
+        assertEquals(1, countRowsInTableWhere(jdbcTemplate, "holdings", "client_id='C001' AND instrument_id='INST002'"));
     }
 
     @Test
@@ -118,7 +121,7 @@ class ClientHoldingsMybatisTest {
     @Test
     void removeClientHoldingToSucceed() throws SQLException {
         dao.removeClientHolding("C001", "INST002");
-        assertEquals(0, countRowsInTableWhere(jdbcTemplate, "holdings", "clientid='C001' AND instrumentid='INST002'"));
+        assertEquals(0, countRowsInTableWhere(jdbcTemplate, "holdings", "client_id='C001' AND instrument_id='INST002'"));
     }
 
     @Test
@@ -130,7 +133,6 @@ class ClientHoldingsMybatisTest {
     void removeClientHoldingToThrowIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> dao.removeClientHolding(null, null));
     }
-
     private int countRowsInTableWhere(JdbcTemplate jdbcTemplate, String tableName, String whereClause) {
         return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM " + tableName + " WHERE " + whereClause, Integer.class);
     }
