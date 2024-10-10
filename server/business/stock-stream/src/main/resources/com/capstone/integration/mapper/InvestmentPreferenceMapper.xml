@@ -4,15 +4,15 @@
 <mapper namespace="com.capstone.integration.mapper.InvestmentPreferenceMapper">
 
 	<resultMap id="InvestmentPreferenceResultMap" type="InvestmentPreference">
-		<result property="clientId" column="clientId" />
-		<result property="investmentPurpose" column="investmentPurpose" />
+		<result property="clientId" column="client_id" />
+		<result property="investmentPurpose" column="investment_purpose" />
 		<result property="investmentPurposeDescription"
-			column="investmentPurposeDescription" />
-		<result property="riskTolerance" column="riskTolerance" />
-		<result property="incomeCategory" column="incomeCategory" />
-		<result property="investmentYear" column="investmentYear" />
+			column="investment_purpose_description" />
+		<result property="riskTolerance" column="risk_tolerance" />
+		<result property="incomeCategory" column="income_category" />
+		<result property="investmentYear" column="investment_year" />
 		<result property="isRoboAdvisorTermsAccepted"
-			column="isRoboAdvisorTermsAccepted" />
+			column="is_robo_advisor_terms_accepted" />
 	</resultMap>
 
 

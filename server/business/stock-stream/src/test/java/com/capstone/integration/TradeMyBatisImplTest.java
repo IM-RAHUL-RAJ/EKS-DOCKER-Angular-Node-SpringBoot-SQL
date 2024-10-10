@@ -35,7 +35,7 @@ class TradeMyBatisImplTest {
 	@Test
 	void testGetAllInstruments (){
 		List<Instrument> instruments = tradeDao.getAllInstruments();
-		assertNotNull(instruments);
+		assertNotNull(instruments.get(0));
 		assertEquals(5, instruments.size());
 	}
 

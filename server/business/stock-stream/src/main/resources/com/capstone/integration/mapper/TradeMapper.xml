@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.capstone.integration.mapper.TradeMapper">
 
+	
+
     <select id="getAllInstruments" resultType="com.capstone.models.Instrument">
         SELECT * FROM ss_instruments
     </select>
@@ -23,7 +25,7 @@
     </select>
 
     <insert id="insertTrade" parameterType="com.capstone.models.Trade">
-        INSERT INTO SS_TRADES (TRADE_ID, clientId, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) 
+        INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) 
         VALUES (#{tradeId}, #{clientId}, #{orderId}, #{instrumentId}, #{quantity}, #{executionPrice}, #{direction}, #{creationTime})
     </insert>
 
@@ -40,7 +42,7 @@
     </select>
 
     <insert id="insertOrder" parameterType="com.capstone.models.Order">
-        INSERT INTO SS_ORDERS (ORDER_ID, clientId, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) 
+        INSERT INTO SS_ORDERS (ORDER_ID, client_id, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) 
         VALUES (#{orderId}, #{clientId}, #{instrumentId}, #{quantity}, #{targetPrice}, #{direction}, #{orderStatus.code}, #{creationTime})
     </insert>
 
@@ -50,7 +52,7 @@
 
     <update id="modifyOrder" parameterType="com.capstone.models.Order">
         UPDATE ss_orders 
-        SET clientId = #{clientId}, 
+        SET client_id = #{clientId}, 
             INSTRUMENT_ID = #{instrumentId}, 
             QUANTITY = #{quantity}, 
             TARGET_PRICE = #{targetPrice}, 
@@ -61,7 +63,7 @@
     </update>
 
     <insert id="executeOrder" parameterType="com.capstone.models.Order">
-        INSERT INTO SS_TRADES (TRADE_ID, clientId, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) 
+        INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) 
         VALUES (#{tradeId}, #{clientId}, #{orderId}, #{instrumentId}, #{quantity}, #{executionPrice}, #{direction}, TO_TIMESTAMP(#{creationTime}, 'YYYY-MM-DD HH24:MI:SS'))
     </insert>
 

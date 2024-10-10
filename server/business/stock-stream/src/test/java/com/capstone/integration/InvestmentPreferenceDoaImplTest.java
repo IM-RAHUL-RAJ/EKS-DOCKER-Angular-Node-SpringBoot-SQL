@@ -50,7 +50,6 @@ class InvestmentPreferenceDoaImplTest {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	TransactionManager transactionManager;
 	private InvestmentPreference investmentPreference1 = new InvestmentPreference("C001",
 			InvestmentPurpose.COLLEGE_FUND, InvestmentPurpose.COLLEGE_FUND.getDescription(), RiskTolerance.CONSERVATIVE,
 			IncomeCategory.BELOW_20000, InvestmentYear.ZERO_TO_FIVE, true);
@@ -58,7 +57,7 @@ class InvestmentPreferenceDoaImplTest {
 	@Test
 	void getInvestmentPreferenceToSucceed() {
 		InvestmentPreference investmentPreference = dao.getInvestmentPreference("C001");
-		assertNotNull(investmentPreference);
+		assertNotNull(investmentPreference.getClientId());
 		assertEquals(investmentPreference, investmentPreference1);
 	}
 

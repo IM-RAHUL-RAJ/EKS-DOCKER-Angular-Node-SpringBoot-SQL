@@ -1,6 +1,7 @@
 package com.capstone.integration;
 
 import static org.junit.Assert.assertThrows;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,7 +11,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,11 +26,16 @@ import org.junit.jupiter.api.DisplayName;
 import com.capstone.exceptions.DatabaseException;
 import com.capstone.models.Holding;
 import java.math.BigDecimal;
+
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration("classpath:beans.xml")
+@Transactional
 class ClientHoldingDaoImplTest {
 
 	static PoolableDataSource dataSource;
 	@Autowired
-	ClientHoldingDaoImpl dao;
+	ClientHoldingDao dao;
 	Connection connection;
 	TransactionManager transactionManager;
 
@@ -100,7 +111,7 @@ class ClientHoldingDaoImplTest {
 	void getClientHoldingToThrowDatabaseException() {
 		
 		assertThrows(DatabaseException.class, () -> {
-			dao.getClientHolding("CLIENT001", "INST003");
+			dao.getClientHolding("CLIENT001", "INST005");
 		});
 		
 	}
@@ -123,7 +134,7 @@ class ClientHoldingDaoImplTest {
 		Holding holding = dao.addClientHolding(newHolding);
 
 		assertEquals(1, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), "holdings",
-				"clientid='C001' AND instrumentid='INST003'"));
+				"client_id='C001' AND instrument_id='INST003'"));
 		assertEquals(holding, newHolding);
 
 	}
@@ -134,7 +145,7 @@ class ClientHoldingDaoImplTest {
 		Holding newHolding = new Holding("Stock A", "INST002", "CLIENT001", 100, new BigDecimal(150.50).setScale(2),15050.00, new BigDecimal(155.00).setScale(2), 3.00, 450.00,
 				2.50);
 
-		assertThrows(DatabaseException.class, () -> {
+		assertThrows(DataIntegrityViolationException.class, () -> {
 			dao.addClientHolding(newHolding);
 		});
 
@@ -159,7 +170,7 @@ class ClientHoldingDaoImplTest {
 		Holding holding = dao.updateClientHolding(newHolding);
 
 		assertEquals(1, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), "holdings",
-				"clientid='C001' AND instrumentid='INST002'"));
+				"client_id='C001' AND instrument_id='INST002'"));
 		assertEquals(holding, newHolding);
 
 	}
@@ -200,7 +211,7 @@ class ClientHoldingDaoImplTest {
 		Holding deletedHolding = dao.removeClientHolding("C001", "INST002");
 
 		assertEquals(0, DbTestUtils.countRowsInTableWhere(dataSource.getConnection(), "holdings",
-				"clientid='CLIENT001' AND instrumentid='INST002'"));
+				"client_id='CLIENT001' AND instrument_id='INST002'"));
 		assertEquals(deletedHolding, holdingToBeDeleted);
 
 	}
