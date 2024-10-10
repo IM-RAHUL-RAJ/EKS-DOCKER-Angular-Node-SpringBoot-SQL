@@ -11,9 +11,11 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.capstone.exceptions.DatabaseException;
 import com.capstone.models.Holding;
+
 
 public class ClientHoldingDaoImpl implements ClientHoldingDao {
 

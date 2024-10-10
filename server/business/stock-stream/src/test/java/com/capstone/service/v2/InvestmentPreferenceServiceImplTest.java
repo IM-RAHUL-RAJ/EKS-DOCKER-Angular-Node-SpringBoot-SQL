@@ -1,4 +1,4 @@
-package com.capstone.services;
+package com.capstone.service.v2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,7 +30,8 @@ import com.capstone.models.ProfileStatus;
 import com.capstone.models.RiskTolerance;
 import com.capstone.services.ClientService;
 import com.capstone.services.FmtsService;
-import com.capstone.services.InvestmentPreferenceServiceImpl;
+import com.capstone.services.v2.InvestmentPreferenceService;
+import com.capstone.services.v2.InvestmentPreferenceServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:beans.xml")
@@ -168,8 +169,7 @@ class InvestmentPreferenceServiceImplTest {
 	@Test
 	void getInvestmentPreferenceToSucceed()
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
-		InvestmentPreference investmentPreference = this.investmentPreferenceService
-				.getInvestmentPreference("C001");
+		InvestmentPreference investmentPreference = this.investmentPreferenceService.getInvestmentPreference("C001");
 
 		assertEquals(investmentPreference.getClientId(), "C001");
 	}

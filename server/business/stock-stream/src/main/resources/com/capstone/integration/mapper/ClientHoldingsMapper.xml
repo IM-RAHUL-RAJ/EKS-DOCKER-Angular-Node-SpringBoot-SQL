@@ -5,32 +5,31 @@
 
 <mapper namespace="com.capstone.integration.mapper.ClientHoldingsMapper">
 
-    <select id="getAllHoldings" resultType="com.capstone.models.Holding">
-        SELECT instrument, instrumentId, clientId, quantity, averagePrice, investedCapital, ltp, percentChange, profitLoss, dayChangePercent
-        FROM holdings
-        WHERE clientId = #{clientId}
-    </select>
+   <select id="getAllHoldings" resultType="com.capstone.models.Holding">
+    SELECT instrument, instrument_id, client_id, quantity, average_price, invested_capital, ltp, percent_change, profit_loss, day_change_percent
+    FROM holdings
+    WHERE client_id = #{clientId}
+</select>
 
-    <select id="getHolding" resultType="com.capstone.models.Holding">
-        SELECT instrument, instrumentId, clientId, quantity, averagePrice, investedCapital, ltp, percentChange, profitLoss, dayChangePercent
-        FROM holdings
-        WHERE clientId = #{clientId} AND instrumentId = #{instrumentId}
-    </select>
+<select id="getHolding" resultType="com.capstone.models.Holding">
+    SELECT instrument, instrument_id as instrumentId, client_id as clientId, quantity, average_price as averagePrice, invested_capital as investedCapital, ltp, percent_change as percentChange, profit_loss as profitLoss, day_change_percent as dayChangePercent
+    FROM holdings
+    WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
+</select>
 
-    <insert id="insertHolding">
-        INSERT INTO holdings (instrument, instrumentId, clientId, quantity, averagePrice, investedCapital, ltp, percentChange, profitLoss, dayChangePercent)
-        VALUES (#{instrument}, #{instrumentId}, #{clientId}, #{quantity}, #{averagePrice}, #{investedCapital}, #{ltp}, #{percentChange}, #{profitLoss}, #{dayChangePercent})
-    </insert>
+<insert id="insertHolding">
+    INSERT INTO holdings (instrument, instrument_id, client_id, quantity, average_price, invested_capital, ltp, percent_change, profit_loss, day_change_percent)
+    VALUES (#{instrument}, #{instrumentId}, #{clientId}, #{quantity}, #{averagePrice}, #{investedCapital}, #{ltp}, #{percentChange}, #{profitLoss}, #{dayChangePercent})
+</insert>
 
-    <update id="updateHolding">
-        UPDATE holdings
-        SET instrument = #{instrument}, instrumentId = #{instrumentId}, clientId = #{clientId}, quantity = #{quantity}, averagePrice = #{averagePrice}, investedCapital = #{investedCapital}, ltp = #{ltp}, percentChange = #{percentChange}, profitLoss = #{profitLoss}, dayChangePercent = #{dayChangePercent}
-        WHERE clientId = #{clientId} AND instrumentId = #{instrumentId}
-    </update>
+<update id="updateHolding">
+    UPDATE holdings
+    SET instrument = #{instrument}, instrument_id = #{instrumentId}, client_id = #{clientId}, quantity = #{quantity}, average_price = #{averagePrice}, invested_capital = #{investedCapital}, ltp = #{ltp}, percent_change = #{percentChange}, profit_loss = #{profitLoss}, day_change_percent = #{dayChangePercent}
+    WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
+</update>
 
-    <delete id="deleteHolding">
-        DELETE FROM holdings
-        WHERE clientId = #{clientId} AND instrumentId = #{instrumentId}
-    </delete>
-
+<delete id="deleteHolding">
+    DELETE FROM holdings
+    WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
+</delete>
 </mapper>

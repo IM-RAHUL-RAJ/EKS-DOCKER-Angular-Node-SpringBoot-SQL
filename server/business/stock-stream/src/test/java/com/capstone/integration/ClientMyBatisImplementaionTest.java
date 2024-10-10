@@ -7,7 +7,8 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
+import static com.capstone.integration.DbTestUtils.countRowsInTable;
+import static com.capstone.integration.DbTestUtils.countRowsInTableWhere;
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.Disabled;
@@ -18,6 +19,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.exceptions.DatabaseException;
@@ -40,7 +42,7 @@ class ClientMyBatisImplementaionTest {
 	private JdbcTemplate jdbcTemplate;
 
 	@Test
-	void test_verifyEmailAddress_succeeds() throws SQLException {
+	void test_verifyEmailAddress_succeeds() {
 		String email = "paul.wilson@example.com";
 
 		assertTrue(dao.verifyEmailAddress(email));
@@ -48,14 +50,14 @@ class ClientMyBatisImplementaionTest {
 	}
 
 	@Test
-	public void testVerifyEmailAddress_Fails() throws SQLException {
+	public void testVerifyEmailAddress_Fails() {
 		String email = "nonexistent@example.com"; // This email does not exist in the database
 		boolean result = dao.verifyEmailAddress(email);
 		assertFalse(result);
 	}
 
 	@Test
-	void test_verifyEmailAddress_emptyEmail() throws SQLException {
+	void test_verifyEmailAddress_emptyEmail() {
 		String email = "";
 		assertThrows(IllegalArgumentException.class, () -> dao.verifyEmailAddress(email));
 	}
@@ -67,7 +69,7 @@ class ClientMyBatisImplementaionTest {
 	}
 
 	@Test
-	public void testVerifyLogin_Success() throws SQLException {
+	public void testVerifyLogin_Success(){
 		String clientId = "C005";
 		String password = "admin123";
 
@@ -76,7 +78,7 @@ class ClientMyBatisImplementaionTest {
 	}
 
 	@Test
-	public void testVerifyLogin_InvalidLogin() throws SQLException {
+	public void testVerifyLogin_InvalidLogin() {
 		String clientId = "wrongUser";
 		String password = "password123";
 
@@ -85,9 +87,10 @@ class ClientMyBatisImplementaionTest {
 	}
 
 	 @Test
-	    public void testAddClient_Success() {
-	        Client client = new Client("test@example.com", "password123", "Test User", "22-MAR-85", "Country", "12345", "PAN", "ID1236780", ProfileStatus.COMPLETE,"ClientId1236745");
+	    public void testAddClient_Success() throws SQLException {
+	        Client client = new Client("test@example.com", "password123", "Test User", "22-MAR-85", "Country", "12345", "PAN", "ID1236780", ProfileStatus.COMPLETE,"C111");
 	        assertDoesNotThrow(() -> dao.addClient(client));
+	        assertEquals(1,JdbcTestUtils.countRowsInTableWhere(jdbcTemplate,"ss_client", "client_id = 'C111'"));
 	    }
 
 	 @Test
@@ -95,6 +98,8 @@ class ClientMyBatisImplementaionTest {
 	        Client client = new Client(null, "password123", "Test User", "22-MAR-85", "Country", "12345", "PAN", "ID123", ProfileStatus.COMPLETE, "ClientId123");
 	        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> dao.addClient(client));
 	        assertEquals("Cannot add user: Required fields are missing", exception.getMessage());
+	        assertEquals(0,JdbcTestUtils.countRowsInTableWhere(jdbcTemplate,"ss_client", "client_id = 'ClientId123'"));
+
 	    }
 	 
 	 @Test
@@ -102,6 +107,8 @@ class ClientMyBatisImplementaionTest {
 	        Client client = new Client("linda.brown@example.com", "password123", "Test User", "22-MAR-85", "Country", "12345", "PAN", "ID123", ProfileStatus.PENDING, "ClientId123");
 	        
 	        assertThrows(DuplicateKeyException.class, () -> dao.addClient(client));
+	        assertEquals(0,JdbcTestUtils.countRowsInTableWhere(jdbcTemplate,"ss_client", "client_id = 'ClientId123'"));
+
 	    }
 
 

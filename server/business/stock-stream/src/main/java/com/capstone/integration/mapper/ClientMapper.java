@@ -11,5 +11,5 @@ public interface ClientMapper {
 
 	void addClient(Client client) throws SQLException;
 
-	int verifyLogin(@Param("clientId") String clientId, @Param("password") String password) throws SQLException;
+	int verifyLogin(@Param("clientId") String clientId, @Param("password") String password);
 }

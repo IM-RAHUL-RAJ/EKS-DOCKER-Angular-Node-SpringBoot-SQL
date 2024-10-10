@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class TradeService {
     private List<Trade> trades = new ArrayList<>();
-    private HoldingService portfolioService = new HoldingService();
+    private HoldingService holdingService = new HoldingService();
 
     public void executeTrade(Trade trade) throws TradeException, PortfolioException {
         try {
@@ -40,7 +40,7 @@ public class TradeService {
             item.setQuantity(trade.getQuantity());
    
             
-            portfolioService.addPortfolioItem(item);
+            holdingService.addPortfolioItem(item);
         } catch (NullPointerException | IllegalArgumentException e) {
             throw new TradeException("Error executing trade: " + e.getMessage());
         }
@@ -111,7 +111,7 @@ public class TradeService {
             item.setProfitLoss(0);
             item.setQuantity(updatedTrade.getQuantity());
             
-            portfolioService.updatePortfolioItem(item);
+            holdingService.updatePortfolioItem(item);
         } catch (NullPointerException | IllegalArgumentException e) {
             throw new TradeException("Error updating trade: " + e.getMessage());
         }

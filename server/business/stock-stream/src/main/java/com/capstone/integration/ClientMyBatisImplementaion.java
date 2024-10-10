@@ -38,7 +38,7 @@ public class ClientMyBatisImplementaion implements ClientDao {
 	}
 
 	@Override
-	public boolean verifyLogin(String email, String password) throws SQLException {
+	public boolean verifyLogin(String email, String password) {
 		
 		if ( password == null ||  password.isEmpty()) {
 			throw new IllegalArgumentException(" password cannot be null or empty");
