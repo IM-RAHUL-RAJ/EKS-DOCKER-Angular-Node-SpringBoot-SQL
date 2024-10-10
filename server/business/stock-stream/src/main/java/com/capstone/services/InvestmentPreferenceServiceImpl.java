@@ -25,6 +25,7 @@ public class InvestmentPreferenceServiceImpl implements InvestmentPreferenceServ
 
 	private List<InvestmentPreference> investmentPreferences = new ArrayList<InvestmentPreference>();
 	private ClientService clientService;
+	
 	@Autowired
 	private InvestmentPreferenceDao investmentPreferenceDao;
 
@@ -35,6 +36,7 @@ public class InvestmentPreferenceServiceImpl implements InvestmentPreferenceServ
 		return this.investmentPreferences.size();
 	}
 
+	@Override
 	public void setClientService(ClientService clientService) {
 		this.clientService = clientService;
 	}

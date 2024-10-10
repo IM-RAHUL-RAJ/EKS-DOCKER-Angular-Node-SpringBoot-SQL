@@ -38,7 +38,7 @@ import com.capstone.services.InvestmentPreferenceServiceImpl;
 class InvestmentPreferenceServiceImplTest {
 
 	@Autowired
-	InvestmentPreferenceServiceImpl investmentPreferenceService;
+	InvestmentPreferenceService investmentPreferenceService;
 
 	private final String PREFERENCE_TABLE = "investment_preferences";
 

@@ -17,8 +17,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.exceptions.ClientWithIdNotFoundException;
@@ -32,6 +34,7 @@ import com.capstone.models.InvestmentYear;
 import com.capstone.models.RiskTolerance;
 
 
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:beans.xml")
 @Transactional
@@ -43,6 +46,9 @@ class InvestmentPreferenceDoaImplTest {
 	
 	@Autowired
 	InvestmentPreferenceDao dao;
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 	
 	TransactionManager transactionManager;
 	private InvestmentPreference investmentPreference1 = new InvestmentPreference("C001",
@@ -79,6 +85,7 @@ class InvestmentPreferenceDoaImplTest {
 		InvestmentPreference insertedInvestmentPreference = dao.addInvestmentPreference(newInvestmentPreference);
 
 		assertEquals(newInvestmentPreference, insertedInvestmentPreference);
+		assertEquals(JdbcTestUtils.countRowsInTableWhere(jdbcTemplate,"investment_preferences","client_id='C003'"), 1);
 
 	}
 
@@ -122,6 +129,7 @@ class InvestmentPreferenceDoaImplTest {
 		InvestmentPreference insertedInvestmentPreference = dao.updateInvestmentPreference(newInvestmentPreference);
 
 		assertEquals(newInvestmentPreference, insertedInvestmentPreference);
+		assertEquals(JdbcTestUtils.countRowsInTableWhere(jdbcTemplate,"investment_preferences","client_id='C001' AND income_category='ABOVE_80000'"), 1);
 
 	}
 
@@ -154,6 +162,7 @@ class InvestmentPreferenceDoaImplTest {
 		InvestmentPreference deletedInvestmentPreference = dao.removeInvestmentPreference(clientIdToBeDeleted);
 
 		assertEquals(clientIdToBeDeleted, deletedInvestmentPreference.getClientId());
+		assertEquals(JdbcTestUtils.countRowsInTableWhere(jdbcTemplate,"investment_preferences","client_id='C001'"), 0);
 	}
 	
 	@Test

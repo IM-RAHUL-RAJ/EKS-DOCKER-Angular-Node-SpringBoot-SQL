@@ -19,4 +19,6 @@ public interface InvestmentPreferenceService {
 	InvestmentPreference removeInvestmentPreference(String clientId)
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction;
 
+	void setClientService(ClientService clientService);
+
 }
