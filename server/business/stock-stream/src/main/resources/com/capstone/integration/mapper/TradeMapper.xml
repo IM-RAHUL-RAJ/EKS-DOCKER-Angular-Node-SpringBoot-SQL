@@ -1,70 +1,126 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.capstone.integration.mapper.TradeMapper">
 
-	
 
-    <select id="getAllInstruments" resultType="com.capstone.models.Instrument">
-        SELECT * FROM ss_instruments
-    </select>
+	<resultMap id="InstrumentMap" type="Instrument">
+		<result property="instrumentId" column="instrument_id" />
+		<result property="externalIdType" column="external_id_type" />
+		<result property="externalId" column="external_id" />
+		<result property="categoryId" column="category_id" />
+		<result property="instrumentDescription" column="description" />
+		<result property="maxQuantity" column="max_quantity" />
+		<result property="minQuantity" column="min_quantity" />
+	</resultMap>
 
-    <select id="getInstrumentById" parameterType="String" resultType="com.capstone.models.Instrument">
-        SELECT * FROM ss_instruments WHERE INSTRUMENT_ID = #{instrumentId}
-    </select>
+	<resultMap id="PriceMap" type="Price">
+		<result property="instrumentId" column="instrument_id" />
+		<result property="askPrice" column="askprice" />
+		<result property="bidPrice" column="bidprice" />
+		<result property="updateTime" column="updated_at" />
+		<association property="instrument" resultMap="InstrumentMap" />
+	</resultMap>
 
-    <select id="getPrice" parameterType="String" resultType="com.capstone.models.Price">
-        SELECT * FROM ss_price WHERE INSTRUMENT_ID = #{instrumentId}
-    </select>
+	<resultMap id="OrderMap" type="Order">
+		<result property="orderId" column="order_id" />
+		<result property="clientId" column="client_id" />
+		<result property="instrumentId" column="instrument_id" />
+		<result property="quantity" column="quantity" />
+		<result property="targetPrice" column="target_price" />
+		<result property="direction" column="direction" />
+		<result property="orderStatus" column="status"
+			typeHandler="com.capstone.enumhandlers.OrderStatusTypeHandler" />
+		<result property="creationTime" column="created_at" />
+	</resultMap>
 
-    <select id="getTradeHistory" resultType="com.capstone.models.Trade">
-        SELECT * FROM ss_trades ORDER BY EXECUTED_AT DESC FETCH FIRST 100 ROWS ONLY
-    </select>
 
-    <select id="getTradeById" parameterType="String" resultType="com.capstone.models.Trade">
-        SELECT * FROM ss_trades WHERE TRADE_ID = #{tradeId}
-    </select>
+	<resultMap id="TradeMap" type="Trade">
 
-    <insert id="insertTrade" parameterType="com.capstone.models.Trade">
-        INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) 
-        VALUES (#{tradeId}, #{clientId}, #{orderId}, #{instrumentId}, #{quantity}, #{executionPrice}, #{direction}, #{creationTime})
-    </insert>
+		<result property="tradeId" column="trade_id" />
+		<result property="clientId" column="client_id" />
+		<result property="orderId" column="order_id" />
+		<result property="instrumentId" column="instrument_id" />
+		<result property="quantity" column="quantity" />
+		<result property="executionPrice" column="execution_price" />
+		<result property="direction" column="direction" />
+		<result property="creationTime" column="executed_at" />
+		<association property="order" resultMap="OrderMap" />
+	</resultMap>
 
-    <select id="getAllPendingOrders" resultType="com.capstone.models.Order">
-        SELECT * FROM ss_orders WHERE STATUS = 0
-    </select>
 
-    <select id="getAllOrders" resultType="com.capstone.models.Order">
-        SELECT * FROM ss_orders
-    </select>
+	<select id="getAllInstruments" resultMap="InstrumentMap">
+		SELECT * FROM ss_instruments
+	</select>
 
-    <select id="getOrderById" parameterType="String" resultType="com.capstone.models.Order">
-        SELECT * FROM ss_orders WHERE ORDER_ID = #{orderId}
-    </select>
+	<select id="getInstrumentById" parameterType="String"
+		resultMap="InstrumentMap">
+		SELECT * FROM ss_instruments WHERE INSTRUMENT_ID = #{instrumentId}
+	</select>
 
-    <insert id="insertOrder" parameterType="com.capstone.models.Order">
-        INSERT INTO SS_ORDERS (ORDER_ID, client_id, INSTRUMENT_ID, QUANTITY, TARGET_PRICE, DIRECTION, STATUS, CREATED_AT) 
-        VALUES (#{orderId}, #{clientId}, #{instrumentId}, #{quantity}, #{targetPrice}, #{direction}, #{orderStatus.code}, #{creationTime})
-    </insert>
+	<select id="getPrice" parameterType="String"
+		resultMap="PriceMap">
+		SELECT * FROM ss_price WHERE INSTRUMENT_ID = #{instrumentId}
+	</select>
 
-    <update id="cancelOrder" parameterType="String">
-        UPDATE ss_orders SET status = 2 WHERE ORDER_ID = #{orderId}
-    </update>
+	<select id="getTradeHistory" resultMap="TradeMap">
+		SELECT * FROM ss_trades ORDER BY EXECUTED_AT DESC FETCH FIRST 100 ROWS
+		ONLY
+	</select>
 
-    <update id="modifyOrder" parameterType="com.capstone.models.Order">
-        UPDATE ss_orders 
-        SET client_id = #{clientId}, 
-            INSTRUMENT_ID = #{instrumentId}, 
-            QUANTITY = #{quantity}, 
-            TARGET_PRICE = #{targetPrice}, 
-            DIRECTION = #{direction}, 
-            STATUS = #{orderStatus.code}, 
-            CREATED_AT = #{creationTime} 
-        WHERE ORDER_ID = #{orderId}
-    </update>
+	<select id="getTradeById" parameterType="String"
+		resultMap="TradeMap">
+		SELECT * FROM ss_trades WHERE TRADE_ID = #{tradeId}
+	</select>
 
-    <insert id="executeOrder" parameterType="com.capstone.models.Order">
-        INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID, QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT) 
-        VALUES (#{tradeId}, #{clientId}, #{orderId}, #{instrumentId}, #{quantity}, #{executionPrice}, #{direction}, TO_TIMESTAMP(#{creationTime}, 'YYYY-MM-DD HH24:MI:SS'))
-    </insert>
+	<insert id="insertTrade" parameterType="Trade">
+		INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID,
+		QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT)
+		VALUES (#{tradeId}, #{clientId}, #{orderId}, #{instrumentId},
+		#{quantity}, #{executionPrice}, #{direction}, #{creationTime})
+	</insert>
+
+	<select id="getAllPendingOrders" resultMap="OrderMap">
+		SELECT * FROM ss_orders WHERE STATUS = 0
+	</select>
+
+	<select id="getAllOrders" resultMap="OrderMap">
+		SELECT * FROM ss_orders
+	</select>
+
+	<select id="getOrderById" parameterType="String"
+		resultMap="OrderMap">
+		SELECT * FROM ss_orders WHERE ORDER_ID = #{orderId}
+	</select>
+
+	<insert id="insertOrder" parameterType="com.capstone.models.Order">
+		INSERT INTO SS_ORDERS (ORDER_ID, client_id, INSTRUMENT_ID, QUANTITY,
+		TARGET_PRICE, DIRECTION, STATUS, CREATED_AT)
+		VALUES (#{orderId}, #{clientId}, #{instrumentId}, #{quantity},
+		#{targetPrice}, #{direction}, #{orderStatus.code}, #{creationTime})
+	</insert>
+
+	<update id="cancelOrder" parameterType="String">
+		UPDATE ss_orders SET status = 2 WHERE ORDER_ID = #{orderId}
+	</update>
+
+	<update id="modifyOrder" parameterType="com.capstone.models.Order">
+		UPDATE ss_orders
+		SET client_id = #{clientId},
+		INSTRUMENT_ID = #{instrumentId},
+		QUANTITY = #{quantity},
+		TARGET_PRICE = #{targetPrice},
+		DIRECTION = #{direction},
+		STATUS = #{orderStatus.code},
+		CREATED_AT = #{creationTime}
+		WHERE ORDER_ID = #{orderId}
+	</update>
+
+	<insert id="executeOrder" parameterType="com.capstone.models.Order">
+		INSERT INTO SS_TRADES (TRADE_ID, client_id, ORDER_ID, INSTRUMENT_ID,
+		QUANTITY, EXECUTION_PRICE, DIRECTION, EXECUTED_AT)
+		VALUES (#{tradeId}, #{clientId}, #{orderId}, #{instrumentId},
+		#{quantity}, #{executionPrice}, #{direction},
+		TO_TIMESTAMP(#{creationTime}, 'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
 
 </mapper>

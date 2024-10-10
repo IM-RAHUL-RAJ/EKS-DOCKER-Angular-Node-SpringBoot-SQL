@@ -2,25 +2,16 @@ package com.capstone.service.v2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
 import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
 import com.capstone.exceptions.RoboAdvisorMandatoryException;
 import com.capstone.exceptions.UserNotLoggedInToPerformAction;
-import com.capstone.integration.InvestmentPreferenceDao;
-import com.capstone.integration.InvestmentPreferenceDaoImpl;
-import com.capstone.integration.PoolableDataSource;
-import com.capstone.integration.TransactionManager;
 import com.capstone.models.Client;
 import com.capstone.models.IncomeCategory;
 import com.capstone.models.InvestmentPreference;
@@ -31,10 +22,8 @@ import com.capstone.models.RiskTolerance;
 import com.capstone.services.ClientService;
 import com.capstone.services.FmtsService;
 import com.capstone.services.v2.InvestmentPreferenceService;
-import com.capstone.services.v2.InvestmentPreferenceServiceImpl;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:beans.xml")
+@SpringBootTest
 @Transactional
 class InvestmentPreferenceServiceImplTest {
 

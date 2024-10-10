@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +27,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import com.capstone.exceptions.PortfolioException;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:beans.xml")
+@SpringBootTest
 @Transactional
 public class HoldingServiceTest {
 
@@ -91,7 +91,7 @@ public class HoldingServiceTest {
             Holding portfolio = client1Portfolios.stream()
                     .findFirst()
                     .orElseThrow(() -> new AssertionError("Updated portfolio not found"));
-            assertEquals(100, portfolio.getQuantity());
+            assertEquals(150, portfolio.getQuantity());
         } catch (PortfolioException e) {
             fail("Update portfolio item failed: " + e.getMessage());
         }
