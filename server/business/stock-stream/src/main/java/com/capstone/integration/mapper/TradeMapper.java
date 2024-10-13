@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -12,6 +13,7 @@ import com.capstone.models.Order;
 import com.capstone.models.Price;
 import com.capstone.models.Trade;
 
+@Mapper
 public interface TradeMapper {
 
     List<Instrument> getAllInstruments();
@@ -21,6 +23,8 @@ public interface TradeMapper {
     Price getPrice(String instrumentId);
 
     List<Trade> getTradeHistory();
+    
+    List<Trade> getClientTradeHistory(String clientId);
 
     Trade getTradeById(String tradeId);
 

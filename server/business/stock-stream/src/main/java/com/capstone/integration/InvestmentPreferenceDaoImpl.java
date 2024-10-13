@@ -26,15 +26,9 @@ import com.capstone.models.RiskTolerance;
 @Primary
 public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 
-	
-	DataSource dataSource;
-	
+
 	@Autowired
 	InvestmentPreferenceMapper investmentPreferenceMapper;
-
-	public InvestmentPreferenceDaoImpl(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 
 	@Override
 	public InvestmentPreference getInvestmentPreference(String clientId) {
@@ -45,14 +39,13 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 
 		InvestmentPreference investmentPreference = investmentPreferenceMapper.getInvestmentPreference(clientId);
 
-		if(investmentPreference == null) {
+		if (investmentPreference == null) {
 			throw new InvestmentPreferenceWithClientIdNotFound();
 		}
-		
-		return investmentPreference;
-		
-	}
 
+		return investmentPreference;
+
+	}
 
 	@Override
 	public InvestmentPreference addInvestmentPreference(InvestmentPreference investmentPreference) {
@@ -60,12 +53,11 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 		if (investmentPreference == null) {
 			throw new IllegalArgumentException("Investment preference cannot be null..");
 		}
-		
-		if(investmentPreferenceMapper.addInvestmentPreference(investmentPreference)==1) {
+
+		if (investmentPreferenceMapper.addInvestmentPreference(investmentPreference) == 1) {
 			InvestmentPreference newInvestmentPreference = getInvestmentPreference(investmentPreference.getClientId());
 			return newInvestmentPreference;
-		}
-		else {
+		} else {
 			throw new DatabaseException();
 		}
 
@@ -78,11 +70,11 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 			throw new IllegalArgumentException("investment preference cannot be null");
 		}
 
-		if(investmentPreferenceMapper.updateInvestmentPreference(investmentPreference)==1) {
-			InvestmentPreference updatedInvestmentPreference = getInvestmentPreference(investmentPreference.getClientId());
+		if (investmentPreferenceMapper.updateInvestmentPreference(investmentPreference) == 1) {
+			InvestmentPreference updatedInvestmentPreference = getInvestmentPreference(
+					investmentPreference.getClientId());
 			return updatedInvestmentPreference;
-		}
-		else {
+		} else {
 			throw new InvestmentPreferenceWithClientIdNotFound();
 		}
 
@@ -95,31 +87,15 @@ public class InvestmentPreferenceDaoImpl implements InvestmentPreferenceDao {
 			throw new IllegalArgumentException("client id cannot be null or empty");
 		}
 
-		try {
-			Connection connection = dataSource.getConnection();
-			
-			InvestmentPreference deletedInvestmentPreference = removeInvestmentPreference(connection,clientId);
-			
-			return deletedInvestmentPreference;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DatabaseException();
-		}
-
-	}
-
-	private InvestmentPreference removeInvestmentPreference(Connection connection, String clientId)
-			throws SQLException {
-		
 		InvestmentPreference investmentPreference = getInvestmentPreference(clientId);
-		
-		if(investmentPreferenceMapper.removeInvestmentPreference(clientId)==1) {
+
+		if (investmentPreferenceMapper.removeInvestmentPreference(clientId) == 1) {
 			return investmentPreference;
-		}else {
+		} else {
 			throw new DatabaseException();
 		}
-		
+
 	}
+
 
 }

@@ -9,11 +9,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.capstone.exceptions.PortfolioException;
-import com.capstone.integration.ClientHoldingDao;
-import com.capstone.integration.ClientHoldingDaoImpl;
-import com.capstone.integration.ClientMyBatisImplementaion;
 import com.capstone.integration.ClientMybatisHoldingsDaoImpl;
 import com.capstone.models.Holding;
+
 
 @Service
 @Primary

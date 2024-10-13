@@ -38,7 +38,7 @@ public class TradeServiceImpl implements TradeService {
 			dao.insertTrade(trade);
 			Holding item = new Holding();
 			item.setAveragePrice(trade.getExecutionPrice());
-			item.setClientId("Test");
+			item.setClientId(trade.getClientId());
 			item.setInstrument("Test");
 			item.setDayChangePercent(0);
 			item.setInstrumentId(trade.getInstrumentId());

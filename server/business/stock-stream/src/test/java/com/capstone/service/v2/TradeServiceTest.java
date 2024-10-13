@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +25,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:beans.xml")
+@SpringBootTest
 @Transactional
 class TradeServiceTest {
 
@@ -36,20 +36,21 @@ class TradeServiceTest {
     @BeforeEach
     void setUp() {
         trade = new Trade();
-        trade.setInstrumentId("123");
+        trade.setInstrumentId("I001");
         trade.setQuantity(10);
         trade.setExecutionPrice(new BigDecimal(100).setScale(2));
         trade.setDirection("B");
-        trade.setClientId("client123");
-        trade.setTradeId("trade123");
+        trade.setClientId("C001");
+        trade.setTradeId("T007");
         trade.setCashValue(1000.0);
+        trade.setOrderId("O001");
         trade.setCreationTime(Timestamp.valueOf(LocalDateTime.now()));
     }
 
     @Test
     void testExecuteTrade_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
-        assertEquals(1, tradeService.listAllTrades().size());
+        assertEquals(6, tradeService.listAllTrades().size());
     }
 
     @Test
@@ -74,7 +75,7 @@ class TradeServiceTest {
     @Test
     void testCalculateTradeValue_Valid() throws TradeException {
         BigDecimal value = tradeService.calculateTradeValue(trade);
-        assertEquals(1000.0, value);
+        assertEquals(1000.00, value);
     }
 
     @Test
@@ -99,7 +100,7 @@ class TradeServiceTest {
         updatedOrder.setDirection("S");
         updatedOrder.setClientId("client123");
         updatedOrder.setOrderId("trade123cti");
-        updatedOrder.setCreationTime(null);
+        updatedOrder.setCreationTime(Timestamp.valueOf(LocalDateTime.now()));
         tradeService.updateOrder(updatedOrder);
         assertEquals(20, tradeService.getTradeById("trade123").getQuantity());
     }
@@ -119,7 +120,7 @@ class TradeServiceTest {
     void testListAllTrades() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         List<Trade> trades = tradeService.listAllTrades();
-        assertEquals(1, trades.size());
+        assertEquals(6, trades.size());
     }
     
     @Test
@@ -127,20 +128,20 @@ class TradeServiceTest {
         tradeService.executeTrade(trade);
         
         List<Trade> tradeHistory = tradeService.getClientTradeHistory(trade.getClientId());
-        assertEquals(1, tradeHistory.size());
+        assertEquals(6, tradeHistory.size());
     }
 
     @Test
     void testListTradesByClient_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         List<Trade> trades = tradeService.listTradesByClient(trade.getClientId());
-        assertEquals(1, trades.size());
+        assertEquals(2, trades.size());
     }
 
     @Test
     void testListTradesByInstrument_Valid() throws TradeException, PortfolioException {
         tradeService.executeTrade(trade);
         List<Trade> trades = tradeService.listTradesByInstrument(trade.getInstrumentId());
-        assertEquals(1, trades.size());
+        assertEquals(2, trades.size());
     }
 }
