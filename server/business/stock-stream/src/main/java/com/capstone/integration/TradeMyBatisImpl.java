@@ -168,5 +168,16 @@ public class TradeMyBatisImpl implements TradeDao{
         }
         return trade;
     }
+
+	@Override
+	public List<Trade> getClientTradeHistory(String clientId) {
+		
+		if(clientId == null) {
+			throw new IllegalArgumentException("client id cannot be null");
+		}
+		
+		List<Trade> clientTradeHistory = tradeMapper.getClientTradeHistory(clientId);
+		return clientTradeHistory;
+	}
 }
 	
