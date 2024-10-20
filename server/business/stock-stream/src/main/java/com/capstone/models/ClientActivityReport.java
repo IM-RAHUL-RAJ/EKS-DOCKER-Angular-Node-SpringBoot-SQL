@@ -3,13 +3,23 @@ package com.capstone.models;
 public class ClientActivityReport {
     private String title;
     private String summary;
+    private String clientId; 
 
-    public ClientActivityReport(String title, String summary) {
+    public ClientActivityReport(String clientId,String title, String summary) {
+    	this.clientId=clientId;
         this.title = title;
         this.summary = summary;
     }
 
-    // Getters and setters
+    public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+	// Getters and setters
     public String getTitle() {
         return title;
     }
