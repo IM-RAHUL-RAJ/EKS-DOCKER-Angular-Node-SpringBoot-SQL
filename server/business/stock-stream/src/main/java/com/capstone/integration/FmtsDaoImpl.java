@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.capstone.dto.EmailDTO;
 import com.capstone.dto.FmtsTokenResponse;
+import com.capstone.dto.LivePricingResponse;
 
 @Repository
 public class FmtsDaoImpl implements FmtsDao {
@@ -26,6 +27,8 @@ public class FmtsDaoImpl implements FmtsDao {
 	@Value("${fmt.verify.url:http://localhost:3000/fmts/client}")
 	private String fmtVerifyUrl;
 
+    private String livePricingUrl="http://localhost:3000/fmts/trades/prices/STOCK";
+	
 	public FmtsDaoImpl(RestTemplate restTemplate) {
 	    MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
@@ -53,4 +56,21 @@ public class FmtsDaoImpl implements FmtsDao {
 	    throw new RuntimeException("Unexpected response status: " + response.getStatusCode());
 	  }
 	}
-}
+	
+	 @Override
+	    public List<LivePricingResponse> getLivePricing() {
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.setContentType(MediaType.APPLICATION_JSON);
+
+	        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+	        ResponseEntity<LivePricingResponse[]> response = restTemplate.exchange(
+	            livePricingUrl, HttpMethod.GET, entity, LivePricingResponse[].class);
+	        if (response.getStatusCode() == HttpStatus.OK) {
+	            return List.of(response.getBody());
+	        } else {
+	            throw new RuntimeException("Unexpected response status: " + response.getStatusCode());
+	        }
+	    }
+	}
+	

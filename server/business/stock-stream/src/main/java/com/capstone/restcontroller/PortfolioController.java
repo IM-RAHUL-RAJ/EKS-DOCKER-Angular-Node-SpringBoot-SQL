@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.capstone.dto.LivePricingResponse;
 import com.capstone.integration.ClientHoldingDao;
+import com.capstone.integration.FmtsDao;
 import com.capstone.models.Holding;
 import com.capstone.services.v2.HoldingService;
 
@@ -32,6 +34,8 @@ public class PortfolioController {
     @Autowired
     private HoldingService service;
 
+    @Autowired
+    private FmtsDao fmtsDao;
     
     @GetMapping(value="/ping", produces=MediaType.ALL_VALUE)
     public String ping() {
@@ -50,6 +54,17 @@ public class PortfolioController {
         } catch (Exception e) {
             logger.error("problem getting widgets", e);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to retrieve books", e);
+        }
+    }
+    
+    @GetMapping("/live-prices")
+    public ResponseEntity<List<LivePricingResponse>> getLivePrices() {
+        try {
+            List<LivePricingResponse> livePricing = fmtsDao.getLivePricing();
+            return ResponseEntity.status(HttpStatus.OK).body(livePricing);
+        } catch (Exception e) {
+            logger.error("problem getting live prices", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to retrieve live prices", e);
         }
     }
 
