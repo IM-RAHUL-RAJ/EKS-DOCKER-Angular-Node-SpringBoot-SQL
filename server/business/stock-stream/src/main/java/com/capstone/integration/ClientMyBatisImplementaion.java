@@ -17,7 +17,6 @@ public class ClientMyBatisImplementaion implements ClientDao {
 
     @Override
     public boolean isEmailUnique(String email) {
-    	System.out.println("EMAIL VALIDAITY CHECKER 77158 3" + (clientMapper.isEmailUnique(email) == 0));
         return clientMapper.isEmailUnique(email) == 0;
     }
 

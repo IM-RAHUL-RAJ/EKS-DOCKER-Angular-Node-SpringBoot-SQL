@@ -56,7 +56,6 @@ public class ClientServiceImpl implements ClientService {
 			FmtsTokenResponse response = fmtsDao.verifyClientToGetToken(client.getEmail());
 			if(response != null) {
 				this.token = response.getToken();
-				System.out.print("TOKEN 222" +this.token);
 				clientDAO.save(client);
 			} else throw new EmailAlreadyExistsException("Email already exists.");
 		} catch (DuplicateKeyException e) {
@@ -65,11 +64,9 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	private boolean isValidEmail(String email) {
-		System.out.println("EMAIL VALIDAITY CHECKER 77158 1" + email);
 		String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(email);
-		System.out.println("EMAIL VALIDAITY CHECKER 77158 1" + matcher.matches());
 		return matcher.matches();
 	}
 

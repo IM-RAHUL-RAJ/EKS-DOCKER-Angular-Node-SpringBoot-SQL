@@ -47,7 +47,6 @@ public class FmtsDaoImpl implements FmtsDao {
 
 	  ResponseEntity<FmtsTokenResponse> response = restTemplate.exchange(
 	      fmtVerifyUrl, HttpMethod.POST, entity, FmtsTokenResponse.class);
-	  System.out.print(response);
 	  if (response.getStatusCode() == HttpStatus.OK) {
 	    return response.getBody();
 	  } else {
