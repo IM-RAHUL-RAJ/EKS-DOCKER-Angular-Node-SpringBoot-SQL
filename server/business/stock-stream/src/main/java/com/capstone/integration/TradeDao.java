@@ -16,6 +16,8 @@ public interface TradeDao {
 	Price getPrice(String instrumentId);
 
 	List<Trade> getTradeHistory();
+	
+	List<Trade> getClientTradeHistory(String clientId);
 
 	Trade getTradeById(String tradeId);
 

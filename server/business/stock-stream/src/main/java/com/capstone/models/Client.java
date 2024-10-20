@@ -1,12 +1,13 @@
 package com.capstone.models;
 
+import java.sql.Date;
 import java.util.Objects;
 
 public class Client {
 	private String email;
 	private String password;
 	private String fullName;
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	private String country;
 	private String postalCode;
 	private String identificationType;
@@ -14,8 +15,8 @@ public class Client {
 	private String clientId;
 	private ProfileStatus profileStatus;
 
-	public Client(String email, String password, String fullName, String dateOfBirth, String country, String postalCode,
-			String identificationType, String identificationNumber, ProfileStatus profileStatus, String clientId) {
+	public Client(String email, String password, String fullName, Date dateOfBirth, String country, String postalCode,
+			String identificationType, String identificationNumber, String profileStatus, String clientId) {
 		super();
 		setEmail(email);
 		setPassword(password);
@@ -26,7 +27,14 @@ public class Client {
 		setIdentificationType(identificationType);
 		setIdentificationNumber(identificationNumber);
 		setClientId(clientId);
-		setProfileStatus(profileStatus);
+		setProfileStatus(ProfileStatus.valueOf(profileStatus.toUpperCase()));
+	}
+	public Client() {
+		super();
+	}
+	public Client(String email, String password) {
+	    setEmail(email);
+	    setPassword(password);
 	}
 
 	public String getEmail() {
@@ -41,7 +49,7 @@ public class Client {
 		return fullName;
 	}
 
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -89,11 +97,14 @@ public class Client {
 		this.fullName = fullName;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		Objects.requireNonNull(dateOfBirth, "dateOfBirth cannot be null");
-		if (dateOfBirth.isEmpty()) {
-			throw new IllegalArgumentException("dateOfBirth cannot be empty");
-		}
+		   Date currentDate = new Date(System.currentTimeMillis());
+		    
+		    if (dateOfBirth.after(currentDate)) {
+		        throw new IllegalArgumentException("dateOfBirth cannot be in the future");
+		    }
+
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -107,38 +118,38 @@ public class Client {
 
 	public void setPostalCode(String postalCode) {
 		Objects.requireNonNull(postalCode, "postalCode cannot be null");
-        if (postalCode.isEmpty()) {
-            throw new IllegalArgumentException("postalCode cannot be empty");
-        }
+		if (postalCode.isEmpty()) {
+			throw new IllegalArgumentException("postalCode cannot be empty");
+		}
 		this.postalCode = postalCode;
 	}
 
 	public void setIdentificationType(String identificationType) {
 		Objects.requireNonNull(identificationType, "identificationType cannot be null");
-        if (identificationType.isEmpty()) {
-            throw new IllegalArgumentException("identificationType cannot be empty");
-        }
+		if (identificationType.isEmpty()) {
+			throw new IllegalArgumentException("identificationType cannot be empty");
+		}
 		this.identificationType = identificationType;
 	}
 
 	public void setIdentificationNumber(String identificationNumber) {
 		Objects.requireNonNull(identificationNumber, "Email cannot be null");
-        if (identificationNumber.isEmpty()) {
-            throw new IllegalArgumentException("identificationNumber cannot be empty");
-        }
+		if (identificationNumber.isEmpty()) {
+			throw new IllegalArgumentException("identificationNumber cannot be empty");
+		}
 		this.identificationNumber = identificationNumber;
 	}
 
 	public void setClientId(String clientId) {
 		Objects.requireNonNull(clientId, "clientId cannot be null");
-        if (clientId.isEmpty()) {
-            throw new IllegalArgumentException("clientId cannot be empty");
-        }
+		if (clientId.isEmpty()) {
+			throw new IllegalArgumentException("clientId cannot be empty");
+		}
 		this.clientId = clientId;
 	}
 
-	public ProfileStatus getProfileStatus() {
-		return profileStatus;
+	public String getProfileStatus() {
+		return profileStatus.getStatus();
 	}
 
 	public void setProfileStatus(ProfileStatus profileStatus) {

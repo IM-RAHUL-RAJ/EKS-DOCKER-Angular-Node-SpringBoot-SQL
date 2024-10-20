@@ -8,4 +8,3 @@ export interface Client {
     identification: { type: string; value: string };
     clientId: string;
   }
-  

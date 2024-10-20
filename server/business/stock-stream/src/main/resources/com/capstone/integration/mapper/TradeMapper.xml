@@ -66,6 +66,11 @@
 		SELECT * FROM ss_trades ORDER BY EXECUTED_AT DESC FETCH FIRST 100 ROWS
 		ONLY
 	</select>
+	
+	<select id="getClientTradeHistory" resultMap="TradeMap">
+		SELECT * FROM ss_trades WHERE client_id = #{clientId} ORDER BY EXECUTED_AT DESC FETCH FIRST 100 ROWS
+		ONLY
+	</select>
 
 	<select id="getTradeById" parameterType="String"
 		resultMap="TradeMap">
