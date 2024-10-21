@@ -1,4 +1,4 @@
-package com.capstone.restcontroller;
+package com.capstone.restcontrollers;
 
 import java.time.LocalDateTime;
 import java.util.List;
