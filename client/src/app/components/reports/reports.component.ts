@@ -1,26 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from 'src/app/services/report.service'; 
-import { Portfolio } from 'src/app/models/portfolio'; 
+import { ReportService, Report } from 'src/app/services/report.service';
 
 @Component({
-  selector: 'app-client-activity',
+  selector: 'app-reports',
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
-export class ClientActivityComponent implements OnInit {
-
-  clientActivityReports: Portfolio[] = [];
+export class ReportsComponent implements OnInit {
+  reports: Report[] = [];
+  clientId = 'C001'; // Example client ID
 
   constructor(private reportService: ReportService) { }
 
   ngOnInit(): void {
-    this.getClientActivity('C001');
-  }
-
-  getClientActivity(clientId: string): void {
-    this.reportService.getReports(clientId).subscribe(
-      (reports) => this.clientActivityReports = reports,
-      (error) => console.error('Error fetching client activity', error)
-    );
+    this.reportService.getReports(this.clientId).subscribe((data) => {
+      this.reports = data;
+    });
   }
 }
+
