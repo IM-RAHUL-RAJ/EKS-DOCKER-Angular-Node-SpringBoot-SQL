@@ -1,14 +1,14 @@
 <div class="reports-container">
   <h2>Reports</h2>
   <ul>
-    <li *ngFor="let report of mockReports">
+    <li *ngFor="let report of reports">
       <div class="report-details">
         <div>
           <h3>{{ report.title }}</h3>
           <p>{{ report.summary }}</p>
         </div>
         <a [href]="" download>
-          <img src="assets/images/arrow.png" alt="Download"  class="download-icon">
+          <img src="assets/images/arrow.png" alt="Download" class="download-icon">
         </a>
       </div>
     </li>
