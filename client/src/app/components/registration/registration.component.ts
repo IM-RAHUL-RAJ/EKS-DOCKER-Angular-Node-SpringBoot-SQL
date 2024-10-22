@@ -65,7 +65,11 @@ export class RegistrationComponent {
       alert('Passwords do not match');
       return;
     }
-
+    
+    let identificationTypeDeduced = "SSN";
+    if(formValues.country != "United States") 
+      identificationTypeDeduced = (formValues.country == 'Ireland') ? "PPS" : "PAN";
+    
     const client = {
       email: formValues.email,
       password: formValues.password,
@@ -73,8 +77,10 @@ export class RegistrationComponent {
       dateOfBirth: formValues.dateOfBirth,
       country: formValues.country,
       postalCode: formValues.postalCode,
-      identification: { type: formValues.identificationType, value: formValues.identificationValue },
-      clientId: ""
+      identificationType: identificationTypeDeduced,
+      identificationNumber: formValues.identificationValue,
+      clientId: "",
+      profileStatus: "PENDING"
     };
 
     // Get clientId from Fmts and proceed with registration

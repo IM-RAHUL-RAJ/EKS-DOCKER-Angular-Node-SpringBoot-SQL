@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class StockStreamApplication {
@@ -15,14 +16,18 @@ public class StockStreamApplication {
 	}
 
 	/**
-	 * This method creates a Logger that can be autowired in other classes:{@code
-	 *    @Autowired 
-	 *    private Logger logger;
-	 }*/
+	 * This method creates a Logger that can be autowired in other
+	 * classes:{@code @Autowired private Logger logger; }
+	 */
 	@Bean
 	@Scope("prototype")
 	Logger createLogger(InjectionPoint ip) {
-	    Class<?> classThatWantsALogger = ip.getField().getDeclaringClass();
-	    return LoggerFactory.getLogger(classThatWantsALogger);
+		Class<?> classThatWantsALogger = ip.getField().getDeclaringClass();
+		return LoggerFactory.getLogger(classThatWantsALogger);
+	}
+
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 }

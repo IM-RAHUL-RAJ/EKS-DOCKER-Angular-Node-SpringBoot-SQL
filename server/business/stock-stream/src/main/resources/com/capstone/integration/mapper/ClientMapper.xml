@@ -2,27 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.capstone.integration.mapper.ClientMapper">
+	<resultMap id="ClientResultMap" type="com.capstone.models.Client">
+		<id property="email" column="EMAIL" />
+		<result property="password" column="PASSWORD" />
+		<result property="fullName" column="FULL_NAME" />
+		<result property="dateOfBirth" column="DATE_OF_BIRTH" />
+		<result property="country" column="COUNTRY" />
+		<result property="postalCode" column="POSTAL_CODE" />
+		<result property="identificationType" column="IDENTIFICATION_TYPE" />
+		<result property="identificationNumber" column="IDENTIFICATION_NUMBER" />
+		<result property="clientId" column="CLIENT_ID" />
+		<result property="profileStatus" column="PROFILE_STATUS" />
+	</resultMap>
 
-	<select id="verifyEmailAddress" resultType="int">
-		SELECT COUNT(*) AS count
-		FROM SS_CLIENT
-		WHERE email = #{emailAddress}
+	<select id="isEmailUnique" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM ss_client WHERE email = #{email}
 	</select>
 
-	<select id="verifyLogin" parameterType="map" resultType="int">
-		SELECT COUNT(*)
-		FROM SS_CLIENT
-		WHERE client_id = #{clientId} AND password = #{password}
+	<select id="isIdentificationUnique" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM ss_client WHERE identification_type =
+		#{identificationType} AND identification_number =
+		#{identificationNumber}
 	</select>
 
-	<insert id="addClient" parameterType="com.capstone.models.Client">
-		INSERT INTO SS_CLIENT
-		(email, password, full_name, date_of_birth, country, postal_code,
-		identification_type, identification_number, client_id,profile_status)
-		VALUES
-		(#{email}, #{password}, #{fullName}, #{dateOfBirth}, #{country},
+	<select id="findByEmail" parameterType="String" resultMap="ClientResultMap">
+		SELECT EMAIL, PASSWORD, FULL_NAME, DATE_OF_BIRTH, COUNTRY, POSTAL_CODE, IDENTIFICATION_TYPE, IDENTIFICATION_NUMBER, PROFILE_STATUS, CLIENT_ID FROM ss_client WHERE email = #{email}
+	</select>
+
+	<insert id="save" parameterType="com.capstone.models.Client">
+		INSERT INTO ss_client (email, password, full_name, date_of_birth,
+		country,
+		postal_code, identification_type, identification_number, client_id,
+		profile_status)
+		VALUES (#{email}, #{password}, #{fullName}, #{dateOfBirth}, #{country},
 		#{postalCode}, #{identificationType}, #{identificationNumber},
-		#{clientId},#{profileStatus.status})
+		#{clientId}, #{profileStatus})
 	</insert>
 
 </mapper>
