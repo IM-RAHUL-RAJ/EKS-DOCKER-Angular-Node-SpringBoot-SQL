@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Portfolio } from '../models/portfolio';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,20 @@ export class PortfolioService {
     new Portfolio('Meta Platforms Inc.', 'META', 12, 200, 2400, 210, 3.50, 60, 1.8)
   ];
 
-  constructor() { }
+  private apiUrl = 'http://localhost:8080/api/clients/holdings/';
 
-  getPortfolio(): Observable<Portfolio[]> {
-    return of(this.mockPortfolio);
+  constructor(private http: HttpClient) { }
+
+  getPortfolio(clientId: string): Observable<Portfolio[]> {
+    return this.http.get<Portfolio[]>(`${this.apiUrl}${clientId}`);
   }
 
+  getLivePrices(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/live-prices`);
+  }
+
+
+  
   addStock(stock: Portfolio): void {
     this.mockPortfolio.push(stock);
     console.log(this.mockPortfolio);
