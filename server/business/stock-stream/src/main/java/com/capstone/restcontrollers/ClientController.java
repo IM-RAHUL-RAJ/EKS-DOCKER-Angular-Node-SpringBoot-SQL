@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +34,7 @@ import com.capstone.services.v2.HoldingService;
 @RequestMapping("/api/clients")
 public class ClientController {
 
+	
 	 @Autowired
 	    private Logger logger;
 
@@ -105,7 +106,7 @@ public class ClientController {
 		}
 	}
 	
-	@GetMapping("/holdings/{id}")
+    @GetMapping(value = "/holdings/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Holding>> getWidgets(@PathVariable String id) {
         try {
             List<Holding> holdings = service.getClientPortfolio(id);
@@ -120,7 +121,7 @@ public class ClientController {
         }
     }
     
-    @GetMapping("/live-prices")
+    @GetMapping(value = "/live-prices", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LivePricingResponse>> getLivePrices() {
         try {
             List<LivePricingResponse> livePricing = fmtsDao.getLivePricing();
