@@ -8,7 +8,7 @@ import { ClientVerification } from '../models/client-verification';
   providedIn: 'root'
 })
 export class ClientService {
-  private baseUrl = 'http://localhost:3001'; // Main server URL
+  private baseUrl = 'http://localhost:8080'; // Main server URL
   private clientVerificationUrl = 'http://localhost:3000'; // URL for Fmts
   private storageSubject = new BehaviorSubject<string>(sessionStorage.getItem('currentUser') || '');
   public availableCash: number = 100000;
@@ -22,18 +22,20 @@ export class ClientService {
       email: client.email,
       country: client.country,
       postalCode: client.postalCode,
-      identification: client.identification
+      identificationType: client.identificationType,
+      identificationNumber: client.identificationNumber,
+      profileStatus: client.profileStatus
     });
   }
 
   // Registration method (after getting clientId from server2)
   register(client: Client): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, client);
+    return this.http.post(`${this.baseUrl}/api/clients/register`, client);
   }
 
   // Login method
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, { email, password });
+    return this.http.post(`${this.baseUrl}/api/clients/login`, { email, password });
   }
 
   // Get current user
