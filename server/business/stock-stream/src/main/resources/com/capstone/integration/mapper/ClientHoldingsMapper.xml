@@ -6,7 +6,7 @@
 <mapper namespace="com.capstone.integration.mapper.ClientHoldingsMapper">
 
    <select id="getAllHoldings" resultType="com.capstone.models.Holding">
-    SELECT instrument, instrument_id, client_id, quantity, average_price, invested_capital, ltp, percent_change, profit_loss, day_change_percent
+    SELECT instrument, instrument_id as instrumentId, client_id as clientId, quantity, average_price as averagePrice, invested_capital as investedCapital, ltp, percent_change as percentChange, profit_loss as profitLoss, day_change_percent as dayChangePercent
     FROM holdings
     WHERE client_id = #{clientId}
 </select>

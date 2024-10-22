@@ -5,14 +5,19 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import com.capstone.exceptions.PortfolioException;
-import com.capstone.models.Holding;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import com.capstone.exceptions.PortfolioException;
+import com.capstone.integration.ClientHoldingDao;
+import com.capstone.models.Holding;
 
 public class HoldingService {
 
+	@Autowired
+    private ClientHoldingDao dao;
+
+    
+    
     private List<Holding> portfolios;
 
     public HoldingService() {
@@ -75,5 +80,7 @@ public class HoldingService {
             throw new PortfolioException("Quantity cannot be negative.");
         }
     }
+    
+    
 
 }
