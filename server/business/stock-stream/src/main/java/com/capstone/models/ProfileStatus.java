@@ -1,8 +1,8 @@
 package com.capstone.models;
 
 public enum ProfileStatus {
-	COMPLETE("Complete"),
-    PENDING("Pending");
+	COMPLETE("COMPLETE"),
+    PENDING("PENDING");
 
 	private final String status;
 

@@ -45,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public void register(Client client) {
+	public Client register(Client client) {
 		if (!verifyEmail(client.getEmail())) {
 			throw new EmailAlreadyExistsException("Email already exists.");
 		}
@@ -57,6 +57,10 @@ public class ClientServiceImpl implements ClientService {
 			if(response != null) {
 				this.token = response.getToken();
 				clientDAO.save(client);
+				System.out.println("Registered Successfully" + client.getEmail() + client.getPassword());
+				Client loginClient = this.login(client.getEmail(), client.getPassword());
+				System.out.println(loginClient);
+				return loginClient;
 			} else throw new EmailAlreadyExistsException("Email already exists.");
 		} catch (DuplicateKeyException e) {
 			throw new DuplicateKeyException("User already exists.");

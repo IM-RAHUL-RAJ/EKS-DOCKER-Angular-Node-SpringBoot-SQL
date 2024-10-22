@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import com.capstone.services.v2.ClientService;
 
 @RestController
 @RequestMapping("/api/clients")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
 
 	@Autowired
@@ -71,8 +73,8 @@ public class ClientController {
 	@PostMapping("/register")
 	public ResponseEntity<?> register(@RequestBody Client client) {
 		try {
-			clientService.register(client);
-			return new ResponseEntity<>("Client registered successfully!", HttpStatus.CREATED);
+			Client loggedInClientAfterRegistration = clientService.register(client);
+			return new ResponseEntity<>(loggedInClientAfterRegistration, HttpStatus.CREATED);
 		} catch (EmailAlreadyExistsException | IdentificationAlreadyExistsException | DuplicateKeyException e) {
 			Map<String, String> errorResponse = new HashMap<>();
 			errorResponse.put("error", e.getMessage());
