@@ -38,7 +38,7 @@ class InvestmentPreferenceControllere2eTest {
 	void setUp() {
 		// Initialize a test InvestmentPreference object
 		testInvestmentPreference = new InvestmentPreference(
-			    "C111", 
+			    "C005", 
 			    InvestmentPurpose.HOBBY_INTEREST, 
 			    "Saving for retirement years", 
 			    RiskTolerance.AVERAGE, 
@@ -86,47 +86,47 @@ class InvestmentPreferenceControllere2eTest {
 		// Verify that the data was inserted into the database
 		Integer count = jdbcTemplate.queryForObject(
 			"SELECT COUNT(*) FROM investment_preferences WHERE client_id = ?", 
-			Integer.class, "C111"
+			Integer.class, "C001"
 		);
 		assertEquals(1, count);
 	}
 
-//	@Test
-//	void testUpdateClientInvestmentPreference() {
-//		// Modify the InvestmentPreference object
-//		
-//		testInvestmentPreference.setInvestmentPurpose(InvestmentPurpose.RETIREMENT);
-//
-//		// Make a PUT request to update the InvestmentPreference
-//		HttpEntity<InvestmentPreference> request = new HttpEntity<>(testInvestmentPreference2);
-//		ResponseEntity<InvestmentPreference> response = restTemplate.exchange(
-//				"/stock_stream/investment_preference", HttpMethod.PUT, request, InvestmentPreference.class);
-//
-//		// Check the status code
-//		assertEquals(OK, response.getStatusCode());
-//
-//		// Verify that the data was updated in the database
-//		String updatedPurpose = jdbcTemplate.queryForObject(
-//			"SELECT investment_purpose FROM investment_preferences WHERE client_id = ?", 
-//			String.class, "C010"
-//		);
-//		assertEquals("RETIREMENT", updatedPurpose);
-//	}
-//
-//	@Test
-//	void testDeleteClientInvestmentPreference() {
-//		// Make a DELETE request to remove the InvestmentPreference by clientId
-//		ResponseEntity<Void> response = restTemplate.exchange(
-//				"/stock_stream/investment_preference/C002", HttpMethod.DELETE, null, Void.class);
-//
-//		// Check the status code
-//		assertEquals(OK, response.getStatusCode());
-//
-//		// Verify that the data was removed from the database
-//		Integer count = jdbcTemplate.queryForObject(
-//			"SELECT COUNT(*) FROM investment_preference WHERE client_id = ?", 
-//			Integer.class, "C010"
-//		);
-//		assertEquals(0, count);
-//	}
+	@Test
+	void testUpdateClientInvestmentPreference() {
+		// Modify the InvestmentPreference object
+		
+		testInvestmentPreference2.setInvestmentPurpose(InvestmentPurpose.RETIREMENT);
+
+		// Make a PUT request to update the InvestmentPreference
+		HttpEntity<InvestmentPreference> request = new HttpEntity<>(testInvestmentPreference2);
+		ResponseEntity<InvestmentPreference> response = restTemplate.exchange(
+				"/stock_stream/investment_preference", HttpMethod.PUT, request, InvestmentPreference.class);
+
+		// Check the status code
+		assertEquals(OK, response.getStatusCode());
+
+		// Verify that the data was updated in the database
+		String updatedPurpose = jdbcTemplate.queryForObject(
+			"SELECT investment_purpose FROM investment_preferences WHERE client_id = ?", 
+			String.class, "C001"
+		);
+		assertEquals("RETIREMENT", updatedPurpose);
+	}
+
+	@Test
+	void testDeleteClientInvestmentPreference() {
+		// Make a DELETE request to remove the InvestmentPreference by clientId
+		ResponseEntity<Void> response = restTemplate.exchange(
+				"/stock_stream/investment_preference/C002", HttpMethod.DELETE, null, Void.class);
+
+		// Check the status code
+		assertEquals(OK, response.getStatusCode());
+
+		// Verify that the data was removed from the database
+		Integer count = jdbcTemplate.queryForObject(
+			"SELECT COUNT(*) FROM investment_preferences WHERE client_id = ?", 
+			Integer.class, "C002"
+		);
+		assertEquals(0, count);
+	}
 }
