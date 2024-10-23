@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.stereotype.Service;
+
 import com.capstone.exceptions.PortfolioException;
 import com.capstone.exceptions.TradeException;
 import com.capstone.models.Order;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class TradeService {
     private List<Trade> trades = new ArrayList<>();
     private HoldingService holdingService = new HoldingService();

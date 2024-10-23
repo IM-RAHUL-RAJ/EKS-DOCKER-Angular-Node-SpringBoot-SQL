@@ -3,8 +3,10 @@ package com.capstone.integration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,6 +20,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.capstone.dto.EmailDTO;
 import com.capstone.dto.FmtsTokenResponse;
+import com.capstone.models.Instrument;
+import com.capstone.models.Price;
 
 @Repository
 public class FmtsDaoImpl implements FmtsDao {
@@ -53,4 +57,21 @@ public class FmtsDaoImpl implements FmtsDao {
 	    throw new RuntimeException("Unexpected response status: " + response.getStatusCode());
 	  }
 	}
+
+	@Override
+	public List<Price> getInstrumentsByCategory(String category) {
+       
+        List<String> validCategories = List.of("GOVT", "CD", "STOCK");
+        
+        if (!validCategories.contains(category)) {
+            throw new IllegalArgumentException("Invalid category: " + category);
+        }
+
+        String url = "http://localhost:3000/fmts/trades/prices/" + category;
+        ResponseEntity<List<Price>> response = restTemplate.exchange(url, HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<Price>>() {});
+
+        return response.getBody(); // Assuming the response directly maps to List<Price>
+    }
 }
+

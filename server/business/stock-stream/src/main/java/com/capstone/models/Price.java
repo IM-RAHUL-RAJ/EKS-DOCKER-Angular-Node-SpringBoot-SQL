@@ -1,36 +1,27 @@
 package com.capstone.models;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Timestamp;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Price {
-	private String instrumentId;
 	private BigDecimal askPrice;
 	private BigDecimal bidPrice;
-	private Timestamp updateTime;
+	private String priceTimestamp;
 	private Instrument instrument; 
-	private BigDecimal rankScore;
 	
-	public Price(String instrumentId, BigDecimal askPrice, BigDecimal bidPrice, Timestamp updateTime) {
+	public Price( BigDecimal askPrice, BigDecimal bidPrice, String priceTimestamp) {
 		super();
-		this.instrumentId = instrumentId;
 		this.askPrice = askPrice;
 		this.bidPrice = bidPrice;
-		this.updateTime = updateTime;
+		this.priceTimestamp = priceTimestamp;
 	}
 	
 	public Price() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BigDecimal getRankScore() {
-		return rankScore;
-	}
-	public void setRankScore(BigDecimal rankScore) {
-		this.rankScore = rankScore;
-	}
 	public BigDecimal getAskPrice() {
 		return askPrice;
 	}
@@ -51,13 +42,15 @@ public class Price {
         }
 		this.bidPrice = bidPrice.setScale(2, RoundingMode.HALF_UP);
 	}
-	public Timestamp getPriceTimeStamp() {
-		return updateTime;
+	
+	public String getPriceTimestamp() {
+		return priceTimestamp;
 	}
-	public void setPriceTimeStamp(Timestamp priceTimeStamp) {
-		Objects.requireNonNull(priceTimeStamp, "Price TimeStamp cannot be null");
-		this.updateTime = priceTimeStamp;
+
+	public void setPriceTimestamp(String priceTimestamp) {
+		this.priceTimestamp = priceTimestamp;
 	}
+
 	public Instrument getInstrument() {
 		return instrument;
 	}
@@ -65,11 +58,12 @@ public class Price {
 		Objects.requireNonNull(instrument, "Instrument cannot be null");
 		this.instrument = instrument;
 	}
-	public String getInstrumentId() {
-		return instrumentId;
+
+	@Override
+	public String toString() {
+		return "Price [askPrice=" + askPrice + ", bidPrice=" + bidPrice + ", priceTimestamp=" + priceTimestamp
+				+ ", instrument=" + instrument + "]";
 	}
-	public void setInstrumentId(String instrumentId) {
-		this.instrumentId = instrumentId;
-	}
+
 
 }
