@@ -21,7 +21,7 @@ import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
 import com.capstone.models.InvestmentYear;
 import com.capstone.models.RiskTolerance;
-import com.capstone.services.v2.InvestmentPreferenceService;
+import com.capstone.services.InvestmentPreferenceService;
 
 @WebMvcTest
 class InvestmentPreferenceControllerWebLayerTest {

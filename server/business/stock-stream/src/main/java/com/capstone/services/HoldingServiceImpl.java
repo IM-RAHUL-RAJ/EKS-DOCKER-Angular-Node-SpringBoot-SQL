@@ -1,4 +1,4 @@
-package com.capstone.services.v2;
+package com.capstone.services;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.capstone.services.v2;
+package com.capstone.services;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +16,7 @@ import com.capstone.exceptions.InvalidEmailException;
 import com.capstone.integration.ClientDao;
 import com.capstone.integration.FmtsDao;
 import com.capstone.models.Client;
-import com.capstone.services.v2.ClientService;
+import com.capstone.services.ClientService;
 
 @Service
 @Primary

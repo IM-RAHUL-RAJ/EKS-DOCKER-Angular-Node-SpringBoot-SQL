@@ -1,4 +1,4 @@
-package com.capstone.service.v2;
+package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.models.Holding;
-import com.capstone.services.v2.HoldingService;
+import com.capstone.services.HoldingService;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;

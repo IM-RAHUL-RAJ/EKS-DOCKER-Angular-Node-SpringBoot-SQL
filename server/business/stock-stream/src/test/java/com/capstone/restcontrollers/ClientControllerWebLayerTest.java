@@ -25,7 +25,7 @@ import com.capstone.dto.LivePricingResponse;
 import com.capstone.integration.FmtsDao;
 import com.capstone.models.Holding;
 import com.capstone.models.Instrument;
-import com.capstone.services.v2.HoldingService;
+import com.capstone.services.HoldingService;
 
 class ClientControllerWebLayerTest {
 

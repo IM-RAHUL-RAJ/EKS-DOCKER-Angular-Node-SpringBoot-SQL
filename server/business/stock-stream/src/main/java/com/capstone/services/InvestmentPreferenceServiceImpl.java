@@ -1,4 +1,4 @@
-package com.capstone.services.v2;
+package com.capstone.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
 import com.capstone.models.InvestmentYear;
 import com.capstone.models.RiskTolerance;
-import com.capstone.services.v2.ClientService;
+import com.capstone.services.ClientService;
 
 @Service
 @Primary

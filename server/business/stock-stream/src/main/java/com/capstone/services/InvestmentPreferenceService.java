@@ -1,4 +1,4 @@
-package com.capstone.services.v2;
+package com.capstone.services;
 
 import com.capstone.exceptions.InvestmentPreferenceAlreadyExists;
 import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;

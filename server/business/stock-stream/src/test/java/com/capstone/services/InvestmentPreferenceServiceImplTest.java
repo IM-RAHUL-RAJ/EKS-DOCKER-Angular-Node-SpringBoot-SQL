@@ -1,4 +1,4 @@
-package com.capstone.service.v2;
+package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +24,7 @@ import com.capstone.models.ProfileStatus;
 import com.capstone.models.RiskTolerance;
 import com.capstone.services.ClientService;
 import com.capstone.services.FmtsService;
-import com.capstone.services.v2.InvestmentPreferenceService;
+import com.capstone.services.InvestmentPreferenceService;
 
 @SpringBootTest
 @Transactional

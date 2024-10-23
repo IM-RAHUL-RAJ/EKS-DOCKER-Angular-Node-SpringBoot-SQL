@@ -1,4 +1,4 @@
-package com.capstone.service.v2;
+package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.capstone.exceptions.TradeException;
 import com.capstone.models.Order;
 import com.capstone.models.Trade;
+import com.capstone.services.TradeService;
 import com.capstone.exceptions.PortfolioException;
-import com.capstone.services.v2.TradeService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

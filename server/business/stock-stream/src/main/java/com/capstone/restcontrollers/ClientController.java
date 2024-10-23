@@ -29,8 +29,8 @@ import com.capstone.integration.ClientHoldingDao;
 import com.capstone.integration.FmtsDao;
 import com.capstone.models.Client;
 import com.capstone.models.Holding;
-import com.capstone.services.v2.ClientService;
-import com.capstone.services.v2.HoldingService;
+import com.capstone.services.ClientService;
+import com.capstone.services.HoldingService;
 
 @RestController
 @RequestMapping("/api/clients")
