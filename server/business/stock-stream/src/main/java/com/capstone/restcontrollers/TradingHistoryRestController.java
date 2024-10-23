@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.capstone.exceptions.NoTradingHistoryFoundForClientException;
 import com.capstone.models.Trade;
-import com.capstone.services.v2.TradeHistoryService;
+import com.capstone.services.TradeHistoryService;
 
 @RestController
 @RequestMapping("stock_stream/trades")

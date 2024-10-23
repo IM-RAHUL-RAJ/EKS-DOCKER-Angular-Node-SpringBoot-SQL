@@ -14,9 +14,27 @@ export class PortfolioComponent {
 
   totalValue=250000;
   portfolio:Portfolio[]=[];
+  clientId = 'C001'; 
+
   
   constructor(private portfolioService:PortfolioService,public dialog: MatDialog){
 
+  }
+
+  getTotalInvestedCapital(): number {
+    return this.portfolio.reduce((total, stock) => total + stock.investedCapital, 0);
+  }
+
+  getTotalCurrentValue(): number {
+    return this.portfolio.reduce((total, stock) => total + (stock.ltp * stock.quantity), 0);
+  }
+
+  getTotalProfitLoss(): number {
+    return this.portfolio.reduce((total, stock) => total + stock.profitLoss, 0);
+  }
+
+  getTotalDayChange(): number {
+    return this.portfolio.reduce((total, stock) => total + (stock.dayChangePercent * stock.quantity * stock.ltp / 100), 0);
   }
   sortPortfolio(event: Event) {
     this.portfolio.sort((a, b) => {
@@ -40,7 +58,7 @@ export class PortfolioComponent {
   }
 
   ngOnInit(){
-    this.portfolioService.getPortfolio().subscribe((data)=>this.portfolio=data);
+      this.portfolioService.getPortfolio(this.clientId).subscribe((data) => this.portfolio = data);
     
   }
   SellForm(price:number) {

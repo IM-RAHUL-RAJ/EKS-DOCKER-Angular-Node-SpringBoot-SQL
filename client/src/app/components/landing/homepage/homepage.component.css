@@ -1,4 +1,78 @@
-.home-container {
+.container {
+    width: 90%;
+    height: 500px;
+    padding: 20px;
+}
+
+.slide-wrapper {
+    max-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 10px;
+    igx-card-media{
+        width: 100%;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        img {
+            align-content: center;
+            width: 70%;
+        }
+    }
+
+}
+ 
+.carousel-wrapper {
+    max-height: 600px;
+    height: 100%;
+    width: 90%;
+    margin: 20px auto;
+}
+ 
+.action-wrapper {
+    height: 40px;
+    width: 70%;
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    margin-left: 5.7rem;
+}
+ 
+.carousel-animation-wrapper {
+    height: 700px;
+    margin: 16px auto;
+    display: flex;
+    flex-flow: column;
+}
+ 
+.igx-card {
+    box-shadow: none;
+}
+ 
+.select-container {
+    margin-left: 10px;
+}
+ 
+span:first-child {
+    position: relative;
+    bottom: 2px;
+}
+ 
+igx-select {
+    width: 150px;
+}
+ 
+::ng-deep {
+    .input.igx-input-group__input {
+        top: 10px;
+        left: 10px;
+    }
+}
+
+/* .home-container {
     display: flex;
     flex-direction: row;
 }
@@ -29,4 +103,4 @@ hr {
 
 h1 {
     min-height: 200px;
-}
+} */

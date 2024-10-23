@@ -23,7 +23,7 @@ import com.capstone.exceptions.InvestmentPreferenceWithClientIdNotFound;
 import com.capstone.exceptions.UserNotLoggedInToPerformAction;
 import com.capstone.models.InvestmentPreference;
 import com.capstone.models.Trade;
-import com.capstone.services.v2.InvestmentPreferenceService;
+import com.capstone.services.InvestmentPreferenceService;
 
 import ch.qos.logback.core.net.server.Client;
 

@@ -1,24 +1,24 @@
 package com.capstone.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.capstone.integration.ClientActivityReportDaoImpl;
 import com.capstone.models.ClientActivityReport;
 
+@Service
 public class ClientActivityReportService {
 
-    // Stub method to get client activity reports
-	public List<ClientActivityReport> getClientActivityReports(String clientId) {
+    @Autowired
+    private ClientActivityReportDaoImpl clientActivityReportDao;
+
+    public List<ClientActivityReport> getClientActivityReports(String clientId) {
         if (clientId == null || clientId.isEmpty()) {
             throw new IllegalArgumentException("Client ID cannot be null or empty");
         }
 
-        List<ClientActivityReport> reports = new ArrayList<>();
-        reports.add(new ClientActivityReport("Annual Report 2023", "Summary of the annual performance for 2023."));
-        reports.add(new ClientActivityReport("Quarterly Report Q1 2024", "Summary of the first quarter performance for 2024."));
-        reports.add(new ClientActivityReport("Monthly Report August 2024", "Summary of the performance for August 2024."));
-        return reports;
+        return clientActivityReportDao.getAllReports(clientId);
     }
-
 }
-

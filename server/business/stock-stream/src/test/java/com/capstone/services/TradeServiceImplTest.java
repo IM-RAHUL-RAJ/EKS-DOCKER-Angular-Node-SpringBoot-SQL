@@ -1,4 +1,4 @@
-package com.capstone.services.v2;
+package com.capstone.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.exceptions.NoTradingHistoryFoundForClientException;
 import com.capstone.models.Trade;
+import com.capstone.services.TradeHistoryService;
 
 
 @SpringBootTest
