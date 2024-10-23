@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Portfolio } from '../models/portfolio';
 import { HttpClient } from '@angular/common/http';
+import { ClientService } from './client.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
+
+  public clientID!: string
 
   private mockPortfolio: Portfolio[] = [
     new Portfolio('Apple Inc.', 'AAPL', 10, 150, 1500, 155, 3.33, 50, 1.5),
@@ -19,7 +23,11 @@ export class PortfolioService {
 
   private apiUrl = 'http://localhost:8080/api/clients/holdings/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private clientService: ClientService,private http: HttpClient) {
+    const currentUser = clientService.getCurrentUser();
+    const clientId = currentUser ? currentUser.clientId : null; // Handle the case where currentUser might be null
+    this.clientID = clientId
+   }
 
   getPortfolio(clientId: string): Observable<Portfolio[]> {
     return this.http.get<Portfolio[]>(`${this.apiUrl}${clientId}`);

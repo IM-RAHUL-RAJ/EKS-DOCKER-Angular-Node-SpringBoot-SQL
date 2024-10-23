@@ -14,7 +14,6 @@ export class PortfolioComponent {
 
   totalValue=250000;
   portfolio:Portfolio[]=[];
-  clientId = 'C001'; 
 
   
   constructor(private portfolioService:PortfolioService,public dialog: MatDialog){
@@ -58,7 +57,7 @@ export class PortfolioComponent {
   }
 
   ngOnInit(){
-      this.portfolioService.getPortfolio(this.clientId).subscribe((data) => this.portfolio = data);
+      this.portfolioService.getPortfolio(this.portfolioService.clientID).subscribe((data) => this.portfolio = data);
     
   }
   SellForm(price:number) {
