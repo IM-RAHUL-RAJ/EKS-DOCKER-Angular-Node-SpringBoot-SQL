@@ -1,6 +1,7 @@
 package com.capstone.restcontrollers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -9,9 +10,12 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,7 +23,9 @@ import com.capstone.dto.EmailDTO;
 import com.capstone.exceptions.EmailAlreadyExistsException;
 import com.capstone.exceptions.IdentificationAlreadyExistsException;
 import com.capstone.exceptions.InvalidEmailException;
+import com.capstone.integration.FmtsDao;
 import com.capstone.models.Client;
+import com.capstone.models.Price;
 import com.capstone.services.v2.ClientService;
 
 @RestController
@@ -29,6 +35,9 @@ public class ClientController {
 
 	@Autowired
 	private ClientService clientService;
+	
+	 @Autowired
+	 private FmtsDao fmtsDao;
 
 	@PostMapping("/verify-email")
 	public ResponseEntity<?> verifyEmail(@RequestBody EmailDTO emailDTO) {
@@ -85,4 +94,25 @@ public class ClientController {
 			return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/instruments/{category}")
+    public ResponseEntity<?> getInstrumentsByCategory(@PathVariable String category) {
+        try {
+            List<Price> prices = fmtsDao.getInstrumentsByCategory(category);
+            if (prices.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                     .body("Instrument category does not exist.");
+            }
+            return ResponseEntity.ok(prices);
+        } catch (IllegalArgumentException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", e.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", e.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+	}
+
 }
