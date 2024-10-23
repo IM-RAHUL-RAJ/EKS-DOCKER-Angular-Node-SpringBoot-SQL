@@ -45,9 +45,6 @@ public class InvestmentPreferenceController {
 		try {
 			investmentPreference = service.getInvestmentPreference(clientId);
 			response = ResponseEntity.status(HttpStatus.OK).body(investmentPreference);
-		}catch(UserNotLoggedInToPerformAction e) {
-			logger.error("Error UserNotLoggedInToPerformAction", e);
-			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}catch(InvestmentPreferenceWithClientIdNotFound e) {
 			logger.error("Error InvestmentPreferenceWithClientIdNotFound", e);
 			response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -66,9 +63,6 @@ public class InvestmentPreferenceController {
 		try {
 			addedInvestmentPreference = service.addInvestmentPreference(investmentPreference);
 			response = ResponseEntity.status(HttpStatus.OK).body(investmentPreference);
-		}catch(UserNotLoggedInToPerformAction e) {
-			logger.error("Error UserNotLoggedInToPerformAction", e);
-			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}catch(InvestmentPreferenceAlreadyExists e) {
 			logger.error("Error InvestmentPreferenceWithClientIdNotFound", e);
 			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -87,9 +81,6 @@ public class InvestmentPreferenceController {
 		try {
 			updatedInvestmentPreference = service.updateInvestmentPreference(investmentPreference);
 			response = ResponseEntity.status(HttpStatus.OK).body(investmentPreference);
-		}catch(UserNotLoggedInToPerformAction e) {
-			logger.error("Error UserNotLoggedInToPerformAction", e);
-			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}catch(InvestmentPreferenceWithClientIdNotFound e) {
 			logger.error("Error InvestmentPreferenceWithClientIdNotFound", e);
 			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -108,9 +99,6 @@ public class InvestmentPreferenceController {
 		try {
 			investmentPreference = service.removeInvestmentPreference(clientId);
 			response = ResponseEntity.status(HttpStatus.OK).body(investmentPreference);
-		}catch(UserNotLoggedInToPerformAction e) {
-			logger.error("Error UserNotLoggedInToPerformAction", e);
-			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}catch(InvestmentPreferenceWithClientIdNotFound e) {
 			logger.error("Error InvestmentPreferenceWithClientIdNotFound", e);
 			response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
