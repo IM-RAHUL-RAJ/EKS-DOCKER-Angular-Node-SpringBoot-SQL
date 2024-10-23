@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.jdbc.JdbcTestUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capstone.enums.OrderStatus;
@@ -30,6 +31,9 @@ class TradeMyBatisImplTest {
 
 	@Autowired
 	private TradeMyBatisImpl tradeDao;
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Test
 	void testGetAllInstruments() {
@@ -133,16 +137,16 @@ class TradeMyBatisImplTest {
 	}
 
 	@Test
-	void testGetClientTradingHistory() {
+	void testGetClientTradingHistoryToSucceed() {
 		List<Trade> clientTradeHistory = tradeDao.getClientTradeHistory("C001");
 
 		assertNotNull(clientTradeHistory.get(0));
-		assertEquals(1, clientTradeHistory.size());
+		assertEquals(JdbcTestUtils.countRowsInTableWhere(jdbcTemplate, "ss_trades", "client_id='C001'"), clientTradeHistory.size());
 
 	}
 
 	@Test
-	void testGetClientTradingHistoryToReturnTrades() {
+	void testGetClientTradingHistoryToReturnEmpty() {
 		List<Trade> clientTradeHistory = tradeDao.getClientTradeHistory("C0012");
 
 		assertTrue(clientTradeHistory.isEmpty());

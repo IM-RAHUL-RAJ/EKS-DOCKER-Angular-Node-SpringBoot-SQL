@@ -39,8 +39,13 @@ public class ClientServiceImpl implements ClientService {
 	public Client login(String email, String password) {
 		Client client = clientDAO.findByEmail(email);
 		if (client != null && client.getPassword().equals(password)) {
+			FmtsTokenResponse response = fmtsDao.verifyClientToGetToken(client.getEmail());
+			if(response != null) {
+				this.token = response.getToken();
+			}
 			return client;
 		}
+		
 		throw new InvalidEmailException("Invalid email or password.");
 	}
 
@@ -74,6 +79,7 @@ public class ClientServiceImpl implements ClientService {
 		return matcher.matches();
 	}
 
+	@Override
 	public Long getToken() {
 		return this.token;
 	}

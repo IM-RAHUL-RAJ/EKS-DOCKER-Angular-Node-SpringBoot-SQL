@@ -1,35 +1,58 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.capstone.integration.mapper.ClientHoldingsMapper">
 
-   <select id="getAllHoldings" resultType="com.capstone.models.Holding">
-    SELECT instrument, instrument_id, client_id, quantity, average_price, invested_capital, ltp, percent_change, profit_loss, day_change_percent
-    FROM holdings
-    WHERE client_id = #{clientId}
-</select>
+	<resultMap id="holdingResultMap" type="com.capstone.models.Holding">
+		<result property="instrument" column="instrument" />
+		<result property="instrumentId" column="instrument_id" />
+		<result property="clientId" column="client_id" />
+		<result property="quantity" column="quantity" />
+		<result property="averagePrice" column="average_price" />
+		<result property="investedCapital" column="investedCapital" />
+		<result property="ltp" column="ltp" />
+		<result property="percentChange" column="percentChange" />
+		<result property="profitLoss" column="profitLoss" />
+		<result property="dayChangePercent" column="dayChangePercent" />
+	</resultMap>
 
-<select id="getHolding" resultType="com.capstone.models.Holding">
-    SELECT instrument, instrument_id as instrumentId, client_id as clientId, quantity, average_price as averagePrice, invested_capital as investedCapital, ltp, percent_change as percentChange, profit_loss as profitLoss, day_change_percent as dayChangePercent
-    FROM holdings
-    WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
-</select>
+	<select id="getAllHoldings" resultMap="holdingResultMap">
+		SELECT instrument, instrument_id, client_id, quantity, average_price,
+		invested_capital, ltp, percent_change, profit_loss, day_change_percent
+		FROM holdings
+		WHERE client_id = #{clientId}
+	</select>
 
-<insert id="insertHolding">
-    INSERT INTO holdings (instrument, instrument_id, client_id, quantity, average_price, invested_capital, ltp, percent_change, profit_loss, day_change_percent)
-    VALUES (#{instrument}, #{instrumentId}, #{clientId}, #{quantity}, #{averagePrice}, #{investedCapital}, #{ltp}, #{percentChange}, #{profitLoss}, #{dayChangePercent})
-</insert>
+	<select id="getHolding" resultMap="holdingResultMap">
+		SELECT instrument, instrument_id , client_id , quantity, average_price,
+		invested_capital as investedCapital, ltp, percent_change as
+		percentChange, profit_loss as profitLoss, day_change_percent as
+		dayChangePercent
+		FROM holdings
+		WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
+	</select>
 
-<update id="updateHolding">
-    UPDATE holdings
-    SET instrument = #{instrument}, instrument_id = #{instrumentId}, client_id = #{clientId}, quantity = #{quantity}, average_price = #{averagePrice}, invested_capital = #{investedCapital}, ltp = #{ltp}, percent_change = #{percentChange}, profit_loss = #{profitLoss}, day_change_percent = #{dayChangePercent}
-    WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
-</update>
+	<insert id="insertHolding">
+		INSERT INTO holdings (instrument, instrument_id, client_id, quantity,
+		average_price, invested_capital, ltp, percent_change, profit_loss,
+		day_change_percent)
+		VALUES (#{instrument}, #{instrumentId}, #{clientId}, #{quantity},
+		#{averagePrice}, #{investedCapital}, #{ltp}, #{percentChange},
+		#{profitLoss}, #{dayChangePercent})
+	</insert>
 
-<delete id="deleteHolding">
-    DELETE FROM holdings
-    WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
-</delete>
+	<update id="updateHolding">
+		UPDATE holdings
+		SET instrument = #{instrument}, instrument_id = #{instrumentId},
+		client_id = #{clientId}, quantity = #{quantity}, average_price =
+		#{averagePrice}, invested_capital = #{investedCapital}, ltp = #{ltp},
+		percent_change = #{percentChange}, profit_loss = #{profitLoss},
+		day_change_percent = #{dayChangePercent}
+		WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
+	</update>
+
+	<delete id="deleteHolding">
+		DELETE FROM holdings
+		WHERE client_id = #{clientId} AND instrument_id = #{instrumentId}
+	</delete>
 </mapper>
