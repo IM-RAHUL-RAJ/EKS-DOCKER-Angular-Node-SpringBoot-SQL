@@ -5,6 +5,6 @@ export class InvestmentPreferences {
     public investmentPurposeDescription: String,
     public riskTolerance :  String,
     public incomeCategory :  String,
-    public investmentYears:  String,
+    public investmentYear:  String,
     public isRoboAdviserTermsAccepted: boolean){}
 }

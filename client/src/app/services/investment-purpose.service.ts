@@ -34,7 +34,7 @@ export class InvestmentPurposeService {
           data.riskTolerance,
           data.incomeCategory,
           data.investmentYear, // this should match 'investmentYears' in the class constructor
-          data.roboAdvisorTermsAccepted // this should match 'isRoboAdviserTermsAccepted' in the class constructor
+          data.isRoboAdvisorTermsAccepted // this should match 'isRoboAdviserTermsAccepted' in the class constructor
         );
       })
     );
@@ -49,7 +49,7 @@ export class InvestmentPurposeService {
       investmentPurposeDescription: investmentPreference.investmentPurposeDescription,
       riskTolerance: investmentPreference.riskTolerance,
       incomeCategory: investmentPreference.incomeCategory,
-      investmentYear: investmentPreference.investmentYears,
+      investmentYear: investmentPreference.investmentYear,
       isRoboAdvisorTermsAccepted: investmentPreference.isRoboAdviserTermsAccepted
     };
 
@@ -68,7 +68,7 @@ export class InvestmentPurposeService {
       investmentPurposeDescription: investmentPreference.investmentPurposeDescription,
       riskTolerance: investmentPreference.riskTolerance,
       incomeCategory: investmentPreference.incomeCategory,
-      investmentYear: investmentPreference.investmentYears,
+      investmentYear: investmentPreference.investmentYear,
       isRoboAdvisorTermsAccepted: investmentPreference.isRoboAdviserTermsAccepted
     };
 
