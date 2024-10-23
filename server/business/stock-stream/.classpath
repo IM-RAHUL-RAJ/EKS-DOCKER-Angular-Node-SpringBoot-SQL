@@ -53,15 +53,5 @@
 			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Associate/.m2/repository/org/springframework/spring-web/5.3.19/spring-web-5.3.19.jar" sourcepath="C:/Users/Associate/.m2/repository/org/springframework/spring-web/5.3.19/spring-web-5.3.19-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Associate/.m2/repository/org/springframework/spring-web/5.3.19/spring-web-5.3.19-javadoc.jar!/"/>
-			<attribute name="maven.groupId" value="org.springframework"/>
-			<attribute name="maven.artifactId" value="spring-web"/>
-			<attribute name="maven.version" value="5.3.19"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

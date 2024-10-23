@@ -5,7 +5,6 @@
       investment options to suit your goals and risk tolerance.</p>
     <mat-divider></mat-divider>
 
-
     <section class="form-section">
       <mat-card appearance="outlined">
         <mat-card-content>
@@ -20,10 +19,11 @@
         </mat-card-content>
       </mat-card>
       <mat-form-field appearance="fill">
-        <mat-label>Purpose of Investment</mat-label>
-        <input matInput formControlName="investmentPurpose">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>College Fund, Retirement, etc</mat-hint>
+        <mat-label>Select Investment Purpose</mat-label>
+        <mat-select id="incomeCategory" formControlName="investmentPurpose">
+          <mat-option value="" disabled>Select Investment Purpose</mat-option>
+          <mat-option *ngFor="let purpose of investmentPurposes" [value]="purpose">{{ InvestmentPurpose[purpose] }}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <div *ngIf="investmentPurpose.invalid && (investmentPurpose.dirty || investmentPurpose.touched || isSubmitted)"
@@ -31,6 +31,35 @@
         <div *ngIf="investmentPurpose.errors?.['required']">This field is required.</div>
       </div>
     </section>
+
+    <section class="form-section">
+      <mat-card appearance="outlined">
+        <mat-card-content>
+          <div class="image-card">
+            <div class="image-wrapper">
+              <img mat-card-image src="assets/images/investPurpose.jpg" alt="Image description">
+            </div>
+            <div class="content">
+              <h3 class="heading">Investment Purpose Description</h3>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-form-field appearance="fill">
+        <mat-label>Investment Purpose Description</mat-label>
+        <input matInput formControlName="investmentPurposeDescription">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>College Fund, Retirement, etc</mat-hint>
+      </mat-form-field>
+
+      <div *ngIf="investmentPurposeDescription.invalid && (investmentPurposeDescription.dirty || investmentPurposeDescription.touched || isSubmitted)"
+        class="alert">
+        <div *ngIf="investmentPurposeDescription.errors?.['required']">This field is required.</div>
+      </div>
+    </section>
+
+  
+
     <section class="form-section">
       <mat-card appearance="outlined">
         <mat-card-content>
@@ -78,13 +107,7 @@
         <mat-label>Select Income Range</mat-label>
         <mat-select id="incomeCategory" formControlName="incomeCategory">
           <mat-option value="" disabled>Select income category</mat-option>
-          <mat-option value="0 - 20,000">0 - 20,000</mat-option>
-          <mat-option value="20,001 - 40,000">20,001 - 40,000</mat-option>
-          <mat-option value="40,001 - 60,000">40,001 - 60,000</mat-option>
-          <mat-option value="60,001 - 80,000">60,001 - 80,000</mat-option>
-          <mat-option value="80,001 - 100,000">80,001 - 100,000</mat-option>
-          <mat-option value="100,001 - 150,000">100,001 - 150,000</mat-option>
-          <mat-option value="150,000+">150,000+</mat-option>
+          <mat-option *ngFor="let category of incomeCategories" [value]="category">{{ IncomeCategory[category] }}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -111,10 +134,7 @@
         <mat-label>Select Investment Years</mat-label>
         <mat-select id="investmentYears" formControlName="investmentYears">
           <mat-option value="" disabled>Select investment years</mat-option>
-          <mat-option value="0-5 years">0-5 years</mat-option>
-          <mat-option value="5-7 years">5-7 years</mat-option>
-          <mat-option value="7-10 years">7-10 years</mat-option>
-          <mat-option value="10-15 years">10-15 years</mat-option>
+          <mat-option *ngFor="let year of investmentYearsEnum" [value]="year">{{ InvestmentYearEnum[year] }}</mat-option>
         </mat-select>
       </mat-form-field>
 

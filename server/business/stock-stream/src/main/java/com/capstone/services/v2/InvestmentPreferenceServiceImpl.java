@@ -18,15 +18,15 @@ import com.capstone.models.InvestmentPreference;
 import com.capstone.models.InvestmentPurpose;
 import com.capstone.models.InvestmentYear;
 import com.capstone.models.RiskTolerance;
-import com.capstone.services.ClientService;
+import com.capstone.services.v2.ClientService;
 
 @Service
 @Primary
 public class InvestmentPreferenceServiceImpl implements InvestmentPreferenceService {
 
 	private List<InvestmentPreference> investmentPreferences = new ArrayList<InvestmentPreference>();
-	private ClientService clientService;
 	
+
 	@Autowired
 	private InvestmentPreferenceDao investmentPreferenceDao;
 
@@ -37,18 +37,18 @@ public class InvestmentPreferenceServiceImpl implements InvestmentPreferenceServ
 		return this.investmentPreferences.size();
 	}
 
-	@Override
-	public void setClientService(ClientService clientService) {
-		this.clientService = clientService;
-	}
+//	@Override
+//	public void setClientService(ClientService clientService) {
+//		this.clientService = clientService;
+//	}
 
 	@Override
 	public InvestmentPreference getInvestmentPreference(String clientId)
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 
-		if (!clientService.isUserLoggedIn(clientId)) {
-			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
-		}
+//		if (!clientService.isUserLoggedIn(clientId)) {
+//			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
+//		}
 
 		InvestmentPreference investmentPreference = investmentPreferenceDao.getInvestmentPreference(clientId);
 
@@ -73,9 +73,11 @@ public class InvestmentPreferenceServiceImpl implements InvestmentPreferenceServ
 	@Override
 	public InvestmentPreference addInvestmentPreference(InvestmentPreference investmentPreference)
 			throws InvestmentPreferenceAlreadyExists, UserNotLoggedInToPerformAction {
-		if (!clientService.isUserLoggedIn(investmentPreference.getClientId())) {
-			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
-		}
+		
+//		if (!clientService.isUserLoggedIn(investmentPreference.getClientId())) {
+//			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
+//		}
+		
 		if (isValidInvestmentPreference(investmentPreference)) {
 			throw new InvestmentPreferenceAlreadyExists(
 					"The given investment preference with the client Id already exists :"
@@ -101,9 +103,9 @@ public class InvestmentPreferenceServiceImpl implements InvestmentPreferenceServ
 	public InvestmentPreference updateInvestmentPreference(InvestmentPreference updatedInvestmentPreference)
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 
-		if (!clientService.isUserLoggedIn(updatedInvestmentPreference.getClientId())) {
-			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
-		}
+//		if (!clientService.isUserLoggedIn(updatedInvestmentPreference.getClientId())) {
+//			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
+//		}
 
 		InvestmentPreference investmentPreference = this.investmentPreferenceDao
 				.updateInvestmentPreference(updatedInvestmentPreference);
@@ -116,9 +118,9 @@ public class InvestmentPreferenceServiceImpl implements InvestmentPreferenceServ
 	public InvestmentPreference removeInvestmentPreference(String clientId)
 			throws InvestmentPreferenceWithClientIdNotFound, UserNotLoggedInToPerformAction {
 
-		if (!clientService.isUserLoggedIn(clientId)) {
-			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
-		}
+//		if (!clientService.isUserLoggedIn(clientId)) {
+//			throw new UserNotLoggedInToPerformAction("The given user with client Id is not logged in..");
+//		}
 
 		InvestmentPreference investmentPreference = this.investmentPreferenceDao.removeInvestmentPreference(clientId);
 
