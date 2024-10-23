@@ -51,6 +51,7 @@ export class InvestmentPreferencesComponent implements OnInit {
     this.investmentPreferenceService.getInvestmentPreference().subscribe((data) => {
       if (data) {
         this.clientID = data.cliendID
+        console.log("client ID",this.clientID)
         this.patchExistingPreference(data)
       }
     })
@@ -69,7 +70,9 @@ export class InvestmentPreferencesComponent implements OnInit {
         this.investmentYears?.value,
         this.isRoboAdviserTermsAccepted?.value
       )
-      this.investmentPreferenceService.updateInvestmentPreference(newPreference)
+      this.investmentPreferenceService.updateInvestmentPreference(newPreference).subscribe((data)=>{
+        console.log("Put data",data)
+      })
       this.isSubmitted = false
       this.router.navigate(['/home'])
 

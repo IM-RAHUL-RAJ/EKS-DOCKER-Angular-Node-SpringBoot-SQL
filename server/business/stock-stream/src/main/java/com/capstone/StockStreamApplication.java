@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.capstone.*"}) 
-@MapperScan(value = { "com.capstone.integration.mapper"})
+//@ComponentScan(basePackages = {"com.capstone.*"}) 
+//@MapperScan(value = { "com.capstone.integration.mapper"})
 public class StockStreamApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StockStreamApplication.class, args);

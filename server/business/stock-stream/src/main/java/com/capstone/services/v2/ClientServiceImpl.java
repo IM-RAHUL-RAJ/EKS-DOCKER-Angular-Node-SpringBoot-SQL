@@ -16,6 +16,7 @@ import com.capstone.exceptions.InvalidEmailException;
 import com.capstone.integration.ClientDao;
 import com.capstone.integration.FmtsDao;
 import com.capstone.models.Client;
+import com.capstone.services.v2.ClientService;
 
 @Service
 @Primary

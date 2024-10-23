@@ -3,7 +3,7 @@ import { InvestmentPreferences } from '../models/investment-preferences';
 import { map, Observable, of } from 'rxjs';
 import { ClientService } from './client.service';
 import { Client } from '../models/client';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,27 @@ export class InvestmentPurposeService {
       })
     );
   }
-  updateInvestmentPreference(investmentPreference : InvestmentPreferences) {
+
+  updateInvestmentPreference(investmentPreference: InvestmentPreferences): Observable<any> {
+    // const url = `${this.baseUrl}/${investmentPreference.cliendID}`; // Use clientID (even though it seems misspelled here)
     
+    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    // Prepare the payload
+    const payload = {
+      clientId: investmentPreference.cliendID,
+      investmentPurpose: investmentPreference.investmentPurpose,
+      investmentPurposeDescription: investmentPreference.investmentPurposeDescription,
+      riskTolerance: investmentPreference.riskTolerance,
+      incomeCategory: investmentPreference.incomeCategory,
+      investmentYear: investmentPreference.investmentYears,
+      isRoboAdvisorTermsAccepted: investmentPreference.isRoboAdviserTermsAccepted
+    };
+
+    // Send the PUT request
+    const response = this.http.put(this.baseUrl, payload);
+    console.log("service",response)
+    return response
   }
 }
+
