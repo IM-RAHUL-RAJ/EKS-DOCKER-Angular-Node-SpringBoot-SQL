@@ -41,10 +41,7 @@ export class InvestmentPurposeService {
   }
 
   updateInvestmentPreference(investmentPreference: InvestmentPreferences): Observable<any> {
-    // const url = `${this.baseUrl}/${investmentPreference.cliendID}`; // Use clientID (even though it seems misspelled here)
-    
-    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+   
     // Prepare the payload
     const payload = {
       clientId: investmentPreference.cliendID,
@@ -58,6 +55,25 @@ export class InvestmentPurposeService {
 
     // Send the PUT request
     const response = this.http.put(this.baseUrl, payload);
+    console.log("service",response)
+    return response
+  }
+
+  addInvestmentPreference(investmentPreference: InvestmentPreferences): Observable<any> {
+   
+    // Prepare the payload
+    const payload = {
+      clientId: investmentPreference.cliendID,
+      investmentPurpose: investmentPreference.investmentPurpose,
+      investmentPurposeDescription: investmentPreference.investmentPurposeDescription,
+      riskTolerance: investmentPreference.riskTolerance,
+      incomeCategory: investmentPreference.incomeCategory,
+      investmentYear: investmentPreference.investmentYears,
+      isRoboAdvisorTermsAccepted: investmentPreference.isRoboAdviserTermsAccepted
+    };
+
+    // Send the PUT request
+    const response = this.http.post(this.baseUrl, payload);
     console.log("service",response)
     return response
   }
