@@ -84,11 +84,11 @@ public class InvestmentPreference {
 		this.investmentYear = investmentYear;
 	}
 
-	public boolean isRoboAdvisorTermsAccepted() {
+	public boolean getIsRoboAdvisorTermsAccepted() {
 		return isRoboAdvisorTermsAccepted;
 	}
 
-	private void setRoboAdvisorTermsAccepted(boolean isRoboAdvisorTermsAccepted) {
+	private void setIsRoboAdvisorTermsAccepted(boolean isRoboAdvisorTermsAccepted) {
 		this.isRoboAdvisorTermsAccepted = isRoboAdvisorTermsAccepted;
 	}
 

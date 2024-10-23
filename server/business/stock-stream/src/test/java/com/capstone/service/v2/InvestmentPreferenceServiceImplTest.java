@@ -2,6 +2,9 @@ package com.capstone.service.v2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,28 +35,29 @@ class InvestmentPreferenceServiceImplTest {
 
 	private final String PREFERENCE_TABLE = "investment_preferences";
 
+
 	@BeforeEach
 	void setup()
 			throws InvestmentPreferenceAlreadyExists, RoboAdvisorMandatoryException, UserNotLoggedInToPerformAction {
 
 		ClientService clientService = new ClientService(new FmtsService());
 
-		clientService.registerClient(new Client("test@example.com", "password123", "John Doe", "1990-01-01", "IN",
-				"PAN", "ID123", "ID123", ProfileStatus.COMPLETE, "C001"));
+		clientService.registerClient(new Client("test@example.com", "password123", "John Doe", Date.valueOf("1990-01-01") , "IN",
+				"PAN", "ID123", "ID123", "COMPLETE", "C001"));
 
 		clientService.loginClient("test@example.com", "password123");
 
-		clientService.registerClient(new Client("test1@example.com", "password1234", "John Doe", "1990-01-01", "IN",
-				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "C002"));
+		clientService.registerClient(new Client("test1@example.com", "password1234", "John Doe", Date.valueOf("1990-01-01"), "IN",
+				"123456", "PAN", "ID123", "COMPLETE", "C002"));
 
 		clientService.loginClient("test1@example.com", "password1234");
 
-		clientService.registerClient(new Client("test2@example.com", "password12345", "John Doe", "1990-01-01", "IN",
-				"123456", "PAN", "ID123", ProfileStatus.COMPLETE, "C003"));
+		clientService.registerClient(new Client("test2@example.com", "password12345", "John Doe",Date.valueOf("1990-01-01"), "IN",
+				"123456", "PAN", "ID123", "COMPLETE", "C003"));
 
 		clientService.loginClient("test2@example.com", "password12345");
 
-		investmentPreferenceService.setClientService(clientService);
+//		investmentPreferenceService.setClientService(clientService);
 
 	}
 

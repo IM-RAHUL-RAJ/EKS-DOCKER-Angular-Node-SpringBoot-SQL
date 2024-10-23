@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
 import com.capstone.models.Client;
+
 
 public class ClientService {
 
@@ -14,6 +19,8 @@ public class ClientService {
 	private HashMap<String, String> loggedInUsers = new HashMap<String, String>();
 
 	private Client registeredClient;
+	
+	@Autowired
 	private FmtsService mockFmtsService;
 
 	public ClientService(FmtsService mockFmtsService) {
