@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,24 +22,23 @@ import com.capstone.services.ClientActivityReportService;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClientActivityReportController {
 
-	@Autowired
-	private Logger logger;
-	
-	@Autowired
-	private ClientActivityReportDao dao;
-	
+    @Autowired
+    private Logger logger;
 
-	@Autowired
-	private ClientActivityReportService service;
+    @Autowired
+    private ClientActivityReportDao dao;
 
-	
-	
-	
-    @GetMapping("/reports/{clientId}")
+    @Autowired
+    private ClientActivityReportService service;
+
+    @GetMapping(value = "/reports/{clientId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientActivityReport>> getClientActivityReports(@PathVariable String clientId) {
+        logger.info("Fetching client activity reports for client ID: " + clientId);
         try {
             List<ClientActivityReport> reports = service.getClientActivityReports(clientId);
+            logger.info("Reports fetched: " + reports);
             if (reports.isEmpty()) {
+                logger.info("No content for client ID: " + clientId);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(reports, HttpStatus.OK);
