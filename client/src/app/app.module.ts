@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-
+import { CommonModule } from "@angular/common";
+import { IgxFinancialChartModule, IgxLegendModule } from "igniteui-angular-charts";
+import { StockIndexDataService } from './components/landing/data/StockIndexDataService';
 import { TradeComponent } from './components/trade/trade.component';
 import { BuyFormComponent } from './form/buy-form/buy-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,7 +25,14 @@ import { MaterialModule } from './material.module';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { TradingHistoryComponent } from './components/trading-history/trading-history.component';
 import { RoboAdvisorComponent } from './components/robo-advisor/robo-advisor/robo-advisor.component';
-
+import { 
+	IgxCarouselModule,
+	IgxIconModule,
+	IgxSelectModule,
+	IgxButtonModule,
+	IgxCardModule
+ } from "igniteui-angular";
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,9 +60,17 @@ import { RoboAdvisorComponent } from './components/robo-advisor/robo-advisor/rob
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    IgxFinancialChartModule,
+    IgxLegendModule,
+    IgxCarouselModule,
+    IgxIconModule,
+    IgxSelectModule,
+    IgxButtonModule,
+    IgxCardModule
   ],
-  providers: [PDFService],
+  providers: [PDFService, StockIndexDataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
