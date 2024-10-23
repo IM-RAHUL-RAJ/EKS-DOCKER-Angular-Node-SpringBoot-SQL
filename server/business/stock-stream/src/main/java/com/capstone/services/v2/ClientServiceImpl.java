@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import com.capstone.integration.FmtsDao;
 import com.capstone.models.Client;
 
 @Service
+@Primary
 public class ClientServiceImpl implements ClientService {
 
 	@Autowired

@@ -1,15 +1,20 @@
 package com.capstone;
 
+import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.annotation.MapperScans;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InjectionPoint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.capstone.*"}) 
+@MapperScan(value = { "com.capstone.integration.mapper"})
 public class StockStreamApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StockStreamApplication.class, args);
