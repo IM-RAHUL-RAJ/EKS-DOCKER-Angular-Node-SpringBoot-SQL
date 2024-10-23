@@ -73,5 +73,14 @@ public class FmtsDaoImpl implements FmtsDao {
 
         return response.getBody(); // Assuming the response directly maps to List<Price>
     }
+	
+	@Override
+	public List<Price> getAllInstruments(){
+		ResponseEntity<Price[]> responseEntity = restTemplate.getForEntity("http://127.0.0.1:3000/fmts/trades/prices", Price[].class);
+		
+		List<Price> instruments = List.of(responseEntity.getBody());
+		
+		return instruments;
+	}
 }
 

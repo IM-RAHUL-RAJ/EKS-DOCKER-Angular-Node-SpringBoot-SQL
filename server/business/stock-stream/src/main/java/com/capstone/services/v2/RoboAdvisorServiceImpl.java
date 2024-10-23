@@ -2,36 +2,24 @@ package com.capstone.services.v2;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capstone.exceptions.ClientHasNoHoldingsToSellException;
-import com.capstone.exceptions.RoboAdvisorException;
-import com.capstone.integration.InstrumentDao;
+import com.capstone.integration.FmtsDao;
 import com.capstone.integration.InvestmentPreferenceDao;
 import com.capstone.models.Holding;
-import com.capstone.models.Instrument;
-import com.capstone.models.InstrumentReport;
 import com.capstone.models.InvestmentPreference;
-import com.capstone.models.InvestmentYear;
 import com.capstone.models.Price;
-import com.capstone.models.RiskTolerance;
 
 @Service
 public class RoboAdvisorServiceImpl implements RoboAdvisorService {
 
 	@Autowired
-	InstrumentDao instrumentDao;
+	FmtsDao instrumentDao;
 
 	@Autowired
 	InvestmentPreferenceDao investmentPreferenceDao;

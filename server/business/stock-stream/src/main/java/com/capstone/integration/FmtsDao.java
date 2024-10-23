@@ -8,4 +8,5 @@ import com.capstone.models.Price;
 public interface FmtsDao {
 	FmtsTokenResponse verifyClientToGetToken(String email);
 	List<Price> getInstrumentsByCategory(String category);
+	List<Price> getAllInstruments();
 }
