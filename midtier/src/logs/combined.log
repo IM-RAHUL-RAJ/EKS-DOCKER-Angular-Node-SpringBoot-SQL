@@ -1,0 +1,4 @@
+{"level":"info","message":"Fetching client activity reports for client ID: C001","timestamp":"2024-10-24T19:53:27.949Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-24T19:53:27.998Z"}
+{"level":"info","message":"Fetching holdings for client ID: C001","timestamp":"2024-10-24T19:54:54.152Z"}
+{"0":{"averagePrice":150.5,"clientId":"C001","dayChangePercent":2.5,"instrument":"Stock A","instrumentId":"INST001","investedCapital":15050,"ltp":155,"percentChange":3,"profitLoss":450,"quantity":100},"1":{"averagePrice":200,"clientId":"C001","dayChangePercent":-1.25,"instrument":"Stock B","instrumentId":"INST002","investedCapital":10000,"ltp":195,"percentChange":-2.5,"profitLoss":-250,"quantity":50},"level":"info","message":"Holdings fetched successfully for client ID: C001","timestamp":"2024-10-24T19:54:54.194Z"}
