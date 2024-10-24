@@ -1,0 +1,18 @@
+{"level":"info","message":"Fetching client activity reports for client ID: C002","timestamp":"2024-10-24T18:50:06.792Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-24T18:50:06.844Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: C002","timestamp":"2024-10-24T19:09:34.919Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-24T19:09:34.969Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: C002","timestamp":"2024-10-24T19:12:15.903Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-24T19:12:15.953Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: C002","timestamp":"2024-10-24T19:16:08.998Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-24T19:16:09.043Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: C001","timestamp":"2024-10-24T19:16:13.781Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-24T19:16:13.800Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: C001","timestamp":"2024-10-24T19:17:22.141Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-24T19:17:22.189Z"}
+{"level":"info","message":"Fetching investment preference for client ID: C001","timestamp":"2024-10-24T19:36:43.244Z"}
+{"clientId":"C001","incomeCategory":"BELOW_20000","investmentPurpose":"COLLEGE_FUND","investmentPurposeDescription":"Saving for party","investmentYear":"ZERO_TO_FIVE","isRoboAdvisorTermsAccepted":true,"level":"info","message":"Investment preference fetched successfully for client ID: C001","riskTolerance":"CONSERVATIVE","timestamp":"2024-10-24T19:36:43.290Z"}
+{"level":"info","message":"Fetching holdings for client ID: C001","timestamp":"2024-10-24T19:39:47.382Z"}
+{"0":{"averagePrice":150.5,"clientId":"C001","dayChangePercent":2.5,"instrument":"Stock A","instrumentId":"INST001","investedCapital":15050,"ltp":155,"percentChange":3,"profitLoss":450,"quantity":100},"1":{"averagePrice":200,"clientId":"C001","dayChangePercent":-1.25,"instrument":"Stock B","instrumentId":"INST002","investedCapital":10000,"ltp":195,"percentChange":-2.5,"profitLoss":-250,"quantity":50},"level":"info","message":"Holdings fetched successfully for client ID: C001","timestamp":"2024-10-24T19:39:47.428Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: C001","timestamp":"2024-10-24T19:42:09.729Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-24T19:42:09.775Z"}
