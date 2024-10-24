@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 20px; /* Add padding for better spacing */
 }
 
 mat-card {
@@ -11,14 +12,21 @@ mat-card {
     justify-content: center;
     width: 50%;
     align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
 }
+
 mat-card-content {
     width: 90%;
+    padding: 20px; /* Increased padding for better spacing */
 }
 
 h2 {
     text-align: center;
     color: #333;
+    font-size: 24px; /* Increased font size for headings */
+    font-weight: bold; /* Bold heading */
+    margin-bottom: 20px; /* Space below the heading */
 }
 
 form {
@@ -26,6 +34,33 @@ form {
     flex-direction: column;
 }
 
+mat-form-field {
+    margin-bottom: 20px; /* Space between form fields */
+    width: 100%; /* Ensure full width */
+}
+
+mat-label {
+    font-size: 16px; /* Larger font size for labels */
+    font-weight: bold; /* Bold labels */
+}
+
+input {
+    font-size: 16px; /* Font size for input */
+}
+
 small {
     color: red;
+    font-size: 14px; /* Font size for error messages */
+}
+
+button {
+    margin-top: 20px; /* Space above the button */
+    font-size: 16px; /* Font size for button */
+    font-weight: bold; /* Bold button text */
+    padding: 10px; /* Padding for button */
+    border-radius: 4px; /* Slightly rounded button */
+}
+
+button[disabled] {
+    background-color: #cfcfcf; /* Grey out disabled button */
 }
