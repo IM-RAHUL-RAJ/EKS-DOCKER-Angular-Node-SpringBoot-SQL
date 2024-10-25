@@ -34,17 +34,14 @@ export class InvestmentPurposeService {
           data.riskTolerance,
           data.incomeCategory,
           data.investmentYear, // this should match 'investmentYears' in the class constructor
-          data.roboAdvisorTermsAccepted // this should match 'isRoboAdviserTermsAccepted' in the class constructor
+          data.isRoboAdvisorTermsAccepted // this should match 'isRoboAdviserTermsAccepted' in the class constructor
         );
       })
     );
   }
 
   updateInvestmentPreference(investmentPreference: InvestmentPreferences): Observable<any> {
-    // const url = `${this.baseUrl}/${investmentPreference.cliendID}`; // Use clientID (even though it seems misspelled here)
-    
-    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
+   
     // Prepare the payload
     const payload = {
       clientId: investmentPreference.cliendID,
@@ -52,12 +49,31 @@ export class InvestmentPurposeService {
       investmentPurposeDescription: investmentPreference.investmentPurposeDescription,
       riskTolerance: investmentPreference.riskTolerance,
       incomeCategory: investmentPreference.incomeCategory,
-      investmentYear: investmentPreference.investmentYears,
+      investmentYear: investmentPreference.investmentYear,
       isRoboAdvisorTermsAccepted: investmentPreference.isRoboAdviserTermsAccepted
     };
 
     // Send the PUT request
     const response = this.http.put(this.baseUrl, payload);
+    console.log("service",response)
+    return response
+  }
+
+  addInvestmentPreference(investmentPreference: InvestmentPreferences): Observable<any> {
+   
+    // Prepare the payload
+    const payload = {
+      clientId: investmentPreference.cliendID,
+      investmentPurpose: investmentPreference.investmentPurpose,
+      investmentPurposeDescription: investmentPreference.investmentPurposeDescription,
+      riskTolerance: investmentPreference.riskTolerance,
+      incomeCategory: investmentPreference.incomeCategory,
+      investmentYear: investmentPreference.investmentYear,
+      isRoboAdvisorTermsAccepted: investmentPreference.isRoboAdviserTermsAccepted
+    };
+
+    // Send the PUT request
+    const response = this.http.post(this.baseUrl, payload);
     console.log("service",response)
     return response
   }

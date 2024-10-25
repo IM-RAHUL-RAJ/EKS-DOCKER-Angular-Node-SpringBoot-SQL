@@ -121,9 +121,9 @@ export class InvestmentPreferencesComponent implements OnInit {
     if (investmentPreference.incomeCategory) {
       this.incomeCategory?.patchValue(investmentPreference.incomeCategory)
     }
-    if (investmentPreference.investmentYears) {
-      console.log(investmentPreference.investmentYears)
-      this.investmentYears?.patchValue(investmentPreference.investmentYears)
+    if (investmentPreference.investmentYear) {
+      console.log(investmentPreference.investmentYear)
+      this.investmentYears?.patchValue(investmentPreference.investmentYear)
     }
     if (investmentPreference.isRoboAdviserTermsAccepted) {
       this.isRoboAdviserTermsAccepted?.patchValue(investmentPreference.isRoboAdviserTermsAccepted)
