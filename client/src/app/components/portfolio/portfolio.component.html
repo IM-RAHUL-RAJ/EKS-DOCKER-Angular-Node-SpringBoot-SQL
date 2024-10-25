@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 <div class="portfolio-container">
     <h2>My Portfolio</h2>
     
@@ -54,10 +56,9 @@
         <div class="stock-metric">
           <span>Day Change %:</span> {{stock.dayChangePercent | number:'1.2-2'}}%
         </div>
-        <div class="stock-metric">
+        <div class="stock-metric sell-button">
           <button (click)="SellForm(stock.averagePrice)">Sell</button>
         </div>
       </div>
     </div>
   </div>
-  
