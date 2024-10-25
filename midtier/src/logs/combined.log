@@ -38,3 +38,57 @@
 {"0":{"averagePrice":150.5,"clientId":"C001","dayChangePercent":2.5,"instrument":"Google","instrumentId":"INST001","investedCapital":15050,"ltp":155,"percentChange":3,"profitLoss":450,"quantity":100},"1":{"averagePrice":200,"clientId":"C001","dayChangePercent":-1.25,"instrument":"JP Morgan Chase Co.","instrumentId":"INST002","investedCapital":10000,"ltp":195,"percentChange":-2.5,"profitLoss":-250,"quantity":50},"level":"info","message":"Holdings fetched successfully for client ID: C001","timestamp":"2024-10-25T02:06:50.374Z"}
 {"level":"info","message":"Fetching holdings for client ID: C001","timestamp":"2024-10-25T03:54:59.920Z"}
 {"0":{"averagePrice":150.5,"clientId":"C001","dayChangePercent":2.5,"instrument":"Google","instrumentId":"INST001","investedCapital":15050,"ltp":155,"percentChange":3,"profitLoss":450,"quantity":100},"1":{"averagePrice":200,"clientId":"C001","dayChangePercent":-1.25,"instrument":"JP Morgan Chase Co.","instrumentId":"INST002","investedCapital":10000,"ltp":195,"percentChange":-2.5,"profitLoss":-250,"quantity":50},"level":"info","message":"Holdings fetched successfully for client ID: C001","timestamp":"2024-10-25T03:54:59.960Z"}
+{"level":"info","message":"Fetching holdings for client ID: C001","timestamp":"2024-10-25T04:04:27.139Z"}
+{"0":{"averagePrice":150.5,"clientId":"C001","dayChangePercent":2.5,"instrument":"Google","instrumentId":"INST001","investedCapital":15050,"ltp":155,"percentChange":3,"profitLoss":450,"quantity":100},"1":{"averagePrice":200,"clientId":"C001","dayChangePercent":-1.25,"instrument":"JP Morgan Chase Co.","instrumentId":"INST002","investedCapital":10000,"ltp":195,"percentChange":-2.5,"profitLoss":-250,"quantity":50},"level":"info","message":"Holdings fetched successfully for client ID: C001","timestamp":"2024-10-25T04:04:27.156Z"}
+{"level":"info","message":"Fetching holdings for client ID: C001","timestamp":"2024-10-25T04:04:36.995Z"}
+{"0":{"averagePrice":150.5,"clientId":"C001","dayChangePercent":2.5,"instrument":"Google","instrumentId":"INST001","investedCapital":15050,"ltp":155,"percentChange":3,"profitLoss":450,"quantity":100},"1":{"averagePrice":200,"clientId":"C001","dayChangePercent":-1.25,"instrument":"JP Morgan Chase Co.","instrumentId":"INST002","investedCapital":10000,"ltp":195,"percentChange":-2.5,"profitLoss":-250,"quantity":50},"level":"info","message":"Holdings fetched successfully for client ID: C001","timestamp":"2024-10-25T04:04:37.011Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:08:39.526Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:08:39.568Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: invalid-id","timestamp":"2024-10-25T05:08:39.587Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:08:39.598Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:08:39.608Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:08:39.625Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:08:39.637Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:08:39.653Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: invalid-id","timestamp":"2024-10-25T05:10:34.278Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:10:34.321Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:10:34.340Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:10:34.354Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:10:34.364Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:10:34.379Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:10:34.386Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:10:34.400Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:14:42.503Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:14:42.544Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:19:47.960Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:19:48.001Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: invalid-id","timestamp":"2024-10-25T05:19:48.019Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:19:48.033Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:19:48.043Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:19:48.055Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:19:48.065Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:19:48.077Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:20:27.909Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:20:27.945Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: invalid-id","timestamp":"2024-10-25T05:20:27.965Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:20:27.979Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:20:27.988Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:20:28.001Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:20:28.009Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:20:28.023Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: C001","timestamp":"2024-10-25T05:21:34.159Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:21:34.176Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:23:14.309Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:23:14.346Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: invalid-id","timestamp":"2024-10-25T05:23:14.365Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:23:14.375Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:23:14.385Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:23:14.399Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:23:14.408Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:23:14.423Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:25:50.287Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:25:50.329Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:27:31.416Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:27:31.457Z"}
+{"level":"info","message":"Fetching client activity reports for client ID: 12345","timestamp":"2024-10-25T05:27:31.477Z"}
+{"level":"info","message":"Reports fetched: [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]","timestamp":"2024-10-25T05:27:31.489Z"}
