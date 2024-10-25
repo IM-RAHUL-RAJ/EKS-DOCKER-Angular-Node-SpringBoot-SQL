@@ -21,7 +21,7 @@ export class PortfolioService {
     new Portfolio('Meta Platforms Inc.', 'META', 12, 200, 2400, 210, 3.50, 60, 1.8)
   ];
 
-  private apiUrl = 'http://localhost:8080/api/clients/holdings/';
+  private apiUrl = 'http://localhost:3030/api/clients/holdings/';
 
   constructor(private clientService: ClientService,private http: HttpClient) {
     const currentUser = clientService.getCurrentUser();
